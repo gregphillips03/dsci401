@@ -1,6 +1,6 @@
-#assignment #2
-#dsci401B
-#william (greg) phillips
+#Assignment #2
+#DSCI401B
+#William (Greg) Phillips
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -17,16 +17,15 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 from sklearn import preprocessing
 
-# ------------- #
-# --- Notes --- #
-# ------------- #
+# ----------------- #
+# --- Meta Data --- #
+# ----------------- #
 
-'''I found that cleanint up the data (imagine that) a bit difficult in Python
+'''I found that cleaning up the data (imagine that) a bit difficult in Python
 versus how we'd do it in R. I did the following outside of this script by hand
 
 - imputed Lot.Frontage WHERE value was listed as NA
-- I used the average (69.2) to fill in the missing values 
-df_vals = df_vals[~df_vals['somecolname'].isnull()] '''
+- I used the average (69.2) to fill in the missing values '''
 
 # ----------------------------------------------------------- #
 # --- Section 0: Load in Data and drop what we don't need --- #
@@ -42,7 +41,7 @@ housepred = pd.read_csv('./data/AmesHousingSetB.csv');
 housepred = housepred.drop('PID', axis = 1); 
 
 # ----------------------------------------------- #
-# --- Section 1: Define some helper functions --- #
+# --- Section 1: Define some utility functions --- #
 # ----------------------------------------------- #
 
 # Get a list of the categorical features for a given dataframe.
@@ -89,6 +88,11 @@ def move_to_index(df, colName, index=0):
 	df = df.ix[:, cols]; 
 	return df; 
 
+#Function removes records where there is a missing value
+def drop_records_with_missing_vals(df, colName):
+	df = df[~df['colName'].isnull()]; 
+	return df;
+
 # -------------------------------------- #
 # --- Section 2: Data transformation --- #
 # -------------------------------------- #
@@ -119,13 +123,22 @@ housepred = pd.get_dummies(housepred, columns=cat_features(housepred));
 # ------------------------------------------------------------------------------------------ #
 
 #make a data frame to play around with
+#based off attributes I *think* will have a large amount of influence on the dependent variable
 df1 = housebild.filter(['SalePrice', 'Year.Built', 'Lot.Area', 'Year.Remod.Add', 'Overall.Cond', 
 	'Lot.Frontage', 'Overall.Qual', 'Mas.Vnr.Area', 'Total.Bsmt.SF', 'Gr.Liv.Area'], axis =1);
 
 #let's use seaborn's heatmap, hopefully it looks simliar to what we can do in R
 corr = df1.corr(); 
-sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values);
 #ok that's much easier to understand than matshow and a bit sexier as well
 plt.show(); 
 
-# --- Section 4: --- #
+# ------------------------------------ #
+# --- Section 4: Split up the Data --- #
+# ------------------------------------ #
+
+#independent / (predictor/ explanatory) variables
+data_x = housebild[list(housebild)[1:]];
+
+#dependent/ response variable (in this case 'SalePrice')
+data_y = housebild[list(housebild)[0]];
