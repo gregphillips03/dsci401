@@ -4,8 +4,12 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 import pprint
 import seaborn as sns
+import statsmodels.api as sm
+from patsy import dmatrices
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
@@ -93,20 +97,47 @@ def drop_records_with_missing_vals(df, colName):
 	df = df[~df['colName'].isnull()]; 
 	return df;
 
+#Function looks for periods in column names and swaps them out for underscores
+def drop_periods(df):
+	df.columns = [c.replace('.', '_') for c in df.columns]; 
+	print('Dropped periods');
+
+#calculate variance inflation and get rid of those that are too influential
+#X = pandas data frame
+def fast_remove_vif(X):
+    thresh = 5.0
+    variables = range(X.shape[1])
+
+    for i in np.arange(0, len(variables)):
+        vif = [variance_inflation_factor(X[variables].values, ix) for ix in range(X[variables].shape[1])]
+        print(vif)
+        maxloc = vif.index(max(vif))
+        if max(vif) > thresh:
+            print('dropping \'' + X[variables].columns[maxloc] + '\' at index: ' + str(maxloc))
+            del variables[maxloc]
+
+    print('Remaining variables:')
+    print(X.columns[variables])
+    return X
+
 # -------------------------------------- #
 # --- Section 2: Data transformation --- #
 # -------------------------------------- #
 
-#let's check to see if there's missing data
-check_missing_data(housebild); 
-check_missing_data(housepred);  
-
 #move SalePrice to the 0 index in housebild
 #becaue I'm picky about locations
 housebild = move_to_index(housebild, 'SalePrice'); 
+#replace periods with underscores
+drop_periods(housebild); 
 
 #let's do the same for the validation data
-housepred = move_to_index(housepred, 'SalePrice'); 
+housepred = move_to_index(housepred, 'SalePrice');
+#replace periods with underscores
+drop_periods(housepred); 
+
+#let's check to see if there's missing data
+check_missing_data(housebild); 
+check_missing_data(housepred);  
 
 #transform the df to a one-hot encoding
 housebild = pd.get_dummies(housebild, columns=cat_features(housebild));
@@ -114,6 +145,9 @@ housepred = pd.get_dummies(housepred, columns=cat_features(housepred));
 
 #surpirse, there's missing data (as if we thought we'd get away with that)
 #using most frequent as the string, since I can't find a similar 'replace with this' as in R
+#it also 'appears' that there are way too many missing values to throw those records out
+
+#(coding this out to do by hand. the preprocessor messes with the .filter method as well)
 #imp = preprocessing.Imputer(missing_values='NaN', strategy='most_frequent', axis=0);
 #housebild = imp.fit_transform(housebild);
 
@@ -124,17 +158,57 @@ housepred = pd.get_dummies(housepred, columns=cat_features(housepred));
 
 #make a data frame to play around with
 #based off attributes I *think* will have a large amount of influence on the dependent variable
-df1 = housebild.filter(['SalePrice', 'Year.Built', 'Lot.Area', 'Year.Remod.Add', 'Overall.Cond', 
-	'Lot.Frontage', 'Overall.Qual', 'Mas.Vnr.Area', 'Total.Bsmt.SF', 'Gr.Liv.Area'], axis =1);
+df1 = housebild.filter(['SalePrice', 'Year_Built', 'Lot_Area', 'Year_Remod_Add', 'Overall_Cond', 
+	'Lot_Frontage', 'Overall_Qual', 'Mas.Vnr_Area', 'Total_Bsmt_SF', 'Gr_Liv_Area'], axis =1);
 
 #let's use seaborn's heatmap, hopefully it looks simliar to what we can do in R
 corr = df1.corr(); 
-sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values);
+heat = sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values);
 #ok that's much easier to understand than matshow and a bit sexier as well
-plt.show(); 
+plt.show(heat); 
+
+'''It appears as if there are going to be predictors that influence other predictors. what
+jumps out at first is the overall quality vand the year remodel was added, which are probably
+supportive of each other, so multicollinearity is probably happening, so 
+lasso is probably the best approach here '''
+
+# -------------------------------------------------------------------- #
+# --- Section 4: Verify my variance inflation phenomena hypothesis --- #
+# -------------------------------------------------------------------- #
+
+#bring in a fresh copy. the getdummies function causes issues when parsing under the hood?
+#or is it having trouble parsing periods? 
+df2 = pd.read_csv('./data/AmesHousingSetA.csv');
+df2 = df2.drop('PID', axis = 1); 
+#drop out missing vals 
+df2.dropna(); 
+#drop non-numeric cols
+df2 = df2._get_numeric_data();
+drop_periods(df2); 
+
+features = list(df2); 
+features.remove("SalePrice"); 
+str1 = " + ".join(features); 
+str2 = "Year_Built + Lot_Area + Year_Remod_Add + Overall_Cond + Lot_Frontage + Overall_Qual + Mas_Vnr_Area + Total_Bsmt_SF + Gr_Liv_Area"
+print(str1); 
+
+#break into left and right hand side; y and X
+#get y and X dataframes based on this regression:
+#so sales price 'is dependent up on all the features in the string'
+
+y, X = dmatrices(formula_like='SalePrice ~ ' + str2, 
+	data=df2, return_type='dataframe');
+vif = pd.DataFrame();
+vif["VIF Factor"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])];
+vif["features"] = X.columns;
+#inspect VIF factors
+print(vif.round(1)); 
+#fast_remove_vif(df2); 
+
+#VIF test actually passes, which is surprising. 
 
 # ------------------------------------ #
-# --- Section 4: Split up the Data --- #
+# --- Section 5: Split up the Data --- #
 # ------------------------------------ #
 
 #independent / (predictor/ explanatory) variables
@@ -142,3 +216,9 @@ data_x = housebild[list(housebild)[1:]];
 
 #dependent/ response variable (in this case 'SalePrice')
 data_y = housebild[list(housebild)[0]];
+
+# --------------------------------------- #
+# --- Section 6: Choose / train model --- #
+# --------------------------------------- #
+
+
