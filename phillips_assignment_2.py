@@ -359,14 +359,16 @@ print(vif.round(1));
 # --- Section 6: Split up the Data --- #
 # ------------------------------------ #
 
+#much easier after rearranging
+
 #independent / (predictor/ explanatory) variables
 data_x = housebild[list(housebild)[1:]];
 
 #dependent/ response variable (in this case 'SalePrice')
 data_y = housebild[list(housebild)[0]];
 
-# --------------------------------------- #
-# --- Section 7: Choose / train model --- #
-# --------------------------------------- #
+# -------------------------------------------- #
+# --- Section 7: Construct Base Line Model --- #
+# -------------------------------------------- #
 
 
