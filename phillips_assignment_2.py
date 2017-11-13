@@ -19,33 +19,161 @@ from sklearn.metrics import explained_variance_score
 from sklearn.feature_selection import SelectPercentile
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
-from sklearn import preprocessing
 
-# ----------------- #
-# --- Meta Data --- #
-# ----------------- #
+# -------------------------------------- #
+# --- Section 0: Meta Data & Caveats --- #
+# -------------------------------------- #
 
 '''I found that cleaning up the data (imagine that) a bit difficult in Python
 versus how we'd do it in R. I did the following outside of this script by hand
 
 - imputed Lot.Frontage WHERE value was listed as NA
-- I used the average (69.2) to fill in the missing values '''
+- I used the average (69.2) to fill in the missing values
+
+- House without Alley -
+
+- imputed Alley WHERE value was listed as NA
+- Python thinks NA is a missing value, but in the data, this is being used categorically as
+- a distinction 
+- replaced NAs with No, meaning no Alley
+
+- House without Veneer -
+
+- imputed Mas.Vnr.Type WHERE value == blank
+- replaced 17 blank locations with None, since None was part of the data set
+
+- imputed Mas.Vnr.Area WHERE value == NA
+- Python thinks NA is a missing value, but in the data, this is being used categorically as
+- a distinction
+- same for imputations below
+- replaced 17 NA with 0, since 0 was part of the data set 
+
+- House without Basement - 
+
+- imputed Bsmt.Qual WHERE value == blank
+- replaced 1 location with TA as a quick pivot table revealed that to be the most frequent value
+- without an ontolgoy or data dictionary its hard to tell what to use, ergo most frequent
+
+- imputed Bsmt.Qual WHERE value == NA
+- replaced 60 locations with None
+
+- imputed Bsmt.Cond WHERE value == blank
+- replaced 1 location with TA as a quick pivot table revealed that to be the most frequent value
+- without an ontolgoy or data dictionary its hard to tell what to use, ergo most frequent
+
+- imputed Bsmt.Cond WHERE value == NA
+- replaced 60 locations with None
+
+- imputed Bsmt.Exposure WHERE value == blank
+- replaced 4 locations with No
+
+- imputed Bsmt.Exposure WHERE value == NA
+- replaced 60 locations with No
+
+- imputed Bsmt.Fin.Type.1 WHERE value == NA
+- replaced 60 locations with None
+
+- imputed Bsmt.Fin.Type.1 WHERE value == blank
+- replaced 1 location with None
+
+- imputed Bsmt.Fin.SF.1 WHERE value == NA
+- replaced 1 location with 0
+
+- imputed Bsmt.Fin.Type.2 WHERE value == NA
+- replaced 60 locations with None
+
+- imputed Bsmt.Fin.Type.2 WHERE value == blank
+- replaced 2 locations with None
+
+- imputed Bsmt.Fin.SF.2 WHERE value == NA
+- replaced 1 location with 0
+
+- imputed Bsmt.Unf.SF WHERE value == NA
+- replaced 1 location with 0
+
+- imputed Total.Bsmt.SF WHERE value == NA
+- replaced 1 location with 0
+
+- imputed Bsmt.Full.Bath WHERE value == NA
+- replaced 2 locations with 0
+
+- imputed Bsmt.Half.Bath WHERE value == NA
+- replaced 2 locations with 0
+
+- House without Fireplace -
+
+- imputed Fireplace.Qu WHERE value == NA
+- replaced 1134 locations with No
+
+- House without Garage -
+
+- inputed Garage.Type WHERE value == NA
+- replaced 119 locations with None
+
+- imputed Garage.Yr.Blt WHERE value == NA
+- this one was a bit tricky, but I ended up deciding to use the avg (year 1977)
+- replaced 121 locations with 1977
+
+- imputed Garage.Yr.Blt WHERE value == 2207
+- considered this as a data entry error
+- replaced 1 location with 2007
+
+- imputed Garage.Finish WHERE value == NA
+- replaced 119 locations with None
+
+- imputed Garage.Finish WHERE value == blank
+- replaced 2 locations with None
+
+- imputed Garage.Cars WHERE value == NA
+- replaced 1 location with 0
+
+- imputed Garage.Area WHERE value == NA
+- replaced 1 location with 0
+
+- imputed Garage.Qual WHERE value == blank
+- replaced 1 locatoin with TA as a quick pivot table revealed that to be the most frequent value
+- without an ontolgoy or data dictionary its hard to tell what to use, ergo most frequent
+
+- imputed Garage.Qual WHERE value == NA
+- replaced 120 locations with None
+
+- imputed Garage.Cond WHERE value == blank
+- replaced 1 location with TA as a quick pivot table revealed that to be the most frequent value
+- without an ontolgoy or data dictionary its hard to tell what to use, ergo most frequent
+
+- imputed Garage.Cond WHERE value == NA
+- replaced 120 locations with None
+
+- House without Pool -
+
+- imputed Pool.QC WHERE value == NA
+- replaced 2335 locations with None
+
+- House without Fence - 
+
+- imputed Fence WHERE value == NA
+- replaced 1880 locations with None
+
+- House without Misc Qualities - 
+
+- imputed Misc.Feature WHERE value == NA
+- replaced 2260 locations with None '''
 
 # ----------------------------------------------------------- #
-# --- Section 0: Load in Data and drop what we don't need --- #
+# --- Section 1: Load in Data and drop what we don't need --- #
 # ----------------------------------------------------------- #
 
 #data for building the model
-housebild = pd.read_csv('./data/AmesHousingSetA.csv');
-#PID won't be needed
+housebild = pd.read_csv('./data/AmesHousingSetAv2.csv');
+#PID won't be needed, its a primary or unique identifier with no bearing on the sale price
 housebild = housebild.drop('PID', axis = 1); 
 #data for validing the predictions
 housepred = pd.read_csv('./data/AmesHousingSetB.csv');
-#PID won't be needed
+#PID won't be needed its a primary or unique identifier with no bearing on the sale price
 housepred = housepred.drop('PID', axis = 1); 
 
 # ----------------------------------------------- #
-# --- Section 1: Define some utility functions --- #
+# --- Section 2: Define some utility functions --- #
 # ----------------------------------------------- #
 
 # Get a list of the categorical features for a given dataframe.
@@ -84,6 +212,7 @@ def check_missing_data(df):
 		print('No of missing vals: ' + str(df.isnull().sum().sum()));
 		a = missing_cols(df); 
 		print('Cols without values: ' + str(a)); 
+	return b;
 
 #Function moves specified column to a specified index
 def move_to_index(df, colName, index=0):
@@ -101,6 +230,8 @@ def drop_records_with_missing_vals(df, colName):
 def drop_periods(df):
 	df.columns = [c.replace('.', '_') for c in df.columns]; 
 	print('Dropped periods');
+	show_name(df); 
+	print('\n'); 
 
 #calculate variance inflation and get rid of those that are too influential
 #X = pandas data frame
@@ -120,8 +251,13 @@ def fast_remove_vif(X):
     print(X.columns[variables])
     return X
 
+#Function shows the DataFrame name
+def show_name(df):
+	name = [x for x in globals() if globals()[x] is df][0]; 
+	print("DataFrame Name is: %s" %name); 
+
 # -------------------------------------- #
-# --- Section 2: Data transformation --- #
+# --- Section 3: Data transformation --- #
 # -------------------------------------- #
 
 #move SalePrice to the 0 index in housebild
@@ -136,24 +272,32 @@ housepred = move_to_index(housepred, 'SalePrice');
 drop_periods(housepred); 
 
 #let's check to see if there's missing data
-check_missing_data(housebild); 
-check_missing_data(housepred);  
+b1 = check_missing_data(housebild); 
+if(b1):
+	print('Found Missing Data'); 
+	show_name(housebild); 
+	print('\n');
+else:
+	print('No Missing Data!');
+	show_name(housebild); 
+	print('\n');
+
+b2 = check_missing_data(housepred); 
+if(b2):
+	print('Found Missing Data');
+	show_name(housepred);  
+	print('\n');
+else:
+	print('No Missing Data!');
+	show_name(housepred);
+	print('\n');  
 
 #transform the df to a one-hot encoding
 housebild = pd.get_dummies(housebild, columns=cat_features(housebild));
 housepred = pd.get_dummies(housepred, columns=cat_features(housepred));
 
-#surpirse, there's missing data (as if we thought we'd get away with that)
-#using most frequent as the string, since I can't find a similar 'replace with this' as in R
-#it also 'appears' that there are way too many missing values to throw those records out
-
-#(coding this out to do by hand. the preprocessor messes with the .filter method as well)
-#imp = preprocessing.Imputer(missing_values='NaN', strategy='most_frequent', axis=0);
-#housebild = imp.fit_transform(housebild);
-
-
 # ------------------------------------------------------------------------------------------ #
-# --- Section 3: Do some exploratory analysis on the data to visually find relationships --- #
+# --- Section 4: Do some exploratory analysis on the data to visually find relationships --- #
 # ------------------------------------------------------------------------------------------ #
 
 #make a data frame to play around with
@@ -173,12 +317,12 @@ supportive of each other, so multicollinearity is probably happening, so
 lasso is probably the best approach here '''
 
 # -------------------------------------------------------------------- #
-# --- Section 4: Verify my variance inflation phenomena hypothesis --- #
+# --- Section 5: Verify my variance inflation phenomena hypothesis --- #
 # -------------------------------------------------------------------- #
 
 #bring in a fresh copy. the getdummies function causes issues when parsing under the hood?
 #or is it having trouble parsing periods? 
-df2 = pd.read_csv('./data/AmesHousingSetA.csv');
+df2 = pd.read_csv('./data/AmesHousingSetAv2.csv');
 df2 = df2.drop('PID', axis = 1); 
 #drop out missing vals 
 df2.dropna(); 
@@ -186,11 +330,14 @@ df2.dropna();
 df2 = df2._get_numeric_data();
 drop_periods(df2); 
 
+#this causes problems when sent over to dmatrices for some reason
 features = list(df2); 
 features.remove("SalePrice"); 
 str1 = " + ".join(features); 
+#this causes problems when sent over to dmatrices for some reason
+
+#hand jambing for now
 str2 = "Year_Built + Lot_Area + Year_Remod_Add + Overall_Cond + Lot_Frontage + Overall_Qual + Mas_Vnr_Area + Total_Bsmt_SF + Gr_Liv_Area"
-print(str1); 
 
 #break into left and right hand side; y and X
 #get y and X dataframes based on this regression:
@@ -205,10 +352,11 @@ vif["features"] = X.columns;
 print(vif.round(1)); 
 #fast_remove_vif(df2); 
 
-#VIF test actually passes, which is surprising. 
+#VIF test actually passes, which is surprising, but hey that's why we do it. 
+#so at this point its not feasible to throw anything out, at least based off what I chose 
 
 # ------------------------------------ #
-# --- Section 5: Split up the Data --- #
+# --- Section 6: Split up the Data --- #
 # ------------------------------------ #
 
 #independent / (predictor/ explanatory) variables
@@ -218,7 +366,7 @@ data_x = housebild[list(housebild)[1:]];
 data_y = housebild[list(housebild)[0]];
 
 # --------------------------------------- #
-# --- Section 6: Choose / train model --- #
+# --- Section 7: Choose / train model --- #
 # --------------------------------------- #
 
 
