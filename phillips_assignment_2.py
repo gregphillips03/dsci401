@@ -452,9 +452,11 @@ print(vif.round(1));
 
 #independent / (predictor/ explanatory) variables
 data_x_bild = housebild[list(housebild)[1:]];
+data_x_val_ = housepred[list(housepred)[1:]];
 
 #dependent/ response variable (in this case 'SalePrice')
 data_y_bild = housebild[list(housebild)[0]];
+data_y_val_ = housepred[list(housepred)[0]];
 
 # -------------------------------------------- #
 # --- Section 7: Construct Base Line Model --- #
@@ -462,10 +464,10 @@ data_y_bild = housebild[list(housebild)[0]];
 
 #we'll start with a basic linear regression model
 
-#create a least squares linear regression model.
+#create a least squares linear regression model
 model = linear_model.LinearRegression();
 
-#split training and test sets from main datapeated.
+#split training and test sets from main data
 x_train_bild, x_test_bild, y_train_bild, y_test_bild = train_test_split(data_x_bild, data_y_bild, test_size = 0.2, random_state = 4);
 
 # Fit the model.
@@ -618,3 +620,26 @@ R^2 (Lasso Model with alpha=5.9): 0.913082246264
 
 #we've reached our limit @ alpha == 5.6
 #this gives us the best overall R^2 score
+
+# ---------------------------------------------------------------------- #
+# --- Section 10: Validate it against the data the model hasn't seen --- #
+# ---------------------------------------------------------------------- #
+
+model.fit(data_x_val_, data_y_val_); 
+predsv1 = model.predict(data_x_val_);
+print('Base Model Fit to Validation Data\n');
+print('MSE, MAE, R^2, EVS: ' + str([mean_squared_error(data_y_val_, predsv1), \
+							   median_absolute_error(data_y_val_, predsv1), \
+							   r2_score(data_y_val_, predsv1), \
+							   explained_variance_score(data_y_val_, predsv1)]));
+print('\n'); 
+
+print('Lasso Model Fit to Validation Data\n');
+alphas = [5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9]
+for a in alphas:
+	# Normalizing transforms all variables to number of standard deviations away from mean.
+	lasso_mod = linear_model.Lasso(alpha=a, normalize=True, fit_intercept=True)
+	lasso_mod.fit(data_x_val_, data_y_val_)
+	predsv2 = lasso_mod.predict(data_x_val_)
+	print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(data_y_val_, predsv2)))
+
