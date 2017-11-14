@@ -338,6 +338,7 @@ EVS = 0.86895928720374904
 + I felt like lasso was the best approach from the beginning, so I settled on this model. 
 
 ```python
+'''
 R^2 (Lasso Model with alpha=5.0): 0.912504625364
 R^2 (Lasso Model with alpha=5.1): 0.912572532422
 R^2 (Lasso Model with alpha=5.2): 0.912580801171
@@ -359,4 +360,19 @@ R^2 (Lasso Model with alpha=5.9): 0.913082246264
 2) Which error metric(s) are you using to compare performance? What is the value(s) of the error metric(s)for the baseline model and your best model?
 ----------------------------------------------------------------------------------------------------------
 
-+ Primarily, I relied on the R2 score and Explained Variance Score. 
++ Primarily, I relied on the R2 score and Explained Variance Score. Since there were such a large amount of variable, and not surefire way to decide what to throw away, I wanted to explain variation the best that I could. 
+
+IV. Predicting and Validating
+-----------------------------
+
+Run your baseline and best models on dataset B. DO NOT do any further training. Remember to apply all transforms you used in building the model to this set (use the transform function on the preprocessors you created in part I).
+
+1) What are the respective error metric values for each model on this set? How did your best model do on this data as compared to the baseline?
+--------------------------------------------------------------------------------------------------------
+
++ My best model actually performed better than the baseline model, which is rather unnerving to me. Specifically, because there are certain instances that, at least in my opinion, the model performs rather bad at.
+
+2) Is your best model a good model? Why or why not
+--------------------------------------------------
+
++ I'll argue that it is a good model for *generalized* use. I really only think this is borderline *fair* for use in actual applications. 
