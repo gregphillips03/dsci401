@@ -283,7 +283,7 @@ vif["VIF Factor"] = [variance_inflation_factor(X.values, i) for i in range(X.sha
 vif["features"] = X.columns;
 ```
 
-+ These are the variable that resolved to infinity:
++ These are the variables that resolved to infinity:
 
 ```python
 BsmtFin_SF_1
@@ -335,8 +335,28 @@ EVS = 0.86895928720374904
 #R^2 went down a bit, but MSE went up a lot
 ```
 
++ I felt like lasso was the best approach from the beginning, so I settled on this model. 
+
+```python
+R^2 (Lasso Model with alpha=5.0): 0.912504625364
+R^2 (Lasso Model with alpha=5.1): 0.912572532422
+R^2 (Lasso Model with alpha=5.2): 0.912580801171
+R^2 (Lasso Model with alpha=5.3): 0.91271073246
+R^2 (Lasso Model with alpha=5.4): 0.912847860123
+R^2 (Lasso Model with alpha=5.5): 0.912985183824
+R^2 (Lasso Model with alpha=5.6): 0.913108884678
+R^2 (Lasso Model with alpha=5.7): 0.913101134751
+R^2 (Lasso Model with alpha=5.8): 0.913089623924
+R^2 (Lasso Model with alpha=5.9): 0.913082246264
+'''
+
+#we've reached our limit @ alpha == 5.6
+#this gives us the best overall R^2 score
+#i'll use this for the actual model
+```
 
 
 2) Which error metric(s) are you using to compare performance? What is the value(s) of the error metric(s)for the baseline model and your best model?
 ----------------------------------------------------------------------------------------------------------
 
++ Primarily, I relied on the R2 score and Explained Variance Score. 
