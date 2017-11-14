@@ -635,11 +635,13 @@ print('MSE, MAE, R^2, EVS: ' + str([mean_squared_error(data_y_val_, predsv1), \
 print('\n'); 
 
 print('Lasso Model Fit to Validation Data\n');
-alphas = [5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9]
+alphas = [5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9];
 for a in alphas:
 	# Normalizing transforms all variables to number of standard deviations away from mean.
-	lasso_mod = linear_model.Lasso(alpha=a, normalize=True, fit_intercept=True)
-	lasso_mod.fit(data_x_val_, data_y_val_)
-	predsv2 = lasso_mod.predict(data_x_val_)
-	print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(data_y_val_, predsv2)))
+	lasso_mod = linear_model.Lasso(alpha=a, normalize=True, fit_intercept=True);
+	lasso_mod.fit(data_x_val_, data_y_val_);
+	predsv2 = lasso_mod.predict(data_x_val_);
+	print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(data_y_val_, predsv2)));
+
+pprint.pprint(pd.DataFrame({'Actual':data_y_val_, 'Predicted':predsv2}));
 
