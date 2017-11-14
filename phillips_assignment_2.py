@@ -516,13 +516,105 @@ print('MSE, MAE, R^2, EVS (Top 25% Model): ' + \
 
 #output of 
 '''
-MSE = 
-MAE = 
-R^2 = 
-EVS = 
+MSE = 892508249.80567992
+MAE = 14630.935672674328
+R^2 = 0.86833895988236054
+EVS = 0.86895928720374904
 
 '''
+#R^2 went down a bit, but MSE went up a lot
 
 # --------------------------------------- #
 # --- Section 9: Try another approach --- #
 # --------------------------------------- #
+
+#let's try lasso
+
+# Show Lasso regression fits for different alphas.
+alphas = [0.0, 0.01, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0]
+for a in alphas:
+	# Normalizing transforms all variables to number of standard deviations away from mean.
+	lasso_mod = linear_model.Lasso(alpha=a, normalize=True, fit_intercept=True)
+	lasso_mod.fit(x_train_bild, y_train_bild)
+	preds3 = lasso_mod.predict(x_test_bild)
+	print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(y_test_bild, preds3)))
+
+'''
+R^2 (Lasso Model with alpha=0.0): 0.896810500603
+R^2 (Lasso Model with alpha=0.01): 0.896940053952
+R^2 (Lasso Model with alpha=0.1): 0.897928587379
+R^2 (Lasso Model with alpha=0.25): 0.899476048998
+R^2 (Lasso Model with alpha=0.5): 0.901626753659
+R^2 (Lasso Model with alpha=1.0): 0.904732365158
+R^2 (Lasso Model with alpha=2.5): 0.909231488015
+R^2 (Lasso Model with alpha=5.0): 0.912504625364
+'''
+
+alphas = [3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9]
+for a in alphas:
+	# Normalizing transforms all variables to number of standard deviations away from mean.
+	lasso_mod = linear_model.Lasso(alpha=a, normalize=True, fit_intercept=True)
+	lasso_mod.fit(x_train_bild, y_train_bild)
+	preds3 = lasso_mod.predict(x_test_bild)
+	print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(y_test_bild, preds3)))
+
+'''
+R^2 (Lasso Model with alpha=3.0): 0.909785989876
+R^2 (Lasso Model with alpha=3.1): 0.909876858782
+R^2 (Lasso Model with alpha=3.2): 0.909963866748
+R^2 (Lasso Model with alpha=3.3): 0.910051436509
+R^2 (Lasso Model with alpha=3.4): 0.91014355225
+R^2 (Lasso Model with alpha=3.5): 0.910232501681
+R^2 (Lasso Model with alpha=3.6): 0.910317724789
+R^2 (Lasso Model with alpha=3.7): 0.910399007596
+R^2 (Lasso Model with alpha=3.8): 0.910474293914
+R^2 (Lasso Model with alpha=3.9): 0.910552022232
+'''
+
+#creeping up higher on the R^2, let's see how far we can walk it
+
+alphas = [4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9]
+for a in alphas:
+	# Normalizing transforms all variables to number of standard deviations away from mean.
+	lasso_mod = linear_model.Lasso(alpha=a, normalize=True, fit_intercept=True)
+	lasso_mod.fit(x_train_bild, y_train_bild)
+	preds3 = lasso_mod.predict(x_test_bild)
+	print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(y_test_bild, preds3)))
+
+'''
+R^2 (Lasso Model with alpha=4.0): 0.910714120133
+R^2 (Lasso Model with alpha=4.1): 0.910917985579
+R^2 (Lasso Model with alpha=4.2): 0.911112882275
+R^2 (Lasso Model with alpha=4.3): 0.911303560585
+R^2 (Lasso Model with alpha=4.4): 0.911493321804
+R^2 (Lasso Model with alpha=4.5): 0.91168115733
+R^2 (Lasso Model with alpha=4.6): 0.911864316988
+R^2 (Lasso Model with alpha=4.7): 0.912035908869
+R^2 (Lasso Model with alpha=4.8): 0.912198223182
+R^2 (Lasso Model with alpha=4.9): 0.912353007473
+'''
+
+#still has a pulse
+alphas = [5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9]
+for a in alphas:
+	# Normalizing transforms all variables to number of standard deviations away from mean.
+	lasso_mod = linear_model.Lasso(alpha=a, normalize=True, fit_intercept=True)
+	lasso_mod.fit(x_train_bild, y_train_bild)
+	preds3 = lasso_mod.predict(x_test_bild)
+	print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(y_test_bild, preds3)))
+
+'''
+R^2 (Lasso Model with alpha=5.0): 0.912504625364
+R^2 (Lasso Model with alpha=5.1): 0.912572532422
+R^2 (Lasso Model with alpha=5.2): 0.912580801171
+R^2 (Lasso Model with alpha=5.3): 0.91271073246
+R^2 (Lasso Model with alpha=5.4): 0.912847860123
+R^2 (Lasso Model with alpha=5.5): 0.912985183824
+R^2 (Lasso Model with alpha=5.6): 0.913108884678
+R^2 (Lasso Model with alpha=5.7): 0.913101134751
+R^2 (Lasso Model with alpha=5.8): 0.913089623924
+R^2 (Lasso Model with alpha=5.9): 0.913082246264
+'''
+
+#we've reached our limit @ alpha == 5.6
+#this gives us the best overall R^2 score
