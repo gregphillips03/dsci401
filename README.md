@@ -26,6 +26,8 @@ Perform an exploratory analysis on your data by visualizing and/or applying othe
 
 + I ran a heat map in Seaborn. The pairs plot was a bit messy given the amount of data present in the set. Therefore, I opted to parse down the data to variables I *thought* would have a correlation or bearing on the sales price. 
 
+<img src="./fig/heat.png" title="Correlation Heatmap" alt="Corrleation Heatmap" style="display: block; margin: auto;" />
+
 + Initially, the overall quality, total basement square footage, and great room living area had high correlations with the sales price - at least based off of the heatmap. 
 
 2) Do you have any hypotheses about relationship of certain variables to the price?
@@ -35,4 +37,3 @@ Perform an exploratory analysis on your data by visualizing and/or applying othe
 
 + I still think there is a small case to argue the multicollinearity exist, especially after running a variance inflation factor test. Some of the factors resolve to infinity, but I'm not sure if that is due to a div/0 problem 'under the hood' or not. To stay on the same side, I left them in the set. 
 
-###Header3
