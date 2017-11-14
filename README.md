@@ -1,3 +1,9 @@
+<h2><b>Assignment 2</b></h2>
+<br>
+Author: Greg Phillips</br>   
+Date:   13.11.2017
+<hr>
+
 Assignment 2: Regression Modeling & Prediction
 ==============================================
 
