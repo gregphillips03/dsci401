@@ -27,12 +27,14 @@ from sklearn.feature_selection import f_regression
 '''I found that cleaning up the data (imagine that) a bit difficult in Python
 versus how we'd do it in R. I did the following outside of this script by hand
 
-- imputed Lot.Frontage WHERE value was listed as NA
+/- Begin Cleaning Up Test Data -/
+
+- imputed Lot.Frontage WHERE value == NA
 - I used the average (69.2) to fill in the missing values
 
 - House without Alley -
 
-- imputed Alley WHERE value was listed as NA
+- imputed Alley WHERE value == NA
 - Python thinks NA is a missing value, but in the data, this is being used categorically as
 - a distinction 
 - replaced NAs with No, meaning no Alley
@@ -157,7 +159,94 @@ versus how we'd do it in R. I did the following outside of this script by hand
 - House without Misc Qualities - 
 
 - imputed Misc.Feature WHERE value == NA
-- replaced 2260 locations with None '''
+- replaced 2260 locations with None 
+
+/- End Cleaning Up Test Data -/
+
+/- Begin Cleaning Up Validation Data -/
+
+- imputed Lot.Frontage WHERE value == NA
+- I used the average (69.2) to fill in the missing values
+
+- House without Alley -
+
+- imputed Alley WHERE value was listed == NA
+- Python thinks NA is a missing value, but in the data, this is being used categorically as
+- a distinction 
+- replaced 554 NAs with No, meaning no Alley
+
+- House without Veneer -
+
+- imputed Mas.Vnr.Type WHERE value == blank
+- replaced 6 blank locations with None, since None was part of the data set
+
+- imputed Mas.Vnr.Area WHERE value == NA
+- Python thinks NA is a missing value, but in the data, this is being used categorically as
+- a distinction
+- same for imputations below
+- replaced 6 NA with 0, since 0 was part of the data set 
+
+- House without Basement - 
+
+- imputed Bsmt.Qual WHERE value == NA
+- replaced 19 locations with None
+
+- imputed Bsmt.Cond WHERE value == NA
+- replaced 19 locations with None
+
+- imputed Bsmt.Exposure WHERE value == NA
+- replaced 19 locations with No
+
+- imputed Bsmt.Fin.Type.1 WHERE value == NA
+- replaced 19 locations with None
+
+- imputed Bsmt.Fin.Type.2 WHERE value == NA
+- replaced 19 locations with None
+
+- House without Fireplace -
+
+- imputed Fireplace.Qu WHERE value == NA
+- replaced 288 locations with No
+
+- House without Garage -
+
+- inputed Garage.Type WHERE value == NA
+- replaced 38 locations with None
+
+- imputed Garage.Yr.Blt WHERE value == NA
+- this one was a bit tricky, but I ended up deciding to use the avg (year 1979)
+- replaced 38 locations with 1979
+
+- imputed Garage.Finish WHERE value == NA
+- replaced 38 locations with None
+
+- imputed Garage.Qual WHERE value == NA
+- replaced 38 locations with None
+
+- imputed Garage.Cond WHERE value == NA
+- replaced 38 locations with None
+
+- House without Pool -
+
+- imputed Pool.QC WHERE value == NA
+- replaced 582 locations with None
+
+- House without Fence - 
+
+- imputed Fence WHERE value == NA
+- replaced 478 locations with None
+
+- House without Misc Qualities - 
+
+- imputed Misc.Feature WHERE value == NA
+- replaced 564 locations with None 
+
+- Electrical - 
+
+- imputed Electrical WHERE value == NA
+- replaced 1 location with SBrkr, as a quick pivot showed that to be the most frequent value
+
+'''
 
 # ----------------------------------------------------------- #
 # --- Section 1: Load in Data and drop what we don't need --- #
@@ -165,11 +254,11 @@ versus how we'd do it in R. I did the following outside of this script by hand
 
 #data for building the model
 housebild = pd.read_csv('./data/AmesHousingSetAv2.csv');
-#PID won't be needed, its a primary or unique identifier with no bearing on the sale price
+#PID won't be needed; its a primary or unique identifier with no bearing on the sale price
 housebild = housebild.drop('PID', axis = 1); 
 #data for validing the predictions
-housepred = pd.read_csv('./data/AmesHousingSetB.csv');
-#PID won't be needed its a primary or unique identifier with no bearing on the sale price
+housepred = pd.read_csv('./data/AmesHousingSetBv2.csv');
+#PID won't be needed; its a primary or unique identifier with no bearing on the sale price
 housepred = housepred.drop('PID', axis = 1); 
 
 # ----------------------------------------------- #
@@ -316,9 +405,9 @@ jumps out at first is the overall quality vand the year remodel was added, which
 supportive of each other, so multicollinearity is probably happening, so 
 lasso is probably the best approach here '''
 
-# -------------------------------------------------------------------- #
-# --- Section 5: Verify my variance inflation phenomena hypothesis --- #
-# -------------------------------------------------------------------- #
+# --------------------------------------------------------------------------- #
+# --- Section 5: Verify / Deny my variance inflation phenomena hypothesis --- #
+# --------------------------------------------------------------------------- #
 
 #bring in a fresh copy. the getdummies function causes issues when parsing under the hood?
 #or is it having trouble parsing periods? 
@@ -362,13 +451,78 @@ print(vif.round(1));
 #much easier after rearranging
 
 #independent / (predictor/ explanatory) variables
-data_x = housebild[list(housebild)[1:]];
+data_x_bild = housebild[list(housebild)[1:]];
 
 #dependent/ response variable (in this case 'SalePrice')
-data_y = housebild[list(housebild)[0]];
+data_y_bild = housebild[list(housebild)[0]];
 
 # -------------------------------------------- #
 # --- Section 7: Construct Base Line Model --- #
 # -------------------------------------------- #
 
+#we'll start with a basic linear regression model
 
+#create a least squares linear regression model.
+model = linear_model.LinearRegression();
+
+#split training and test sets from main datapeated.
+x_train_bild, x_test_bild, y_train_bild, y_test_bild = train_test_split(data_x_bild, data_y_bild, test_size = 0.2, random_state = 4);
+
+# Fit the model.
+model.fit(x_train_bild,y_train_bild);
+
+# Make predictions on test data and look at the results.
+preds = model.predict(x_test_bild);
+print('MSE, MAE, R^2, EVS: ' + str([mean_squared_error(y_test_bild, preds), \
+							   median_absolute_error(y_test_bild, preds), \
+							   r2_score(y_test_bild, preds), \
+							   explained_variance_score(y_test_bild, preds)]));
+
+#output of 
+'''
+MSE = 699316040.50473368
+MAE = 11746.06613336131
+R^2 = 0.89683828997227877
+EVS = 0.89788927124721352
+
+'''
+#not terrible but I'm sure there is a better model
+
+# --------------------------------------- #
+# --- Section 8: Try another approach --- #
+# --------------------------------------- #
+
+# Create a percentile-based feature selector based on the F-scores. Get top 25% best features by F-test.
+selector_f = SelectPercentile(f_regression, percentile=25)
+selector_f.fit(x_train_bild, y_train_bild)
+
+# Get the columns of the best 25% features.	
+xt_train_bild, xt_test_bild = selector_f.transform(x_train_bild), selector_f.transform(x_test_bild)
+
+# Create a least squares linear regression model.
+model2 = linear_model.LinearRegression()
+
+# Fit the model.
+model2.fit(xt_train_bild, y_train_bild)
+
+# Make predictions on test data
+preds2 = model2.predict(xt_test_bild)
+
+print('MSE, MAE, R^2, EVS (Top 25% Model): ' + \
+							   str([mean_squared_error(y_test_bild, preds2), \
+							   median_absolute_error(y_test_bild, preds2), \
+							   r2_score(y_test_bild, preds2), \
+							   explained_variance_score(y_test_bild, preds2)])) 
+
+#output of 
+'''
+MSE = 
+MAE = 
+R^2 = 
+EVS = 
+
+'''
+
+# --------------------------------------- #
+# --- Section 9: Try another approach --- #
+# --------------------------------------- #
