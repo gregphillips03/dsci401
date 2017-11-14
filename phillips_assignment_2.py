@@ -653,6 +653,7 @@ lasso_mod = linear_model.Lasso(alpha=5.6, normalize=True, fit_intercept=True);
 lasso_mod.fit(data_x_val_, data_y_val_);
 predsv2 = lasso_mod.predict(data_x_val_);
 print('R^2 (Lasso Model with alpha=' + str(a) + '): ' + str(r2_score(data_y_val_, predsv2)));
+print('EVS: ' +str(explained_variance_score(data_y_val_, predsv1))); 
 
 pprint.pprint(pd.DataFrame({'Actual':data_y_val_, 'Predicted':predsv2}));
 
