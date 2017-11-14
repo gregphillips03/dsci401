@@ -37,8 +37,7 @@ Perform an exploratory analysis on your data by visualizing and/or applying othe
 
 + I still think there is a small case to argue the multicollinearity exist, especially after running a variance inflation factor test. Some of the factors resolve to infinity, but I'm not sure if that is due to a div/0 problem 'under the hood' or not. To stay on the safe side, I left them in the set. I would need to know a bit more about how it actually works under the hood to really tell. 
 
-'''python
-
+'''r
 df2 = pd.read_csv('./data/AmesHousingSetAv2.csv');
 df2 = df2.drop('PID', axis = 1); 
 #drop out missing vals 
