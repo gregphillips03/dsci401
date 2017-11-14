@@ -382,7 +382,7 @@ Run your baseline and best models on dataset B. DO NOT do any further training. 
 + Lasso Model R^2 and EVS when applied to unseen data:
 ```python
 '''
-R^2 (Lasso Model with alpha=5.9): 0.962818558166
+R^2 (Lasso Model with alpha=5.6): 0.962818558166
 EVS: 0.964713804366
 '''
 ```
@@ -410,4 +410,4 @@ EVS: 0.964713804366
 
 + Granted, we do get a rather good R^2 and EVS, so the objective of attempting to explain variance is usually upheld. 
 
-+ I close by adding that with more data to train the model; a better understanding of the domain; and a better understanding of which factors support multicollinearity (so we can throw stuff out); this model has potential for actual use. 
++ I'll close by adding that with more data to train the model; a better understanding of the domain; and a better understanding of which factors support multicollinearity (so we can throw stuff out); this model has potential for actual use. 
