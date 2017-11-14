@@ -18,6 +18,7 @@ I. Data Preparation Questions
 + Here is the actual data cleanup that occurred outside of the working environment:
 
 ```python
+'''
 /- Begin Cleaning Up Test Data -/
 
 - imputed Lot.Frontage WHERE value == NA
@@ -236,7 +237,7 @@ I. Data Preparation Questions
 
 - imputed Electrical WHERE value == NA
 - replaced 1 location with SBrkr, as a quick pivot showed that to be the most frequent value
-
+'''
 ```
 
 II. Exploratory Analysis Questions
@@ -372,7 +373,33 @@ Run your baseline and best models on dataset B. DO NOT do any further training. 
 
 + My best model actually performed better than the baseline model, which is rather unnerving to me. Specifically, because there are certain instances that, at least in my opinion, the model performs rather bad at.
 
++ Lasso Model R^2 and EVS when applied to unseen data:
+```python
+R^2 (Lasso Model with alpha=5.9): 0.962818558166
+EVS: 0.964713804366
+```
+
++ Areas the model just totally gets wrong, and raises doubt:
+```python
+     Actual      Predicted
+2    166000  173330.597078
+5    132500  127194.156062
+6    318000  287548.726142
+9    179400  187096.417473
+11   158000  177845.000762
+13   176000  153817.630178
+14   176500  165388.478505
+15   260000  230380.811120
+19   239900  223178.930778
+22   169000  144124.461716
+27   147000  160652.956836
+```
+
 2) Is your best model a good model? Why or why not
 --------------------------------------------------
 
-+ I'll argue that it is a good model for *generalized* use. I really only think this is borderline *fair* for use in actual applications. 
++ I'll argue that it is a good model for *generalized* use. In other words, you can probably get a good estimation with it, but I wouldn't rely on it if I were in Vegas. I really only think this is borderline *fair* for use in actual applications. 
+
++ Granted, we do get a rather good R^2 and EVS, so the objective of attempting to explain variance is usually upheld. 
+
++ I close by adding that with more data to train the model; a better understanding of the domain; and a better understanding of which factors support multicollinearity (so we can throw stuff out); this model has potential for actual use. 
