@@ -35,5 +35,43 @@ Perform an exploratory analysis on your data by visualizing and/or applying othe
 
 + I thougtht that some of the variables would reinforce each other, ergo multicollinearity. This didn't pan out the way I thought that it would, though. I thought that possibly the size of a room, or the conditoin of a feature would feed into the overall quality, but this strangely wasn't the case. 
 
-+ I still think there is a small case to argue the multicollinearity exist, especially after running a variance inflation factor test. Some of the factors resolve to infinity, but I'm not sure if that is due to a div/0 problem 'under the hood' or not. To stay on the same side, I left them in the set. 
++ I still think there is a small case to argue the multicollinearity exist, especially after running a variance inflation factor test. Some of the factors resolve to infinity, but I'm not sure if that is due to a div/0 problem 'under the hood' or not. To stay on the safe side, I left them in the set. I would need to know a bit more about how it actually works under the hood to really tell. 
+
+'''python
+
+df2 = pd.read_csv('./data/AmesHousingSetAv2.csv');
+df2 = df2.drop('PID', axis = 1); 
+#drop out missing vals 
+df2.dropna(); 
+#drop non-numeric cols
+df2 = df2._get_numeric_data();
+drop_periods(df2); 
+features = list(df2); 
+features.remove("SalePrice"); 
+str1 = " + ".join(features); 
+#break into left and right hand side; y and X
+#get y and X dataframes based on this regression:
+#so sales price 'is dependent up on all the features in the string'
+y, X = dmatrices(formula_like='SalePrice ~ ' + str1, 
+	data=df2, return_type='dataframe');
+vif = pd.DataFrame();
+vif["VIF Factor"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])];
+vif["features"] = X.columns;
+'''
+
+III. Model Building
+-------------------
+
+First construct a baseline model (containing all predictors) to predict the price. Then build the
+best model you can devise. In this part use ONLY dataset A and DO NOT TOUCH dataset B.
+You will want to split this into training and test sets and apply error metrics/compare models
+only on the test data.
+
+1) What approach did you use to arrive at the best model? Why did you select this approach?
+-------------------------------------------------------------------------------------------
+
++ I first built a base model using regular resgression. 
+
+2) Which error metric(s) are you using to compare performance? What is the value(s) of the error metric(s)for the baseline model and your best model?
+----------------------------------------------------------------------------------------------------------
 
