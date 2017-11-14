@@ -259,7 +259,7 @@ Perform an exploratory analysis on your data by visualizing and/or applying othe
 
 + I thougtht that some of the variables would reinforce each other, ergo multicollinearity. This didn't pan out the way I thought that it would, though. I thought that possibly the size of a room, or the condition of a feature would feed into the overall quality, but this strangely wasn't the case. 
 
-+ I still think there is a small case to argue the multicollinearity exist, especially after running a variance inflation factor test. Some of the factors resolve to infinity, but I'm not sure if that is due to a div/0 problem 'under the hood' or not. To stay on the safe side, I left them in the set. I would need to know a bit more about how it actually works under the hood to really tell.
++ I still think there is a small case to argue that multicollinearity exists, especially after running a variance inflation factor test. Some of the factors resolve to infinity, but I'm not sure if that is due to a div/0 problem 'under the hood' or not. To stay on the safe side, I left them in the set. I would need to know a bit more about how it actually works under the hood to really tell.
 
 + VIF Test I Used: 
 
@@ -361,7 +361,7 @@ R^2 (Lasso Model with alpha=5.9): 0.913082246264
 2) Which error metric(s) are you using to compare performance? What is the value(s) of the error metric(s)for the baseline model and your best model?
 ----------------------------------------------------------------------------------------------------------
 
-+ Primarily, I relied on the R2 score and Explained Variance Score. Since there were such a large amount of variable, and not surefire way to decide what to throw away, I wanted to explain variation the best that I could. 
++ Primarily, I relied on the R2 score and Explained Variance Score. Since there were such a large amount of variables, and not surefire way to decide what to throw away, I wanted to explain variation the best that I could. 
 
 IV. Predicting and Validating
 -----------------------------
@@ -375,8 +375,10 @@ Run your baseline and best models on dataset B. DO NOT do any further training. 
 
 + Lasso Model R^2 and EVS when applied to unseen data:
 ```python
+'''
 R^2 (Lasso Model with alpha=5.9): 0.962818558166
 EVS: 0.964713804366
+'''
 ```
 
 + Areas the model just totally gets wrong, and raises doubt:
