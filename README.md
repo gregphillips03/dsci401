@@ -24,3 +24,12 @@ Assignment 3: Customer Churn
 	+ Education
 	+ Calls
 	+ Visits
+
+2) What data transforms are necessary to perform on this data and why?
+----------------------------------------------------------------------
+
++ It's important to change the response variable from text to something numeric. I chose to change it outside of the work environment. 
+
+	+ If the value was 'Yes', I changed it to a 1. 
+
+	+ If the value was 'No', I changed it to a 0. 
