@@ -38,6 +38,7 @@ Assignment 3: Customer Churn
 
 + The data is also comprised of numeric and text values. In order to use it properly, it was one-hot encoded using the pd.getdummies method. 
 
+<hr>
 
 3) What modeling approaches did you use and why? Describe your model development process, including the different models tried, feature selection methods, and the different transformation techniques you employed. 
 --------------------------------------------------------------------------------------------------------
@@ -46,7 +47,9 @@ Assignment 3: Customer Churn
 
 	+ I thought it might be useful to see if it was a "near is like" problem. 
 
-	+ K-nearest results were actually really ugly. 
+	+ K-nearest results were actually really ugly.
+
+<hr> 
 
 4) Which error metrics did you use to assess performance and why? What kind of performance did you obtain
 on the different models you built?
@@ -82,5 +85,27 @@ Confusion Matrix:
 [[11  2]
  [ 9  4]]
 '''
- ```
+```
 
+
++ I switched to a 2-Class Logistic Regression approach. It gave a negligibly better improvement, but still fell very short of anything useful. 
+
++ It encompasses more underneath the curve, but it's still not even good enough for government work. Confusion matrix also improves. 
+
+```python
+'''
+Accuracy: 0.653846153846
+Precison: 0.7
+Recall: 0.538461538462
+F1: 0.608695652174
+ROC AUC: 0.653846153846
+Confusion Matrix:
+[[10  3]
+ [ 6  7]]
+'''
+```
+
+<hr>
+
+5) Construct the best (i.e. least-error) possible model on this data set. What are the predictors used?
+-------------------------------------------------------------------------------------------------------
