@@ -32,4 +32,7 @@ Assignment 3: Customer Churn
 
 	+ If the value was 'Yes', I changed it to a 1. 
 
-	+ If the value was 'No', I changed it to a 0. 
+	+ If the value was 'No', I changed it to a 0.
+
+3) What modeling approaches did you use and why? Describe your model development process, including the different models tried, feature selection methods, and the different transformation techniques you employed. 
+---
