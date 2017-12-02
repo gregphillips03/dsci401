@@ -150,11 +150,11 @@ x_train_vald, x_test_vald, y_train_vald, y_test_vald = train_test_split(churn_va
 ks = [2, 3, 6, 8, 10, 12, 14, 16, 18, 20]
 for k in ks:
 	# Create model and fit.
-	mod = neighbors.KNeighborsClassifier(n_neighbors=k)
-	mod.fit(x_train_data, y_train_data)
+	kmod = neighbors.KNeighborsClassifier(n_neighbors=k)
+	kmod.fit(x_train_data, y_train_data)
 
 	# Make predictions - both class labels and predicted probabilities.
-	preds = mod.predict(x_test_data)
+	preds = kmod.predict(x_test_data)
 	print('---------- EVALUATING MODEL: k = ' + str(k) + ' -------------------')
 	# Look at results.
 	print('Accuracy: ' + str(accuracy_score(y_test_data, preds)))
