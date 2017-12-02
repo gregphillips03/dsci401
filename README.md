@@ -34,5 +34,13 @@ Assignment 3: Customer Churn
 
 	+ If the value was 'No', I changed it to a 0.
 
++ The data is also comprised of numeric and text values. In order to use it properly, it was one-hot encoded using the pd.getdummites method. 
+
 3) What modeling approaches did you use and why? Describe your model development process, including the different models tried, feature selection methods, and the different transformation techniques you employed. 
----
+--------------------------------------------------------------------------------------------------------
+
++ I first started off with K-nearest
+
+	+ I thought it might be useful to see if it was a "near is like" problem. 
+
+	+ K-nearest results were actually really ugly. 
