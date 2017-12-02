@@ -109,3 +109,16 @@ Confusion Matrix:
 
 5) Construct the best (i.e. least-error) possible model on this data set. What are the predictors used?
 -------------------------------------------------------------------------------------------------------
+
+<hr>
+
+6) Load the dataset “churn_validation.csv” into a new data frame and recode as necessary. Predict the
+outcomes for each of the customers and compare to the actual. What are the error rates you get based on
+your selected metrics?
+-------------------------------------------------------------------------------------------------------
+
+<hr>
+
+7) Consider the best model you built for this problem. Is it a good model that can reliably be used for
+prediction? Why or why not?
+-------------------------------------------------------------------------------------------------------
