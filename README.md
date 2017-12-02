@@ -71,6 +71,7 @@ on the different models you built?
 
 
 ```python
+'''
 Accuracy: 0.576923076923
 Precison: 0.666666666667
 Recall: 0.307692307692
@@ -79,5 +80,6 @@ ROC AUC: 0.576923076923
 Confusion Matrix:
 [[11  2]
  [ 9  4]]
+'''
  ```
 

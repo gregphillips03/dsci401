@@ -8,6 +8,7 @@ import pprint
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn import neighbors
+from sklearn import linear_model
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
@@ -162,3 +163,27 @@ for k in ks:
 	print('F1: ' + str(f1_score(y_test_data, preds_data)));
 	print('ROC AUC: ' + str(roc_auc_score(y_test_data, preds_data)));
 	print("Confusion Matrix:\n" + str(confusion_matrix(y_test_data, preds_data)));
+
+# --------------------------------------------------------- #
+# --- Section 6: 2-Class Logistic Regression Evaluation --- #
+# --------------------------------------------------------- #
+
+# Build the model.
+log_mod = linear_model.LogisticRegression();
+log_mod.fit(x_train_data, y_train_data);
+
+# Make predictions - both class labels and predicted probabilities.
+preds = log_mod.predict(x_test_data);
+pred_probs = log_mod.predict_proba(x_test_data);
+prob_pos = pred_probs.transpose()[1];  # P(X = 1) is column 1
+prob_neg = pred_probs.transpose()[0];  # P(X = 0) is column 0
+
+# Look at results.
+pred_df = pd.DataFrame({'Actual':y_test_data, 'Predicted Class':preds, 'P(1)':prob_pos, 'P(0)':prob_neg});
+print(pred_df.head(15));
+print('Accuracy: ' + str(accuracy_score(y_test_data, preds)));
+print('Precison: ' + str(precision_score(y_test_data, preds)));
+print('Recall: ' + str(recall_score(y_test_data, preds)));
+print('F1: ' + str(f1_score(y_test_data, preds)));
+print('ROC AUC: ' + str(roc_auc_score(y_test_data, preds)));
+print("Confusion Matrix:\n" + str(confusion_matrix(y_test_data, preds)));
