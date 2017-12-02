@@ -7,6 +7,7 @@ Date:   01.12.2017
 Assignment 3: Customer Churn
 ==============================================
 
+<hr>
 
 1) Load the “churn_data.csv” dataset into Python. What is the response variable, and what are the predictor variables?
 -----------------------------------------------------------------------------------------------------------
