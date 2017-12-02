@@ -15,6 +15,8 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import confusion_matrix
+from sklearn import ensemble 
+from sklearn.metrics import classification_report
 
 # -------------------------------------- #
 # --- Section 0: Meta Data & Caveats --- #
@@ -83,6 +85,15 @@ def move_to_index(df, colName, index=0):
 def show_name(df):
 	name = [x for x in globals() if globals()[x] is df][0]; 
 	print("DataFrame Name is: %s" %name); 
+
+# Print out common error metrics for the binary classifications.
+def print_multiclass_classif_error_report(y_test, preds):
+	print('Accuracy: ' + str(accuracy_score(y_test, preds)))
+	print('Avg. F1 (Micro): ' + str(f1_score(y_test, preds, average='micro')))
+	print('Avg. F1 (Macro): ' + str(f1_score(y_test, preds, average='macro')))
+	print('Avg. F1 (Weighted): ' + str(f1_score(y_test, preds, average='weighted')))
+	print(classification_report(y_test, preds))
+	print("Confusion Matrix:\n" + str(confusion_matrix(y_test, preds)))
 
 # -------------------------------------- #
 # --- Section 3: Data transformation --- #
@@ -187,3 +198,22 @@ print('Recall: ' + str(recall_score(y_test_data, preds)));
 print('F1: ' + str(f1_score(y_test_data, preds)));
 print('ROC AUC: ' + str(roc_auc_score(y_test_data, preds)));
 print("Confusion Matrix:\n" + str(confusion_matrix(y_test_data, preds)));
+
+# --------------------------------------------------------- #
+# --- Section 7: Random Forest Evaluation ----------------- #
+# --------------------------------------------------------- #
+
+# Build a sequence of models for different n_est and depth values. **NOTE: nest=10, depth=None is equivalent to the default.
+n_est = [5, 10, 50, 100];
+depth = [3, 6, None];
+for n in n_est:
+	for dp in depth:
+		# Create model and fit.
+		mod = ensemble.RandomForestClassifier(n_estimators=n, max_depth=dp);
+		mod.fit(x_train_data, y_train_data);
+
+		# Make predictions - both class labels and predicted probabilities.
+		preds = mod.predict(x_test_data);
+		print('---------- EVALUATING MODEL: n_estimators = ' + str(n_est) + ', depth =' + str(dp) + ' -------------------');
+		# Look at results.
+		print_multiclass_classif_error_report(y_test_data, preds);
