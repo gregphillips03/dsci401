@@ -25,6 +25,7 @@ Assignment 3: Customer Churn
 	+ Calls
 	+ Visits
 
+<hr>
 
 2) What data transforms are necessary to perform on this data and why?
 ----------------------------------------------------------------------
