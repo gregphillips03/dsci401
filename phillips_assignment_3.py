@@ -147,21 +147,18 @@ x_train_vald, x_test_vald, y_train_vald, y_test_vald = train_test_split(churn_va
 # --------------------------------------- #
 
 # Build a sequence of models for k = 2, 4, 6, 8, ..., 20.
-ks = [2, 3, 6, 8, 10, 12, 14, 16, 18, 20]
+ks = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 for k in ks:
 	# Create model and fit.
-	kmod = neighbors.KNeighborsClassifier(n_neighbors=k)
-	kmod.fit(x_train_data, y_train_data)
-
+	kmod = neighbors.KNeighborsClassifier(n_neighbors=k);
+	kmod.fit(x_train_data, y_train_data);
 	# Make predictions - both class labels and predicted probabilities.
-	preds = kmod.predict(x_test_data)
-	print('---------- EVALUATING MODEL: k = ' + str(k) + ' -------------------')
+	preds_data = kmod.predict(x_test_data);
+	print('---------- EVALUATING MODEL (Data): k = ' + str(k) + ' -------------------');
 	# Look at results.
-	print('Accuracy: ' + str(accuracy_score(y_test_data, preds)))
-	print('Precison: ' + str(precision_score(y_test_data, preds)))
-	print('Recall: ' + str(recall_score(y_test_data, preds)))
-	print('F1: ' + str(f1_score(y_test_data, preds)))
-	print('ROC AUC: ' + str(roc_auc_score(y_test_data, preds)))
-	print("Confusion Matrix:\n" + str(confusion_matrix(y_test_data, preds)))
-
-print('end\n');
+	print('Accuracy: ' + str(accuracy_score(y_test_data, preds_data)));
+	print('Precison: ' + str(precision_score(y_test_data, preds_data)));
+	print('Recall: ' + str(recall_score(y_test_data, preds_data)));
+	print('F1: ' + str(f1_score(y_test_data, preds_data)));
+	print('ROC AUC: ' + str(roc_auc_score(y_test_data, preds_data)));
+	print("Confusion Matrix:\n" + str(confusion_matrix(y_test_data, preds_data)));
