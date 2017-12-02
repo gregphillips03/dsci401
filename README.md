@@ -13,7 +13,7 @@ Assignment 3: Customer Churn
 
 + Response Variable: 
 	
-	+'Churn' or the Yes/No boolean value of whether or not a customer left for a competitor. 
+	+ 'Churn' or the Yes/No boolean value of whether or not a customer left for a competitor. 
 
 + Predictor Variables:
 
