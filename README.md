@@ -11,3 +11,15 @@ Assignment 3: Customer Churn
 1) Load the “churn_data.csv” dataset into Python. What is the response variable, and what are the predictor variables?
 these?
 -----------------------------------------------------------------------------------------------------------
+
++ Response Variable: 'Churn' or the Yes/No boolean value of whether or not a customer left for a competitor. 
+
++ Predictor Variables:
+
+	+ Gender
+	+ Age
+	+ Income
+	+ FamilySize
+	+ Education
+	+ Calls
+	+ Visits
