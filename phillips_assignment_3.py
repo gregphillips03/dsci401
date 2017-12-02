@@ -19,6 +19,12 @@ from sklearn.metrics import confusion_matrix
 # --- Section 0: Meta Data & Caveats --- #
 # -------------------------------------- #
 
+'''
+Outside of the work environment, I change the values of the 'Churn' field
+Yes to 1
+No to 0
+'''
+
 # ----------------------------------------------------------- #
 # --- Section 1: Load in Data and drop what we don't need --- #
 # ----------------------------------------------------------- #
