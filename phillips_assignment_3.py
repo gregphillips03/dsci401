@@ -7,10 +7,13 @@ import pandas as pd
 import pprint
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import median_absolute_error
-from sklearn.metrics import r2_score
-from sklearn.metrics import explained_variance_score
+from sklearn import neighbors
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import confusion_matrix
 
 # -------------------------------------- #
 # --- Section 0: Meta Data & Caveats --- #
@@ -106,3 +109,35 @@ else:
 	print('No Missing Data!');
 	show_name(churn_vald);
 	print('\n'); 
+
+#transform the dfs to a one-hot encoding
+churn_data = pd.get_dummies(churn_data, columns=cat_features(churn_data));
+churn_vald = pd.get_dummies(churn_vald, columns=cat_features(churn_vald));
+
+# ------------------------------------ #
+# --- Section 4: Split up the Data --- #
+# ------------------------------------ #
+
+#much easier after rearranging
+
+#independent / (predictor/ explanatory) variables
+churn_data_x = churn_data[list(churn_data)[1:]];
+churn_vald_x = churn_vald[list(churn_vald)[1:]];
+
+#dependent/ response variable (in this case 'Churn')
+churn_data_y = churn_data[list(churn_data)[0]];
+churn_vald_y = churn_vald[list(churn_vald)[0]];
+
+#split training and test sets from main data
+x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(churn_data_x, churn_data_y, 
+	test_size = 0.2, random_state = 4);
+
+#split training and test sets from main data
+x_train_vald, x_test_vald, y_train_vald, y_test_vald = train_test_split(churn_vald_y, churn_vald_y, 
+	test_size = 0.2, random_state = 4); 
+
+# --------------------------------------- #
+# --- Section 5: K-Nearest Evaluation --- #
+# --------------------------------------- #
+
+print('end\n');
