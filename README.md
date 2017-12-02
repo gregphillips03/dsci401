@@ -7,7 +7,7 @@ Date:   01.12.2017
 Assignment 3: Customer Churn
 ==============================================
 
-<hr>
+
 1) Load the “churn_data.csv” dataset into Python. What is the response variable, and what are the predictor variables?
 -----------------------------------------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ Assignment 3: Customer Churn
 	+ Calls
 	+ Visits
 
-<hr>
+
 2) What data transforms are necessary to perform on this data and why?
 ----------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ Assignment 3: Customer Churn
 
 + The data is also comprised of numeric and text values. In order to use it properly, it was one-hot encoded using the pd.getdummites method. 
 
-<hr>
+
 3) What modeling approaches did you use and why? Describe your model development process, including the different models tried, feature selection methods, and the different transformation techniques you employed. 
 --------------------------------------------------------------------------------------------------------
 
