@@ -119,6 +119,31 @@ Confusion Matrix:
 5) Construct the best (i.e. least-error) possible model on this data set. What are the predictors used?
 -------------------------------------------------------------------------------------------------------
 
++ The random forest model blows <b>K-nearest</b> and <b>Logistical Regression</b> out of the water. 
+
+```python
+'''
+---------- EVALUATING MODEL: n_estimators = [5, 10, 50, 100], depth =6 -------------------
+Accuracy: 0.884615384615
+Avg. F1 (Micro): 0.884615384615
+Avg. F1 (Macro): 0.883058470765
+Avg. F1 (Weighted): 0.883058470765
+             precision    recall  f1-score   support
+
+          0       0.81      1.00      0.90        13
+          1       1.00      0.77      0.87        13
+
+avg / total       0.91      0.88      0.88        26
+
+Confusion Matrix:
+[[13  0]
+ [ 3 10]]
+'''
+
+```
+
++ We get really good precision and recall scores, supported visually by the high F1 score as well. Even the confusion matrix is top-notch. It doesn't get everything wrong; however, we are still only using a very small data set. 
+
 <hr>
 
 6) Load the dataset “churn_validation.csv” into a new data frame and recode as necessary. Predict the
