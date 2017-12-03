@@ -50,6 +50,18 @@ Assignment 3: Customer Churn
 
 	+ K-nearest results were actually really ugly.
 
++ Then I tried the <b>2-Class Logistic Regression</b>
+
+	+ Since we have two classes, I gave this one a try. 
+
+	+ The results here were only marginally better than K-nearest. 
+
++ Finally, I went with the <b>Random Forest</b> just as I thought the problem itself might be more related to a if/then problem than the 2 former approaches. 
+	
+	+ The approach proved to be the best. 
+
++ A last point of note, and something I'll use on the final project, relates to how predictors view features. A lot of predictors actually care about the relative size of features, even though those scales make little or no sense. Here, I used a standard scaler across the feature space just to ensure the model doesn't do anything crazy underneath the hood. 
+
 <hr> 
 
 4) Which error metrics did you use to assess performance and why? What kind of performance did you obtain
@@ -106,7 +118,7 @@ Confusion Matrix:
 '''
 ```
 
-+ Then I stepped away from the code a bit an thought about the overall question. 
++ <b><i>Then I stepped away from the code a bit</i></b> an thought about the overall question. 
 
 	+ An important question to ask should be, <i>'when a customer churns, how often does my classifier predict that correctly?'</i> In other words, we're really concerned about <b>recall</b>. 
 
@@ -153,7 +165,7 @@ your selected metrics?
 
 + Performance varies. I ran it against the same inputs that we use to build the model, and it really depends on which way the data is split up. 
 
-```pyhon
+```python
 
 ---------- EVALUATING MODEL: n_estimators = 5, depth =6 -------------------
 Accuracy: 0.857142857143
@@ -181,7 +193,5 @@ prediction? Why or why not?
 + I think the model itself is solid. We see that in when we build it. We got really good metrics in some cases, and fair metrics in others. All in all, we know that the predictors we've chosen actually relate to whether or not a customer leaves. Recall and Precision (and thus F1), really speak to this. 
 
 + However, this is an ML problem; ergo, it takes time to learn. The initial model was only trained with ~85 records, which honestly isn't enough to really allow the model to accurately learn. Once it runs into unseen data, it gets a little bit sketchy on performance. 
-
-+ A last point of note, and something I'll use on the final project, relate to how predictors view features. A lot of predictors actually care about the relative size of features, even though those scales make little or no sense. Here, we might need to use a standard scalar across the feature space just to ensure the model doesn't do anything crazy underneath the hood. 
 
 + To directly answer the question, yes it is a good model to use for prediction, but we really need more records to properly train the model, prior to deployment.  
