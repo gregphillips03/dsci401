@@ -70,7 +70,7 @@ on the different models you built?
 
 + I mostly focused on the AUC, to show how much the model actually got right. 
 
-+ The <b>K-nearest<b> approach didn't work very well. The amount underneath the curve was only a bit better than half, which isn't very good
++ The <b>K-nearest</b> approach didn't work very well. The amount underneath the curve was only a bit better than half, which isn't very good
 
 + Even the confusion matrix is poor, as shown below:
 
@@ -89,7 +89,7 @@ Confusion Matrix:
 ```
 
 
-+ I switched to a <b>2-Class Logistic Regression<b> approach. It gave a negligibly better improvement, but still fell very short of anything useful. 
++ I switched to a <b>2-Class Logistic Regression</b> approach. It gave a negligibly better improvement, but still fell very short of anything useful. 
 
 + It encompasses more underneath the curve, but it's still not even good enough for government work. Confusion matrix also improves. 
 
