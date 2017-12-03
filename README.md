@@ -108,9 +108,11 @@ Confusion Matrix:
 
 + Then I stepped away from the code a bit an thought about the overall question. 
 
-	+ An important question to ask should be, when a customer churns, how often does my classifier predict that correctly? In other words, we're really concerned about <b>recall</b>. 
+	+ An important question to ask should be, <i>'when a customer churns, how often does my classifier predict that correctly?'</i> In other words, we're really concerned about <b>recall</b>. 
 
-	+ Also, <b>precision</b> or, <i>When a classifier predicts a customer will churn, how often does that individual actually churn?</i> The differences between those two questions is small, but it really make a huge difference if you sit an think it through. 
+	+ Also, <b>precision</b> or, <i>'when a classifier predicts a customer will churn, how often does that individual actually churn?'</i> The differences between those two questions is small, but it really make a huge difference if you sit an think it through. 
+
++ After thinking this over, and determining that these were really the error metrics to concentrate on, I moved to a random forest evaluation. 
 
 <hr>
 
