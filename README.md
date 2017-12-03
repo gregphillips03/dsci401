@@ -166,7 +166,7 @@ your selected metrics?
 + Performance varies. I ran it against the same inputs that we use to build the model, and it really depends on which way the data is split up. 
 
 ```python
-
+'''
 ---------- EVALUATING MODEL: n_estimators = 5, depth =6 -------------------
 Accuracy: 0.857142857143
 Avg. F1 (Micro): 0.857142857143
@@ -182,6 +182,7 @@ avg / total       0.88      0.86      0.84         7
 Confusion Matrix:
 [[5 0]
  [1 1]]
+'''
 ```
 
 <hr>
