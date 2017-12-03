@@ -222,7 +222,8 @@ for n in n_est:
 # --- Section 8: Random Forest Against the Validation Data --- #
 # ------------------------------------------------------------ #
 
-mod1 = ensemble.RandomForestClassifier(n_estimators=50 , max_depth=6 ); 
+print('---------- PREDICTION ON VALIDATION DATA -------------------');
+mod1 = ensemble.RandomForestClassifier(n_estimators=5 , max_depth=3 ); 
 mod1.fit(x_train_data, y_train_data); 
 preds1 = mod1.predict(x_test_vald); 
 print_multiclass_classif_error_report(y_test_vald, preds1); 
