@@ -106,6 +106,12 @@ Confusion Matrix:
 '''
 ```
 
++ Then I stepped away from the code a bit an thought about the overall question. 
+
+	+ An important question to ask should be, when a customer churns, how often does my classifier predict that correctly? In other words, we're really concerned about <b>recall</b>. 
+
+	+ Also, <b>precision</b> or, <i>When a classifier predicts a customer will churn, how often does that individual actually churn?</i> The differences between those two questions is small, but it really make a huge difference if you sit an think it through. 
+
 <hr>
 
 5) Construct the best (i.e. least-error) possible model on this data set. What are the predictors used?
