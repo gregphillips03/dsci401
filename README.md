@@ -177,3 +177,11 @@ Confusion Matrix:
 7) Consider the best model you built for this problem. Is it a good model that can reliably be used for
 prediction? Why or why not?
 -------------------------------------------------------------------------------------------------------
+
++ I think the model itself is solid. We see that in when we build it. We got really good metrics in some cases, and fair metrics in others. All in all, we know that the predictors we've chosen actually relate to whether or not a customer leaves. Recall and Precision (and thus F1), really speak to this. 
+
++ However, this is an ML problem; ergo, it takes time to learn. The initial model was only trained with ~85 records, which honestly isn't enough to really allow the model to accurately learn. Once it runs into unseen data, it gets a little bit sketchy on performance. 
+
++ A last point of note, and something I'll use on the final project, relate to how predictors view features. A lot of predictors actually care about the relative size of features, even though those scales make little or no sense. Here, we might need to use a standard scalar across the feature space just to ensure the model doesn't do anything crazy underneath the hood. 
+
++ To directly answer the question, yes it is a good model to use for prediction, but we really need more records to properly train the model, prior to deployment.  
