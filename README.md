@@ -151,6 +151,27 @@ outcomes for each of the customers and compare to the actual. What are the error
 your selected metrics?
 -------------------------------------------------------------------------------------------------------
 
++ Performance varies. I ran it against the same inputs that we use to build the model, and it really depends on which way the data is split up. 
+
+```pyhon
+
+---------- EVALUATING MODEL: n_estimators = 5, depth =6 -------------------
+Accuracy: 0.857142857143
+Avg. F1 (Micro): 0.857142857143
+Avg. F1 (Macro): 0.787878787879
+Avg. F1 (Weighted): 0.839826839827
+             precision    recall  f1-score   support
+
+          0       0.83      1.00      0.91         5
+          1       1.00      0.50      0.67         2
+
+avg / total       0.88      0.86      0.84         7
+
+Confusion Matrix:
+[[5 0]
+ [1 1]]
+```
+
 <hr>
 
 7) Consider the best model you built for this problem. Is it a good model that can reliably be used for
