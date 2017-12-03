@@ -118,7 +118,7 @@ Confusion Matrix:
 '''
 ```
 
-+ <b><i>Then I stepped away from the code a bit</i></b> an thought about the overall question. 
++ <b><i>Then I stepped away from the code a bit</i></b> and thought about the overall question. 
 
 	+ An important question to ask should be, <i>'when a customer churns, how often does my classifier predict that correctly?'</i> In other words, we're really concerned about <b>recall</b>. 
 
