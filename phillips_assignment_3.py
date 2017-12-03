@@ -151,7 +151,7 @@ x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(churn_da
 	test_size = 0.2, random_state = 4);
 
 #split training and test sets from main data
-x_train_vald, x_test_vald, y_train_vald, y_test_vald = train_test_split(churn_vald_y, churn_vald_y, 
+x_train_vald, x_test_vald, y_train_vald, y_test_vald = train_test_split(churn_vald_x, churn_vald_y, 
 	test_size = 0.2, random_state = 4); 
 
 # --------------------------------------- #
@@ -214,6 +214,15 @@ for n in n_est:
 
 		# Make predictions - both class labels and predicted probabilities.
 		preds = mod.predict(x_test_data);
-		print('---------- EVALUATING MODEL: n_estimators = ' + str(n_est) + ', depth =' + str(dp) + ' -------------------');
+		print('---------- EVALUATING MODEL: n_estimators = ' + str(n) + ', depth =' + str(dp) + ' -------------------');
 		# Look at results.
 		print_multiclass_classif_error_report(y_test_data, preds);
+
+# ------------------------------------------------------------ #
+# --- Section 8: Random Forest Against the Validation Data --- #
+# ------------------------------------------------------------ #
+
+mod1 = ensemble.RandomForestClassifier(n_estimators=50 , max_depth=6 ); 
+mod1.fit(x_train_data, y_train_data); 
+preds1 = mod1.predict(x_test_vald); 
+print_multiclass_classif_error_report(y_test_vald, preds1); 
