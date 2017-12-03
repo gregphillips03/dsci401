@@ -1,7 +1,7 @@
 #Assignment #3
 #DSCI401B
 #William (Greg) Phillips
-#Working State
+#Submission
 
 import pandas as pd
 import pprint
@@ -9,6 +9,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn import neighbors
 from sklearn import linear_model
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
@@ -137,10 +138,13 @@ churn_vald = pd.get_dummies(churn_vald, columns=cat_features(churn_vald));
 # ------------------------------------ #
 
 #much easier after rearranging
+scaler = StandardScaler()
 
 #independent / (predictor/ explanatory) variables
 churn_data_x = churn_data[list(churn_data)[1:]];
+churn_data_x = scaler.fit_transform(churn_data_x);
 churn_vald_x = churn_vald[list(churn_vald)[1:]];
+churn_vald_x = scaler.fit_transform(churn_vald_x); 
 
 #dependent/ response variable (in this case 'Churn')
 churn_data_y = churn_data[list(churn_data)[0]];
