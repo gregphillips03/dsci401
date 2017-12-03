@@ -123,21 +123,21 @@ Confusion Matrix:
 
 ```python
 '''
----------- EVALUATING MODEL: n_estimators = [5, 10, 50, 100], depth =6 -------------------
-Accuracy: 0.884615384615
-Avg. F1 (Micro): 0.884615384615
-Avg. F1 (Macro): 0.883058470765
-Avg. F1 (Weighted): 0.883058470765
+---------- EVALUATING MODEL: n_estimators = 5, depth =3 -------------------
+Accuracy: 0.961538461538
+Avg. F1 (Micro): 0.961538461538
+Avg. F1 (Macro): 0.961481481481
+Avg. F1 (Weighted): 0.961481481481
              precision    recall  f1-score   support
 
-          0       0.81      1.00      0.90        13
-          1       1.00      0.77      0.87        13
+          0       1.00      0.92      0.96        13
+          1       0.93      1.00      0.96        13
 
-avg / total       0.91      0.88      0.88        26
+avg / total       0.96      0.96      0.96        26
 
 Confusion Matrix:
-[[13  0]
- [ 3 10]]
+[[12  1]
+ [ 0 13]]
 '''
 
 ```
