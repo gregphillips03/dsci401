@@ -191,7 +191,7 @@ Confusion Matrix:
 prediction? Why or why not?
 -------------------------------------------------------------------------------------------------------
 
-+ I think the model itself is solid. We see that in when we build it. We got really good metrics in some cases, and fair metrics in others. All in all, we know that the predictors we've chosen actually relate to whether or not a customer leaves. Recall and Precision (and thus F1), really speak to this. 
++ I think the model itself is solid. We see that in performance when we build it. We get really good metrics in some cases, and fair metrics in others. All in all, we know that the predictors we've chosen actually relate to whether or not a customer leaves. Recall and Precision (and thus F1), really speak to this. 
 
 + However, this is an ML problem; ergo, it takes time to learn. The initial model was only trained with ~85 records, which honestly isn't enough to really allow the model to accurately learn. Once it runs into unseen data, it gets a little bit sketchy on performance. 
 
