@@ -44,7 +44,7 @@ Assignment 3: Customer Churn
 3) What modeling approaches did you use and why? Describe your model development process, including the different models tried, feature selection methods, and the different transformation techniques you employed. 
 --------------------------------------------------------------------------------------------------------
 
-+ I first started off with K-nearest
++ I first started off with <b>K-nearest</b>
 
 	+ I thought it might be useful to see if it was a "near is like" problem. 
 
@@ -70,7 +70,7 @@ on the different models you built?
 
 + I mostly focused on the AUC, to show how much the model actually got right. 
 
-+ The K-nearest approach didn't work very well. The amount underneath the curve was only a bit better than half, which isn't very good
++ The <b>K-nearest<b> approach didn't work very well. The amount underneath the curve was only a bit better than half, which isn't very good
 
 + Even the confusion matrix is poor, as shown below:
 
@@ -89,7 +89,7 @@ Confusion Matrix:
 ```
 
 
-+ I switched to a 2-Class Logistic Regression approach. It gave a negligibly better improvement, but still fell very short of anything useful. 
++ I switched to a <b>2-Class Logistic Regression<b> approach. It gave a negligibly better improvement, but still fell very short of anything useful. 
 
 + It encompasses more underneath the curve, but it's still not even good enough for government work. Confusion matrix also improves. 
 
@@ -119,7 +119,7 @@ Confusion Matrix:
 5) Construct the best (i.e. least-error) possible model on this data set. What are the predictors used?
 -------------------------------------------------------------------------------------------------------
 
-+ The random forest model blows <b>K-nearest</b> and <b>Logistical Regression</b> out of the water. 
++ The <b>Random Forest</b> model blows <b>K-nearest</b> and <b>2-Class Logistical Regression</b> out of the water. 
 
 ```python
 '''
@@ -142,7 +142,7 @@ Confusion Matrix:
 
 ```
 
-+ We get really good precision and recall scores, supported visually by the high F1 score as well. Even the confusion matrix is top-notch. It doesn't get everything wrong; however, we are still only using a very small data set. 
++ We get really good <b>precision</b> and <b>recall</b> scores, supported visually by the high F1 score as well. Even the confusion matrix is top-notch. It doesn't get everything right; however, we are still only using a very small data set. 
 
 <hr>
 
