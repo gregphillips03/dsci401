@@ -91,18 +91,22 @@ Assignment 4: Predicting Employees and Contractors
 + From a terminal (substitute pip for the package manager you use): 
 
 ```dos
-
 pip install xlrd
-
 ```
 
 + Then within your Python code:
 
 ```python
-
 data = pd.read_excel('./data/incs.xlsx', sheet_name='ALL');
-
 ```
 
-+ The ```python read_excel``` method takes a string argument for the worksheet you want to import. There are other paramaters you can specify as well. Since my spreadsheet contained multiple tabs within it, I used the ```python sheet_name='ALL'``` argument as well. 
++ The 
+```python 
+read_excel
+``` 
+method takes a string argument for the worksheet you want to import. There are other paramaters you can specify as well. Since my spreadsheet contained multiple tabs within it, I used the 
+```python 
+sheet_name='ALL'
+```
+argument as well. 
 
