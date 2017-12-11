@@ -40,7 +40,7 @@ Assignment 4: Predicting Employees and Contractors
 
 <hr>
 
-<h2><b>2) Cleaning up the Data</b></h2>
+<h2><b>2) Cleaning up the Data (Outside the Work Environment)</b></h2>
 
 <hr>
 
@@ -169,11 +169,20 @@ target_result = data['Worker Type'];
 
 ```
 
-+ Then, using numpy, apply a simple if / then statement (via the ```nump.where``` method) for the transformation:
++ Then, using numpy, apply a simple if / then statement (via the ```numpy.where``` method) for the transformation:
 
 ```python
 y = np.where(target_result == 'AECOM Employee', 1, 0)
 
 ```
 
-+ This yields a response variable ('Worker Type'), that is either 'true' (1) for an AECOM Employee, or is 'false' (0) for a Contractor. 
++ This yields a response variable ('Worker Type'), that is either 'true' [1] for an AECOM Employee, or is 'false' [0] for a Contractor. 
+
++ Next, we need to get rid of the text values. This part might not be apparent at first, but its crucial to performing the analysis. Ergo, we need a label encoder, or something that can take a column, find all the different text values / categories in it, then encoded it properly. 
+
++ To accomplish this, we'll use pandas ```get_dummies()``` method, coupled with a utility label encoder borrowed from Chris Garcia, PhD. The ```get_dummies()``` method converts categorical values into "dummy", or indicator variables, while the ```cat_features()``` function returns a list of the categorical features for a given dataframe. They work hand in hand to get rid of the text and leave us with a nice, clean, numerical data frame. 
+
+```python
+data = pd.get_dummies(data, columns=cat_features(data));
+
+```
