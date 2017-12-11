@@ -100,5 +100,19 @@ pip install xlrd
 data = pd.read_excel('./data/incs.xlsx', sheet_name='ALL');
 ```
 
-+ The ```read_excel``` method takes a string argument for the worksheet you want to import. There are other paramaters you can specify as well. Since my spreadsheet contained multiple tabs within it, I used the ```sheet_name='ALL'``` argument as well. 
++ This comes in especially useful if your spreadsheet isn't hosted on you local machine. You can specify a host within the string to point pandas to a remotely hosted spreadsheet. YMMV.
+
++ The ```read_excel``` method takes a string argument for the worksheet you want to import. There are other paramaters you can specify as well. Since my spreadsheet contained multiple tabs within it, I used the ```sheet_name='ALL'``` argument as well.
+
+	+ Due to the size of the data, I was forced to download each month separately. The 'ALL' tab is where I aggregated each month by hand. Ergo, that's where I want pandas to look for the entirey of my incident records. 
+
++ Here, you can see column names within the data set. I cleverly placed 'Worker Type' at index 0, as it will function as the dependent /response variable for this analysis. 
+
+```python
+'''
+Column names: 
+[u'Worker Type', u'Incident Type', u'Month', u'Potential Severity', u'Potential Probability', u'Business Group', u'Business line']
+'''
+```
+
 
