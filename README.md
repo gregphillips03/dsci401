@@ -9,8 +9,9 @@ Assignment 4: Predicting Employees and Contractors
 
 <hr>
 
-1) The Data
------------------------------------------------------------------------------------------------------------
+<h2><b>1) The Data</b></h2>
+
+<hr>
 
 + The data is comprised of Safety, Health, and Environmental records generated from AECOM's IndustrySafe online incident reporting system. Each time an employee experiences an incident (such as those associated with physical harm, property damage, or hazardous material spills), they - or someone on their behalf - enters the incident into the IndustrySafe database. 
 
@@ -46,7 +47,8 @@ Assignment 4: Predicting Employees and Contractors
 
 + The data set contained the column 'Date of Incident', which was renamed to 'Month'
 
-+ Each record contained the specific calendar day which the incident occurred. These fields were mapped to the corresponding month of the year, as a text label; i.e., 03/04/2017 became 'March'. 
+	+ Each record contained the specific calendar day which the incident occurred. 
+	+ These fields were mapped to the corresponding month of the year, as a text label; i.e., 03/04/2017 became 'March'. 
 
 + Contractors can come in more than one type. That distinction is not necessary for this analysis. 
 
