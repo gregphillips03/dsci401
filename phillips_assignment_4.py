@@ -61,6 +61,9 @@ col_names = data.columns.tolist();
 print("Column names: "); 
 print(col_names); 
 
+print("\nSample data: "); 
+print(data.head(10)); 
+
 
 
 
