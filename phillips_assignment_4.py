@@ -3,7 +3,10 @@
 #William (Greg) Phillips
 #Working
 
+from __future__ import division 
 import pandas as pd
+import numpy as np
+
 import pprint
 import seaborn as sns
 from sklearn.model_selection import train_test_split
@@ -48,6 +51,13 @@ partners, as well as members of the public.
 - Removed a total of 38 records. 
 
 '''
+
+# --------------------------------------------- #
+# --- Section 1: Importation and First Look --- #
+# --------------------------------------------- #
+
+data = pd.read_excel('./data/incs.xlsx', sheet_name='ALL');
+
 
 
 
