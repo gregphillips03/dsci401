@@ -121,7 +121,7 @@ target_result = data['Worker Type'];
 #Everything else (contractor) set it to 0
 y = np.where(target_result == 'AECOM Employee', 1, 0)
 
-#transform using a labe encoder
+#transform using a label encoder
 data = pd.get_dummies(data, columns=cat_features(data));
 
 #if I had anything to drop, i'd specify it here
@@ -136,6 +136,17 @@ X = feature_space.as_matrix().astype(np.float);
 #apply a scaler to the predictors
 scaler = StandardScaler(); 
 X = scaler.fit_transform(X);
+
+#let's check to see if there's missing data
+b = check_missing_data(data); 
+if(b):
+	print('Found Missing Data'); 
+	show_name(data); 
+	print('\n');
+else:
+	print('No Missing Data!');
+	show_name(data); 
+	print('\n');
 
 #check to make sure that we've not done anything crazy at this point
 print("Feature space contains %d records and %d columns" % X.shape); 
