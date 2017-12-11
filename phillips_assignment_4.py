@@ -57,6 +57,9 @@ partners, as well as members of the public.
 # --------------------------------------------- #
 
 data = pd.read_excel('./data/incs.xlsx', sheet_name='ALL');
+col_names = data.columns.tolist(); 
+print("Column names: "); 
+print(col_names); 
 
 
 
