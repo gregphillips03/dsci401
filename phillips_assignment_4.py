@@ -24,11 +24,11 @@ from sklearn.metrics import classification_report
 # -------------------------------------- #
 
 '''
-The following transformation were made to the data outside of the work enviornment:
+The following transformations were made to the data outside of the work environment:
 
 - The data set contained the column 'Date of Incident', which was renamed to 'Month'
 - Each record contained the specific calendar day which the incident occurred. These fields were mapped
-to the corresponding month of the year, as a text lable; i.e., 03/04/2017 became 'March'. 
+to the corresponding month of the year, as a text label; i.e., 03/04/2017 became 'March'. 
 
 - Changed 'Worker Type' WHERE value == 'Contractor/Subcontractor (Managed)'
 - Replaced 1040 locations with 'Contractor'
@@ -46,6 +46,8 @@ partners, as well as members of the public.
 
 - Removed records WHERE value of 'Worker Type' == 'Third Party/Public'. 
 - Removed a total of 38 records. 
+
+'''
 
 
 
