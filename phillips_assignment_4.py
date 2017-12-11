@@ -56,7 +56,7 @@ partners, as well as members of the public.
 # --- Section 1: Importation and First Look --- #
 # --------------------------------------------- #
 
-data = pd.read_excel('./data/incs.xlsx', sheet_name='ALL');
+data = pd.read_excel('./data/incs.xlsx', sheet_name='fy17');
 col_names = data.columns.tolist(); 
 print("Column names: "); 
 print(col_names); 

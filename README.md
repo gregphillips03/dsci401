@@ -111,7 +111,8 @@ data = pd.read_excel('./data/incs.xlsx', sheet_name='ALL');
 ```python
 '''
 Column names: 
-[u'Worker Type', u'Incident Type', u'Month', u'Potential Severity', u'Potential Probability', u'Business Group', u'Business line']
+[u'Worker Type', u'Incident Type', u'Month', u'Potential Severity', u'Potential Probability', 
+u'Business Group', u'Business line']
 '''
 ```
 
