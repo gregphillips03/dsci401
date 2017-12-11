@@ -100,13 +100,5 @@ pip install xlrd
 data = pd.read_excel('./data/incs.xlsx', sheet_name='ALL');
 ```
 
-+ The 
-```python 
-read_excel
-``` 
-method takes a string argument for the worksheet you want to import. There are other paramaters you can specify as well. Since my spreadsheet contained multiple tabs within it, I used the 
-```python 
-sheet_name='ALL'
-```
-argument as well. 
++ The ```read_excel``` method takes a string argument for the worksheet you want to import. There are other paramaters you can specify as well. Since my spreadsheet contained multiple tabs within it, I used the ```sheet_name='ALL'``` argument as well. 
 
