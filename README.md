@@ -40,15 +40,17 @@ Assignment 4: Predicting Employees and Contractors
 
 <hr>
 
-2) Cleaning up the Data
------------------------------------------------------------------------------------------------------------
+<h2><b>2) Cleaning up the Data</b></h2>
+
+<hr>
 
 + The data required a bit of massaging and manipulation before analysis. The following transformations were made to the data outside of the work environment:
 
 + The data set contained the column 'Date of Incident', which was renamed to 'Month'
 
 	+ Each record contained the specific calendar day which the incident occurred. 
-	+ These fields were mapped to the corresponding month of the year, as a text label; i.e., 03/04/2017 became 'March'. 
+	+ These fields were mapped to the corresponding month of the year, as a text label.
+		+ i.e., 03/04/2017 became 'March'. 
 
 + Contractors can come in more than one type. That distinction is not necessary for this analysis. 
 
