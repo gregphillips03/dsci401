@@ -408,7 +408,7 @@ K-Nearest-Neighbors:
 
 > Again, it's good to go back and really think about the question we're asking. This helps us to determine what error metrics we should really be focused on. 
 
-+ Here, a good question to ask is, 
++ Here, a good question to ask is: 
 
 > When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?. 
 
@@ -422,7 +422,11 @@ SVM | 4152 | 4150 |0.999
 
 + Again, Random Forest is in the lead. Each time a record is attributed to an AECOM Employee, it correctly predicts that. 
 
-+ An equally important question to ask is, <i>When my classifier predicts a record is associated with an AECOM Employee, how often is this true?</i> This is the <b>precision</b> metric, or <i> the fraction of relevant retrieved instances, among the retrieved instances</i>. 
++ An equally important question to ask is:
+
+> When my classifier predicts a record is associated with an AECOM Employee, how often is this true?
+
++ This is the <b>precision</b> metric, or <i> the fraction of relevant retrieved instances, among the retrieved instances</i>. 
 
 Algorithm | Retrieved Instances | Relevant Instances | Precision Score
 --- | ---: | ---: | ---:
