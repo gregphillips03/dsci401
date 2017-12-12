@@ -60,3 +60,17 @@ def move_to_index(df, colName, index=0):
 	cols.insert(index, cols.pop(cols.index(colName)));
 	df = df.ix[:, cols]; 
 	return df; 
+
+#Runs cross validation models
+def run_cv(X, y, clf_class, **kwargs):
+	kf = KFold(len(y), n_folds=5, shuffle=true);
+	y_pred = y.copy();
+
+	for train_index, test_index in kf:
+		X_train, X_test = X[train_index], X[test_index]; 
+		y_train = y[train_index]; 
+		clf = clf_class(**kwargs); 
+		clf.fit(X_train, y_train); 
+		y_pred[test_index] = clf.predict(X_test); 
+
+	return y_pred; 
