@@ -185,7 +185,7 @@ y = np.where(target_result == 'AECOM Employee', 1, 0)
 + To accomplish this, we'll use pandas ```get_dummies()``` method, coupled with a utility label encoder borrowed from <a href=https://github.com/chrisgarcia001>Chris Garcia, PhD</a>. The ```get_dummies()``` method converts categorical values into "dummy", or indicator variables, while the ```cat_features()``` function returns a list of the categorical features for a given dataframe. They work hand in hand to get rid of the text and leave us with a nice, clean, numerical data frame. 
 
 ```python
-data = pd.get_dummies(data, columns=cat_features(data));
+data = pd.get_dummies(data, columns=util.cat_features(data));
 
 ```
 
@@ -228,7 +228,7 @@ X = scaler.fit_transform(X);
 + Here, were simply printing back to the screen the name of the frame, and whether or not there was missing data. 
 
 ```python
-b = check_missing_data(data); 
+b = util.check_missing_data(data); 
 if(b):
 	print('Found Missing Data'); 
 	show_name(data); 
