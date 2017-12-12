@@ -1,3 +1,6 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="./util/mdstyle.css">
+</head>
 <h2><b>Assignment 4</b></h2>
 <br>
 Author: Greg Phillips</br>   
@@ -10,6 +13,9 @@ Assignment 4: Predicting Employees and Contractors
 <img src="./img/sfl.PNG" title="Safety For Life Logo" alt="sfl logo" style="display: block; margin: auto;" />
 
 <hr>
+
+<button class="accordion">Section [0]</button>
+<div class="panel">
 
 <h2><b>0) The Question, the Problem</b></h2>
 
@@ -28,6 +34,8 @@ Assignment 4: Predicting Employees and Contractors
 + The question then is, "Can we develop a model that accurately predicts if a record is an AECOM Employee or Contractor, based off of other information we know about the record." Since there are thousands of records created every year, a model could quickly and efficiently quality check data as it came in, where such a task would require a staff to accomplish. 
 
 <hr>
+
+</div>
 
 <h2><b>1) The Data</b></h2>
 
