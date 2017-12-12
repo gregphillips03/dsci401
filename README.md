@@ -380,7 +380,7 @@ K-Nearest-Neighbors:
 
 <hr>
 
-<h2><b>5) Data Visualization</b></h2>
+<h2><b>6) Data Visualization</b></h2>
 
 <hr>
 
