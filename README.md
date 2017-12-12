@@ -11,6 +11,14 @@ Assignment 4: Predicting Employees and Contractors
 
 <hr>
 
+<h2><b>0) The Question</b></h2>
+
+<hr>
+
++ TODO Question information. 
+
+<hr>
+
 <h2><b>1) The Data</b></h2>
 
 <hr>
@@ -225,7 +233,7 @@ X = scaler.fit_transform(X);
 
 + Let's check to see if there's missing data. The ```check_missing_data``` is a utility function I built to look for missing values within a data frame. It looks for ```null``` values across the set, and prints out the column names that contain them (if it finds them). 
 
-+ Here, were simply printing back to the screen the name of the frame, and whether or not there was missing data. 
++ Here, we are simply printing back to the screen the name of the frame, and whether or not there was missing data. 
 
 ```python
 b = util.check_missing_data(data); 
@@ -267,7 +275,7 @@ Feature space contains 6510 records and 66 columns
 
 + Here we have two important pieces of information:
 
-	+ Our feature space contains the correct amount of records, and after we label encoded all the text, has the correct amount of columns as well. 
+	+ Our feature space contains the correct amount of records, and after we label encoded all the text, it has the correct amount of columns as well. 
 
 		+ Worker Type x 1
 		+ Incident Type x 9
