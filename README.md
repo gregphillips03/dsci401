@@ -294,3 +294,82 @@ Feature space contains 6510 records and 66 columns
 <h2><b>5) Evaluate different modeling approaches</b></h2>
 
 <hr>
+
++ Now that our data is ready, I'll start looking through different modeling appraoches to see what works the best. First, I'll start off by simply running the data through different algorithms, and comparing how the algorithm performs. To measure this, I'll base it off the <b>accuracy</b> error metric, or the proportion of the total number of predictions that were correct.
+
+```python
+print("Support Vector Machine:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,SVC))); 
+print("Random Forest:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
+print("K-Nearest-Neighbors:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
+
+```
+
++ There's alot going on underneath the hood here. The ```accuracy()``` method simply returns the accuracy score. Nested within it, is the ```run_cv()``` method which takes in our feature space, our response variable, and the type of model we want to run. 
+
++ The ```run_cv()``` method creates a KFold object, folds the data 5 times, and shuffles the records around.
+
+```python
+	kf = KFold(len(y), n_folds=5, shuffle=True);
+
+```
+
++ Then it splits the data up into test and train sets, creates a model object with any associated key word arguments (if you so choose to pass them), and fits the data to the model. 
+
+```python
+for train_index, test_index in kf:
+	X_train, X_test = X[train_index], X[test_index]; 
+	y_train = y[train_index]; 
+	clf = clf_class(**kwargs); 
+	clf.fit(X_train, y_train); 
+	y_pred[test_index] = clf.predict(X_test); 
+
+```
+
++ I took this function directly from <a href=http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html>scikit-learn.org</a> in case you're interested in the specifics of it. It's a rather common implementation of KFold's use. 
+
++ The object of this is to ensure that:
+
+	+ We split the data multiple ways, so we don't simply create predictions off a singular 'point of view' on the data itself. We want to 'view it from different angles'. 
+
+	+ Shuffle the data up. Here, we want to avoid one 'fold' of the data ending up with nothing but AECOM Employees or just Contractors. In essence, we want to shuffle the deck. 
+
++ ```run_cv()``` returns the predictions, which are piped back up to the ```accuracy()``` method, giving us an overall percentage of what each algorithm 'gets right'. 
+
+```python
+return y_pred;
+
+``` 
+
++ Performance of each algorithm:
+
+```python
+'''
+Support Vector Machine:
+0.9962
+Random Forest:
+1.0000
+K-Nearest-Neighbors:
+0.9214
+'''
+```
+
++ Each algorithm performs outstanding, at least using <b>accuracy</b> as the error metric, but we can't always rely on a measurement to explain whether or not a model is good or bad. Models don't always spit out high performance measures when they're good, and they won't always spit out low numbers when they are bad. It's simply not that black and white. If it were, models would simply be akin to algebraic formulas; you'd plug your data in, let the model cogitate, then wait for it to spit you out a number (fingers crossed that it's a high number). 
+
++ Instead, error metrics give you a good indication that you've built a model that's solid, and can be put to use. It's still the job of the scientist to verify that the model is actually valid. 
+
+	+ For instance, in our case it's bad enough if the classifier predicts that a record is an AECOM Employee and they're actuall not. Our rates will take a hit (as we're including records we don't need to), but we're not missing anything that we should be including. 
+
+	+ But it's worse if my classifier predicts that a record is a Contractor when they are, in fact, an AECOM Employee. Here, we'd be missing out on data, and undereporting. 
+
++ Plus we can't forget the old adage <i>garbage in, garbage out</i>. Our model is only every going to perform as well as the data it's fed. 
+
+<hr>
+
+<h2><b>5) Data Visualization</b></h2>
+
+<hr>
+
++ It's nearly always more palatable to general audiences to visualize the data with pictures and graphs. Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. 
