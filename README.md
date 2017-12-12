@@ -366,10 +366,12 @@ K-Nearest-Neighbors:
 
 + Plus we can't forget the old adage <i>garbage in, garbage out</i>. Our model is only every going to perform as well as the data it's fed. 
 
++ Random forest looks to hands-down be the winner, but let's make sure. 
+
 <hr>
 
 <h2><b>5) Data Visualization</b></h2>
 
 <hr>
 
-+ It's nearly always more palatable to general audiences to visualize the data with pictures and graphs. Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. 
++ It's nearly always more palatable to general audiences to visualize the data with pictures and graphs. Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. I'll be using another boiler plate function from <a href=http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html>scikit-learn.org</a> that I've added to my data_util file. 
