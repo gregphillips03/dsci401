@@ -1,5 +1,5 @@
 <head>
-	<link rel="stylesheet" type="text/css" href="./util/mdstyle.css">
+	<link rel="stylesheet" type="text/css" href="https://github.com/gregphillips03/dsci401/tree/master/util/mdstyle.css">
 </head>
 <h2><b>Assignment 4</b></h2>
 <br>
