@@ -400,3 +400,10 @@ K-Nearest-Neighbors:
 
 + Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. I'll be using another boiler plate function from <a href=http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html>scikit-learn.org</a> that I've added to my data_util file.
 
+<img src="./fig/KNNconfmatrix.png" title="KNN Conf Matrix" alt="KNN Conf Matrix" style="display: block; margin: auto;" />
+
+<img src="./fig/RFconfmatrix.png" title="RF Conf Matrix" alt="RF Conf Matrix" style="display: block; margin: auto;" />
+
+<img src="./fig/SVMconfmatrix.png" title="SVM Conf Matrix" alt="SVM Conf Matrix" style="display: block; margin: auto;" />
+
++ Again, it's good to go back and really think about the question we're asking. 
