@@ -117,8 +117,8 @@ print("Number of Response Types:", np.unique(y));
 # ---------------------------------- #
 
 print("Support vector machines:"); 
-print("%.3f" % util.accuracy(y, run_cv(X,y,SVC))); 
+print("%.3f" % util.accuracy(y, util.run_cv(X,y,SVC))); 
 print("Random forest:"); 
-print("%.3f" % util.accuracy(y, run_cv(X,y,RF))); 
+print("%.3f" % util.accuracy(y, util.run_cv(X,y,RF))); 
 print("K-nearest-neighbors:"); 
-print("%.3f" % util.accuracy(y, run_cv(X,y,KNN))); 
+print("%.3f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
