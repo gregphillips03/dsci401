@@ -112,6 +112,13 @@ print("Feature space contains %d records and %d columns" % X.shape);
 print("Number of Response Types:", np.unique(y));  
 
 
-# ------------------------------ #
-# --- Section 4: Predictions --- #
-# ------------------------------ #
+# ---------------------------------- #
+# --- Section 4: Evaluate Models --- #
+# ---------------------------------- #
+
+print("Support vector machines:"); 
+print("%.3f" % util.accuracy(y, run_cv(X,y,SVC))); 
+print("Random forest:"); 
+print("%.3f" % util.accuracy(y, run_cv(X,y,RF))); 
+print("K-nearest-neighbors:"); 
+print("%.3f" % util.accuracy(y, run_cv(X,y,KNN))); 
