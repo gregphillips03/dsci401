@@ -8,8 +8,7 @@ Author: Greg Phillips</br>
 Date:   11.12.2017
 <hr>
 
-Assignment 4: Predicting Employees and Contractors
-==============================================
+<h1><b>Assignment 4: Predicting Employees and Contractors</b></h1>
 
 <img src="./img/sfl.PNG" title="Safety For Life Logo" alt="sfl logo" style="display: block; margin: auto;" />
 
