@@ -1,4 +1,7 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import itertools
 from sklearn.cross_validation import KFold
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
@@ -64,7 +67,7 @@ def move_to_index(df, colName, index=0):
 
 #Runs cross validation models
 def run_cv(X, y, clf_class, **kwargs):
-	kf = KFold(len(y), n_folds=5, shuffle=true);
+	kf = KFold(len(y), n_folds=5, shuffle=True);
 	y_pred = y.copy();
 
 	for train_index, test_index in kf:
@@ -79,3 +82,38 @@ def run_cv(X, y, clf_class, **kwargs):
 #Simple accuracy return to be nested with run_cv
 def accuracy(y_true,y_pred):
     return np.mean(y_true == y_pred) 
+
+#pretty way to draw a confusion matrix
+def plot_confusion_matrix(cm, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.Blues):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+
+    print(cm)
+
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('Actual label')
+    plt.xlabel('Predicted label')
