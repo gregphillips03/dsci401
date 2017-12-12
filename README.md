@@ -408,7 +408,11 @@ K-Nearest-Neighbors:
 
 > Again, it's good to go back and really think about the question we're asking. This helps us to determine what error metrics we should really be focused on. 
 
-+ Here, a good question to ask is, <i>When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?</i>. This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is.  
++ Here, a good question to ask is, 
+
+> When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?. 
+
++ This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is.  
 
 Algorithm | Total Relevant Instances | Relevant Instances | Recall Score
 --- | ---: | ---: | ---:
@@ -426,6 +430,6 @@ KNN | 4170 | 3898 | 0.934
 RF | 4142 | 4152 | 1.000
 SVM | 4170 | 4150 |0.995
 
-+ Again, Random Forest for the in. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
++ Again, Random Forest for the win. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
 
 
