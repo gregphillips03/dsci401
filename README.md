@@ -363,12 +363,7 @@ for train_index, test_index in kf:
 
 	+ Shuffle the data up. Here, we want to avoid one 'fold' of the data ending up with nothing but AECOM Employees or just Contractors. In essence, we want to shuffle the deck. 
 
-+ ```run_cv()``` returns the predictions, which are piped back up to the ```accuracy()``` method, giving us an overall percentage of what each algorithm 'gets right'. 
-
-```python
-return y_pred;
-
-``` 
++ ```run_cv()``` returns the predictions ```return y_pred```, which are piped back up to the ```accuracy()``` method, giving us an overall percentage of what each algorithm 'gets right'. 
 
 + Performance of each algorithm:
 
@@ -387,11 +382,11 @@ K-Nearest-Neighbors:
 
 + Instead, error metrics give you a good indication that you've built a model that's solid, and can be put to use. It's still the job of the scientist to verify that the model is actually valid. 
 
-	+ For instance, in our case it's bad enough if the classifier predicts that a record is an AECOM Employee and they're actuall not. Our rates will take a hit (as we're including records we don't need to), but we're not missing anything that we should be including. 
+	+ For instance, in our case it's bad enough if the classifier predicts that a record is an AECOM Employee and they're actually not. Our rates will take a hit (as we're including records we don't need to), but we're not missing anything that we should be including. 
 
 	+ But it's worse if my classifier predicts that a record is a Contractor when they are, in fact, an AECOM Employee. Here, we'd be missing out on data, and undereporting. 
 
-+ Plus we can't forget the old adage <i>garbage in, garbage out</i>. Our model is only every going to perform as well as the data it's fed. 
++ Plus we can't forget the old adage <i>garbage in, garbage out</i>. Our model is only ever going to perform as well as the data it's fed. 
 
 + Random forest looks to hands-down be the winner, but let's make sure. In the Safety realm, there's no room for error. 
 
@@ -401,4 +396,7 @@ K-Nearest-Neighbors:
 
 <hr>
 
-+ It's nearly <i>always</i> more palatable to general audiences to visualize the data with pictures and graphs. Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. I'll be using another boiler plate function from <a href=http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html>scikit-learn.org</a> that I've added to my data_util file. 
++ It's nearly <i>always</i> more palatable to general audiences to visualize the data with pictures and graphs. Command lines and scripts are good for displaying information, but they're only good for a particular audience. Generally, most people don't want to look at a terminal window.
+
++ Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. I'll be using another boiler plate function from <a href=http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html>scikit-learn.org</a> that I've added to my data_util file.
+
