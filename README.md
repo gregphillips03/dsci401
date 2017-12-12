@@ -54,10 +54,10 @@ Date:   11.12.2017
 <li>The dataset contains the following attributes:</li>
 	<ul>
 		<li>Business Group</li>
-	</ul>
 		<ul>
 			<li>Sub entity within AECOM as a whole</li>
 		</ul>
+	</ul>
 	+ Incident Type
 		+ Classification of the incident record itself
 	+ Potential Severity
