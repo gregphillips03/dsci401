@@ -416,9 +416,9 @@ K-Nearest-Neighbors:
 
 Algorithm | Total Relevant Instances | Relevant Instances | Recall Score
 --- | ---: | ---: | ---:
-KNN | 4152 | 3898 | 0.938
-RF | 4142 | 4152 | 1.000
-SVM | 4152 | 4150 |0.999
+K-Nearest-Neighbors | 4152 | 3898 | 0.938
+Random Forest | 4142 | 4152 | 1.000
+Support Vector Machine | 4152 | 4150 |0.999
 
 + Again, Random Forest is in the lead. Each time a record is attributed to an AECOM Employee, it correctly predicts that. 
 
@@ -430,9 +430,9 @@ SVM | 4152 | 4150 |0.999
 
 Algorithm | Retrieved Instances | Relevant Instances | Precision Score
 --- | ---: | ---: | ---:
-KNN | 4170 | 3898 | 0.934
-RF | 4142 | 4152 | 1.000
-SVM | 4170 | 4150 |0.995
+K-Nearest-Neighbors | 4170 | 3898 | 0.934
+Random Forest | 4142 | 4152 | 1.000
+Support Vector Machine | 4170 | 4150 |0.995
 
 + Again, Random Forest for the win. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
 
