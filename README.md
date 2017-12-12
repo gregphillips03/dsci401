@@ -322,7 +322,7 @@ print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN)));
 + The ```run_cv()``` method creates a KFold object, folds the data 5 times, and shuffles the records around.
 
 ```python
-	kf = KFold(len(y), n_folds=5, shuffle=True);
+kf = KFold(len(y), n_folds=5, shuffle=True);
 
 ```
 
