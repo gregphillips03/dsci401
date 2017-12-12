@@ -452,6 +452,6 @@ SVM | 4170 | 4150 |0.995
 
 + Which piece of information would you rather have, if you needed to make a decision? Expand that into the business world, and you have a better understanding as to the crux of the problem. Not everything is black and white, and classification really lends itself better to the discrete realm, than that of the continuous realm. It's the distinction between integers and doubles; digital and analog; fried eggs and scrambled eggs. 
 
-+ Probabilities make more sense, especially when you need to communicate information <i>as it pertains to a decision making problem</i>. 
++ Probabilities makes more sense, especially when you need to communicate information <i>as it pertains to a decision making problem</i>. 
 
 
