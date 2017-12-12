@@ -3,22 +3,22 @@
 #William (Greg) Phillips
 #Working
 
-from __future__ import division 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import itertools
-from sklearn.preprocessing import StandardScaler
-from sklearn.cross_validation import KFold
-from sklearn.svm import SVC
-from sklearn.ensemble import RandomForestClassifier as RF
-from sklearn.neighbors import KNeighborsClassifier as KNN
-from sklearn.metrics import confusion_matrix
-data_util_file = './util/data_util.py'
-import os
-import sys
+from __future__ import division;
+import pandas as pd;
+import numpy as np;
+import matplotlib.pyplot as plt;
+import itertools;
+from sklearn.preprocessing import StandardScaler;
+from sklearn.cross_validation import KFold;
+from sklearn.svm import SVC;
+from sklearn.ensemble import RandomForestClassifier as RF;
+from sklearn.neighbors import KNeighborsClassifier as KNN;
+from sklearn.metrics import confusion_matrix;
+data_util_file = './util/data_util.py';
+import os;
+import sys;
 sys.path.append(os.path.dirname(os.path.expanduser(data_util_file))); 
-import data_util as util
+import data_util as util;
 
 # -------------------------------------- #
 # --- Section 0: Meta Data & Caveats --- #

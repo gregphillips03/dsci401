@@ -127,8 +127,8 @@ Date:   11.12.2017
 
 + From a terminal (substitute pip for the package manager you use): 
 
-```dos
-pip install xlrd
+```unix
+	sudo pip install xlrd
 ```
 
 + Then within your Python code:
