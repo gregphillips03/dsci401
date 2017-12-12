@@ -34,31 +34,30 @@ Date:   11.12.2017
 
 <li>The question then is, "Can we develop a model that accurately predicts if a record is an AECOM Employee or Contractor, based off of other information we know about the record." Since there are thousands of records created every year, a model could quickly and efficiently quality check data as it came in, where such a task would require a staff to accomplish.</li>
 </ul>
-<div class="standard">
+
+</div>>
 <hr>
 
 </div>
+
+<button class="accordion"></button>
+<div class="panel">
 
 <h2><b>1) The Data</b></h2>
 
 <hr>
 <div class="standard">
-<ul>
-<li>The data is comprised of Safety, Health, and Environmental records generated from AECOM's IndustrySafe online incident reporting system. Each time an employee experiences an incident (such as those associated with physical harm, property damage, or hazardous material spills), they - or someone on their behalf - enter the incident into the IndustrySafe database.</li> 
 
-<li>In keeping with the Health Insurance Portability and Accountability Act of 1996 (HIPAA); best practices associated with the protection and dissemination of employee personally identifiable information (PII); and AECOM's own internal guidelines that govern the dissemination of said information, all fields which could possibily indicate a specific employee have been removed from the data set prior to importing it into the working environment.</li> 
-	<ul>
-	<li>Removal of these attributes has no bearing on the outcome of the analysis. Attributes such as employee names and employee tracking IDs would not factor into the overall outcome.</li>
-	<ul> 
-</ul>
-<ul>
-<li>The dataset contains the following attributes:</li>
-	<ul>
-		<li>Business Group</li>
-		<ul>
-			<li>Sub entity within AECOM as a whole</li>
-		</ul>
-	</ul>
++ The data is comprised of Safety, Health, and Environmental records generated from AECOM's IndustrySafe online incident reporting system. Each time an employee experiences an incident (such as those associated with physical harm, property damage, or hazardous material spills), they - or someone on their behalf - enter the incident into the IndustrySafe database.</li> 
+
++ In keeping with the Health Insurance Portability and Accountability Act of 1996 (HIPAA); best practices associated with the protection and dissemination of employee personally identifiable information (PII); and AECOM's own internal guidelines that govern the dissemination of said information, all fields which could possibily indicate a specific employee have been removed from the data set prior to importing it into the working environment.
+
+	+ Removal of these attributes has no bearing on the outcome of the analysis. Attributes such as employee names and employee tracking IDs would not factor into the overall outcome.
+
++ The dataset contains the following attributes:
+
+	+ Business Group
+		+ Sub entity within AECOM as a whole
 	+ Incident Type
 		+ Classification of the incident record itself
 	+ Potential Severity
@@ -71,11 +70,13 @@ Date:   11.12.2017
 		+ AECOM Employee or Contractor
 	+ Date of Incident
 		+ Calendar Day / Month / Year the incident occured
-</ul>
 
 + Overall, this data set is composed of 6510 records from fiscal year 2017. 
 
+</div>
 <hr>
+
+</div>
 
 <h2><b>2) Cleaning up the Data (Outside the Work Environment)</b></h2>
 
