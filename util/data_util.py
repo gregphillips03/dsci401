@@ -74,4 +74,8 @@ def run_cv(X, y, clf_class, **kwargs):
 		clf.fit(X_train, y_train); 
 		y_pred[test_index] = clf.predict(X_test); 
 
-	return y_pred; 
+	return y_pred;
+
+#Simple accuracy return to be nested with run_cv
+def accuracy(y_true,y_pred):
+    return np.mean(y_true == y_pred) 
