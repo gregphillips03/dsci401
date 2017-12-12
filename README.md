@@ -444,6 +444,12 @@ Accuracy || Third | First | Second
 Recall || Third | First | Second
 Precision || Third | First | Second
 
+Algorithm | Accuracy (Rank) | Recall (Rank) | Precision (Rank)
+--- | :---: | :---: | :---:
+Random Forest | First | First | First
+Support Vector Machine | Second | Second |Second
+K-Nearest-Neighbors | Third | Third | Third
+
 <hr>
 
 <h2><b>7) Beyond Classification</b></h2>
