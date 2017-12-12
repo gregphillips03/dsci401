@@ -400,7 +400,7 @@ K-Nearest-Neighbors:
 
 + Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. I'll be using another boiler plate function from <a href=http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html>scikit-learn.org</a> that I've added to my data_util file.
 
-> At this point, remember that 1 is an "AECOM Employee", and 0 isn't - or is a "Contractor".
+	> At this point, remember that 1 is an "AECOM Employee", and 0 isn't - or is a "Contractor".
 
 <img src="./fig/KNNconfmatrix.png" title="KNN Conf Matrix" alt="KNN Conf Matrix" style="display: block; margin: auto;" />
 
