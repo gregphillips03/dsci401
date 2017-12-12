@@ -436,6 +436,8 @@ Support Vector Machine | 4170 | 4150 |0.995
 
 + Again, Random Forest for the win. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
 
++ To sum up our analysis to this point:
+
 Error Metric | K-Nearest-Neighbors  | Random Forest | Support Vector Machine
 :--- | :---: | :---: | :---:
 Accuracy | Third | First | Second
