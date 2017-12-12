@@ -465,7 +465,7 @@ K-Nearest-Neighbors | Third | Third | Third
 + Here, we'll move on to the part I think is really cool because you can communicate it much easier. I'll be using the same ```run_cv()``` method I defined earlier, but I'll rewrite the code to spit out probabilities instead of classes. <a href="http://scikit-learn.org/stable/modules/generated/
 sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy.
 
-+ The ```run_cv_prob()``` function produces the following:
++ The ```run_cv_prob()``` function produces the following, when applied against the Random Forest algorithm:
 
 ```python
 '''
@@ -482,7 +482,7 @@ sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>,
 
 ``` 
 
-+ The following table is a cleaner version of the above output snippet. 
++ The following table is a cleaner, more communicatable version of the above output snippet: 
 
 Predicted Probabilty % | Number of Records  | AECOM Employee?
 ---: | :---: | :---:
@@ -495,6 +495,11 @@ Predicted Probabilty % | Number of Records  | AECOM Employee?
 10 | 116 | No
 0 | 2218 | No
 
++ Essentially the table says, there is an ```X Predicted Probability %``` that these ```Number of Records``` were an AECOM Employee. Then it shows the if they were actually an ```AECOM Employee?```. Underneath the hood, were asking the machine to predict the probability that 'this' record is an AECOM Employee. 
+
+> So on the first line, the machine is saying, "For these 4009 records, there is a 100% probability that they are an AECOM Employee." And, based on the last column, those records actually were associated with AECOM Employees. 
+
+> On the fourth line, the machine is saying, "For this lonely 1 record, there is a 40% probability that it is an AECOM Employee". That record actually isn't, but the good thing is that the model didn't assign it a high percentage, nor does the model predict anything crazy - such as high percentages when they're actually the opposite. 
 
 
 
