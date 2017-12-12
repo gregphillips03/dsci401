@@ -34,7 +34,7 @@ Date:   11.12.2017
 
 + The question then is, "Can we develop a model that accurately predicts if a record is an AECOM Employee or Contractor, based off of other information we know about the record." Since there are thousands of records created every year, a model could quickly and efficiently quality check data as it came in, where such a task would require a staff to accomplish.
 
-</div>>
+</div>
 <hr>
 
 </div>
