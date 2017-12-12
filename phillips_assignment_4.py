@@ -149,13 +149,13 @@ util.plot_confusion_matrix(confusion_matrix_KNN, classes=class_names,
                       title='K-Nearest-Neighbors, without normalization')
 
 plt.figure()
-util.plot_confusion_matrix(confusion_matrix_SVC, classes=class_names, normalize=True
+util.plot_confusion_matrix(confusion_matrix_SVC, classes=class_names, normalize=True,
                       title='Support Vector Machine, with normalization')
 plt.figure()
-util.plot_confusion_matrix(confusion_matrix_RF, classes=class_names, normalize=True
+util.plot_confusion_matrix(confusion_matrix_RF, classes=class_names, normalize=True,
                       title='Random Forest, with normalization')
 plt.figure()
-util.plot_confusion_matrix(confusion_matrix_KNN, classes=class_names, normalize=True
+util.plot_confusion_matrix(confusion_matrix_KNN, classes=class_names, normalize=True,
                       title='K-Nearest-Neighbors, with normalization')
 
 plt.show()
