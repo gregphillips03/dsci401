@@ -51,7 +51,7 @@ Date:   11.12.2017
 	<li>Removal of these attributes has no bearing on the outcome of the analysis. Attributes such as employee names and employee tracking IDs would not factor into the overall outcome.</li>
 	<ul> 
 </ul>
-
+<ul>
 <li>The dataset contains the following attributes:</li>
 	<ul>
 		<li>Business Group</li>
@@ -71,8 +71,7 @@ Date:   11.12.2017
 		+ AECOM Employee or Contractor
 	+ Date of Incident
 		+ Calendar Day / Month / Year the incident occured
-
-
+</ul>
 
 + Overall, this data set is composed of 6510 records from fiscal year 2017. 
 
