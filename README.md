@@ -495,11 +495,13 @@ Predicted Probabilty % | Number of Records  | AECOM Employee?
 10 | 116 | No
 0 | 2218 | No
 
-+ Essentially the table says, there is an ```X Predicted Probability %``` that these ```Number of Records``` were an AECOM Employee. Then it shows the if they were actually an ```AECOM Employee?```. Underneath the hood, were asking the machine to predict the probability that 'this' record is an AECOM Employee. 
++ Essentially the table says, there is an ```X Predicted Probability %``` that these ```Number of Records``` were an AECOM Employee. Then it shows the if they were actually an ```AECOM Employee?```. Underneath the hood, were asking the model to predict the probability that 'this' record is an AECOM Employee. 
 
-> So on the first line, the machine is saying, "For these 4009 records, there is a 100% probability that they are an AECOM Employee." And, based on the last column, those records actually were associated with AECOM Employees. 
+> So on the first line, the model is saying, "For these 4009 records, there is a 100% probability that they are an AECOM Employee." And, based on the last column, those records actually were associated with AECOM Employees. 
 
-> On the fourth line, the machine is saying, "For this lonely 1 record, there is a 40% probability that it is an AECOM Employee". That record actually isn't, but the good thing is that the model didn't assign it a high percentage, nor does the model predict anything crazy - such as high percentages when they're actually the opposite. 
+> On the fourth line, the model is saying, "For this lonely 1 record, there is a 40% probability that it is an AECOM Employee". That record actually isn't, but the good thing is that the model didn't assign it a high percentage, nor does the model predict anything crazy - such as high percentages when they're actually the opposite. 
+
++ The key thing to take away from this is that the model really understands what an "AECOM Employee" record looks like, and it also knows what one doesn't look like. There are really only 8 records where it got a bit 'iffy', but even there it didn't lend them alot of weight. 
 
 
 
