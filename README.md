@@ -485,7 +485,7 @@ sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>,
 + The following table is a cleaner version of the above output snippet. 
 
 Predicted Probabilty % | Number of Records  | AECOM Employee?
----: | :---: | ---
+---: | :---: | :---:
 100 | 4009 | Yes
 90 | 132 | Yes
 80 | 11 | Yes
