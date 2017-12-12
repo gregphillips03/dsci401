@@ -30,7 +30,7 @@ Date:   11.12.2017
 
 + This, however, presents a problem. IndustrySafe, AECOM's online safety reporting software suite, is used to formulate incident rates for legal, business, and performance purposes. Properly distinguishing between an actual AECOM Employee and Contractor is paramount; <b>Contractors</b> aren't included in these rates. If they are included, they have the propensity to negatively influence the overall metrics.
 
-+ <b><i>The problem, therein, lies at data entry</i></b>. It's not often clear to an end user whether or not someone is an AECOM Employee 'proper', or one of our contractors. I've often wondered if most end users simply default to classifying someon as an AECOM Employee when they don't know. While this isn't as bad as classifying an actual employee as a contractor, it's still detrimental to metrics, such as OSHA's Recordable Incident Rate.
++ <b><i>The problem, therein, lies at data entry</i></b>. It's not often clear to an end user whether or not someone is an AECOM Employee 'proper', or one of our contractors. I've often wondered if most end users simply default to classifying someone as an AECOM Employee when they don't know. While this isn't as bad as classifying an actual employee as a contractor, it's still detrimental to metrics, such as OSHA's Recordable Incident Rate.
 
 + The question then is, "Can we develop a model that accurately predicts if a record is an AECOM Employee or Contractor, based off of other information we know about the record." Since there are thousands of records created every year, a model could quickly and efficiently quality check data as it came in, where such a task would require a staff to accomplish.
 
@@ -435,5 +435,23 @@ RF | 4142 | 4152 | 1.000
 SVM | 4170 | 4150 |0.995
 
 + Again, Random Forest for the win. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
+
+<hr>
+
+<h2><b>7) Beyond Classification</b></h2>
+
+<hr>
+
++ Classification is great, but it's actually lacking a lot of information - <i>which most people really want</i>. Think of it like this:
+
+	> You probably won't be a car crash on your way home today. 
+
+	or
+
+	> There's a 65% chance you'll be in a car crash on your way home today. 
+
++ Which piece of information would you rather have, if you needed to make a decision? Expand that into the business world, and you have a better understanding as to the crux of the problem. Not everything is black and white, and classification really lends itself better to the discrete realm, than that of the continuous realm. It's the distinction between integers and doubles; digital and analog; fried eggs and scrambled eggs. 
+
++ Probabilities make more sense, especially when you need to communicate information <i>as it pertains to a decision making problem</i>. 
 
 
