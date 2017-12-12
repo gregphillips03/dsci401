@@ -412,7 +412,7 @@ K-Nearest-Neighbors:
 
 	> When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?. 
 
-+ This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is.  
++ This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is?  
 
 Algorithm | Total Relevant Instances | Relevant Instances | Recall Score
 --- | ---: | ---: | ---:
@@ -463,7 +463,37 @@ Precision | Third | First | Second
 + Probabilities makes more sense, especially when you need to communicate information <i>as it pertains to a decision making problem</i>. 
 
 + Here, we'll move on to the part I think is really cool because you can communicate it much easier. I'll be using the same ```run_cv()``` method I defined earlier, but I'll rewrite the code to spit out probabilities instead of classes. <a href="http://scikit-learn.org/stable/modules/generated/
-sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy. 
+sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy.
+
++ The ```run_cv_prob()``` function produces the following:
+
+```python
+'''
+   Predicted Probability  Count  Actual Probability
+0                    1.0   4009                 1.0
+1                    0.0   2218                 0.0
+2                    0.9    132                 1.0
+3                    0.1    116                 0.0
+4                    0.2     16                 0.0
+5                    0.8     11                 1.0
+6                    0.3      7                 0.0
+7                    0.4      1                 0.0
+'''
+
+``` 
+
++ The following table is a cleaner version of the above output snippet. 
+
+Predicted Probabilty % | Number of Records  | AECOM Employee?
+:--- | :---: | ---
+100 | 4009 | Yes
+0 | 2218 | No
+90 | 132 | Yes
+10 | 116 | No
+20 | 16 | No
+80 | 11 | Yes
+30 | 7 | No
+40 | 1 | No
 
 
 

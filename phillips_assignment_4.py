@@ -126,9 +126,9 @@ print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF)));
 print("K-Nearest-Neighbors:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
 
-# ---------------------------------- #
+# ------------------------------------- #
 # --- Section 5: Confusion Matrices --- #
-# ---------------------------------- #
+# ------------------------------------- #
 
 y = np.array(y)
 class_names = np.unique(y)
@@ -158,5 +158,21 @@ plt.figure()
 util.plot_confusion_matrix(confusion_matrix_KNN, classes=class_names, normalize=True,
                       title='K-Nearest-Neighbors, with normalization')
 
-plt.show()
+#plt.show()
 
+# -------------------------------- #
+# --- Section 6: Probabilities --- #
+# -------------------------------- #
+
+predicted_prob = util.run_prob_cv(X, y, RF, n_estimators=10); 
+predicted_emp = predicted_prob[:,1]; 
+is_AECOM_emp = y == 1; 
+counts = pd.value_counts(predicted_emp); 
+actual_prob ={}; 
+for prob in counts.index:
+	actual_prob[prob] = np.mean(is_AECOM_emp[predicted_emp == prob]); 
+	actual_prob = pd.Series(actual_prob); 
+
+counts = pd.concat([counts, actual_prob], axis=1).reset_index(); 
+counts.columns = ['Predicted Probability', 'Count', 'Actual Probability']; 
+print(counts); 
