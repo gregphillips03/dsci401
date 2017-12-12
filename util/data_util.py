@@ -65,7 +65,7 @@ def move_to_index(df, colName, index=0):
 	df = df.ix[:, cols]; 
 	return df; 
 
-#Runs cross validation models
+#Runs cross validation models, predicts classes
 def run_cv(X, y, clf_class, **kwargs):
 	kf = KFold(len(y), n_folds=5, shuffle=True);
 	y_pred = y.copy();
@@ -117,3 +117,15 @@ def plot_confusion_matrix(cm, classes,
     plt.tight_layout()
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
+
+#Runs cross validation models, and predicts probabilities 
+def run_prob_cv(X, y, clf_class, **kwargs):
+	kf = KFold(len(y), n_folds=5, shuffle=True)
+	y_prob = np.zeros((len(y), 2))
+	for train_index, test_index in kf:
+		X_train, X_test = X[train_index], X[test_index]
+		y_train = y[train_index]
+		clf = clf_class(**kwargs)
+		clf.fit(X_train, y_train)
+		y_prob[test_index] = clf.predict_proba(X_test)
+	return y_prob
