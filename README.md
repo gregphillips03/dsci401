@@ -438,11 +438,11 @@ Support Vector Machine | 4170 | 4150 |0.995
 
 + To sum up our analysis to this point:
 
-Error Metric ][ Algorithm-> | K-Nearest-Neighbors  | Random Forest | Support Vector Machine
-:--- | :---: | :---: | :---:
-Accuracy | Third | First | Second
-Recall | Third | First | Second
-Precision | Third | First | Second
+Error Metric | Algorithm | K-Nearest-Neighbors  | Random Forest | Support Vector Machine
+:--- |---| :---: | :---: | :---:
+Accuracy || Third | First | Second
+Recall || Third | First | Second
+Precision || Third | First | Second
 
 <hr>
 
