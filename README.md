@@ -289,3 +289,8 @@ Feature space contains 6510 records and 66 columns
 
 + Now that we've cleaned up the data, transformed it, and given a few sanity checks, we can rest easy knowing that our data is ready to be processed. Now we can move onto making the predictions. 
 
+<hr>
+
+<h2><b>5) Evaluate different modeling approaches</b></h2>
+
+<hr>
