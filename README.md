@@ -410,7 +410,7 @@ K-Nearest-Neighbors:
 
 + Here, a good question to ask is: 
 
-> When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?. 
+	> When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?. 
 
 + This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is.  
 
@@ -424,7 +424,7 @@ SVM | 4152 | 4150 |0.999
 
 + An equally important question to ask is:
 
-> When my classifier predicts a record is associated with an AECOM Employee, how often is this true?
+	> When my classifier predicts a record is associated with an AECOM Employee, how often is this true?
 
 + This is the <b>precision</b> metric, or <i> the fraction of relevant retrieved instances, among the retrieved instances</i>. 
 
