@@ -410,8 +410,8 @@ K-Nearest-Neighbors:
 
 + Here, a good question to ask is, <i>When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?</i>. This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is.  
 
-Algorithm | Total AECOM Employee | Classified Correctly | Recall
---- | --- | --- | ---
+Algorithm | Total Relevant Instances | Relevant Instances | Recall Score
+--- | ---: | ---: | ---:
 KNN | 4152 | 3898 | 0.938
 RF | 4142 | 4152 | 1.000
 SVM | 4152 | 4150 |0.999
@@ -420,8 +420,8 @@ SVM | 4152 | 4150 |0.999
 
 + An equally important question to ask is, <i>When my classifier predicts a record is associated with an AECOM Employee, how often is this true?</i> This is the <b>precision</b> metric, or <i> the fraction of relevant retrieved instances, among the retrieved instances</i>. 
 
-Algorithm | No Predicted | Classified Correctly | Precision
---- | --- | --- | ---
+Algorithm | Retrieved Instances | Relevant Instances | Precision Score
+--- | ---: | ---: | ---:
 KNN | 4170 | 3898 | 0.934
 RF | 4142 | 4152 | 1.000
 SVM | 4170 | 4150 |0.995
