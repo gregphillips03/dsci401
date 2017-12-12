@@ -1,6 +1,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="./util/mdstyle.css">
 </head>
+
 <h2><b>Assignment 4</b></h2>
 <br>
 Author: Greg Phillips</br>   
@@ -14,7 +15,7 @@ Assignment 4: Predicting Employees and Contractors
 
 <hr>
 
-<button class="accordion">Section [0]</button>
+<button class="accordion"></button>
 <div class="panel">
 
 <h2><b>0) The Question, the Problem</b></h2>
