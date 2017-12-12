@@ -6,11 +6,14 @@
 from __future__ import division 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import itertools
 from sklearn.preprocessing import StandardScaler
 from sklearn.cross_validation import KFold
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier as RF
 from sklearn.neighbors import KNeighborsClassifier as KNN
+from sklearn.metrics import confusion_matrix
 data_util_file = './util/data_util.py'
 import os
 import sys
@@ -53,12 +56,12 @@ partners, as well as members of the public.
 
 data = pd.read_excel('./data/incs.xlsx', sheet_name='fy17');
 col_names = data.columns.tolist(); 
-print("Column names: "); 
-print(col_names); 
+#print("Column names: "); 
+#print(col_names); 
 
-print("\nSample data: "); 
-print(data.head(5)); 
-print(data.tail(5));
+#print("\nSample data: "); 
+#print(data.head(5)); 
+#print(data.tail(5));
 
 # --------------------------------------------- #
 # --- Section 2: Helper function -------------- #
@@ -116,9 +119,34 @@ print("Number of Response Types:", np.unique(y));
 # --- Section 4: Evaluate Models --- #
 # ---------------------------------- #
 
-print("Support vector machines:"); 
-print("%.3f" % util.accuracy(y, util.run_cv(X,y,SVC))); 
-print("Random forest:"); 
-print("%.3f" % util.accuracy(y, util.run_cv(X,y,RF))); 
-print("K-nearest-neighbors:"); 
-print("%.3f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
+print("Support Vector Machine:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,SVC))); 
+print("Random Forest:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
+print("K-Nearest-Neighbors:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
+
+# ---------------------------------- #
+# --- Section 5: Confusion Matrices --- #
+# ---------------------------------- #
+
+y = np.array(y)
+class_names = np.unique(y)
+np.set_printoptions(precision=2)
+
+confusion_matrix_SVC = confusion_matrix(y, util.run_cv(X,y,SVC)); 
+confusion_matrix_RF = confusion_matrix(y, util.run_cv(X,y,RF)); 
+confusion_matrix_KNN = confusion_matrix(y, util.run_cv(X,y,KNN)); 
+
+plt.figure()
+util.plot_confusion_matrix(confusion_matrix_SVC, classes=class_names,
+                      title='Support Vector Machine, without normalization')
+plt.figure()
+util.plot_confusion_matrix(confusion_matrix_RF, classes=class_names,
+                      title='Random Forest, without normalization')
+plt.figure()
+util.plot_confusion_matrix(confusion_matrix_KNN, classes=class_names,
+                      title='K-Nearest-Neighbors, without normalization')
+
+plt.show()
+
