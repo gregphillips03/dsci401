@@ -7,6 +7,8 @@ Date:   11.12.2017
 Assignment 4: Predicting Employees and Contractors
 ==============================================
 
+<img src="./img/sfl.png" title="Safety For Life Logo" alt="sfl logo" style="display: block; margin: auto;" />
+
 <hr>
 
 <h2><b>1) The Data</b></h2>
