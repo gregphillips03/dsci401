@@ -355,7 +355,7 @@ for train_index, test_index in kf:
 
 ```
 
-+ I took this function directly from <a href=http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html>scikit-learn.org</a> in case you're interested in the specifics of it. It's a rather common implementation of KFold's use. 
++ I took this function directly from <a href=http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html>scikit-learn.org</a> in case you're interested in the specifics of it. It's a rather common implementation of KFold's use. You can find it plastered all of the internet without looking too hard.  
 
 + The object of this is to ensure that:
 
@@ -388,7 +388,7 @@ K-Nearest-Neighbors:
 
 + Plus we can't forget the old adage <i>garbage in, garbage out</i>. Our model is only ever going to perform as well as the data it's fed. 
 
-+ Random forest looks to hands-down be the winner, but let's make sure. In the Safety realm, there's no room for error. 
+> Random forest looks to hands-down be the winner, but let's make sure. In the Safety realm, there's no room for error. 
 
 <hr>
 
@@ -406,4 +406,26 @@ K-Nearest-Neighbors:
 
 <img src="./fig/SVMconfmatrix.png" title="SVM Conf Matrix" alt="SVM Conf Matrix" style="display: block; margin: auto;" />
 
-+ Again, it's good to go back and really think about the question we're asking. 
+> Again, it's good to go back and really think about the question we're asking. This helps us to determine what error metrics we should really be focused on. 
+
++ Here, a good question to ask is, <i>When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?</i>. This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is.  
+
+Algorithm | Total AECOM Employee | Classified Correctly | Recall
+--- | --- | --- | ---
+KNN | 4152 | 3898 | 0.938
+RF | 4142 | 4152 | 1.000
+SVM | 4152 | 4150 |0.999
+
++ Again, Random Forest is in the lead. Each time a record is attributed to an AECOM Employee, it correctly predicts that. 
+
++ An equally important question to ask is, <i>When my classifier predicts a record is associated with an AECOM Employee, how often is this true?</i> This is the <b>precision</b> metric, or <i> the fraction of relevant retrieved instances, among the retrieved instances</i>. 
+
+Algorithm | No Predicted | Classified Correctly | Precision
+--- | --- | --- | ---
+KNN | 4170 | 3898 | 0.934
+RF | 4142 | 4152 | 1.000
+SVM | 4170 | 4150 |0.995
+
++ Again, Random Forest for the in. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
+
+
