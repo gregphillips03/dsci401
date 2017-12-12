@@ -11,7 +11,7 @@ Assignment 4: Predicting Employees and Contractors
 
 <hr>
 
-<h2><b>0) The Question</b></h2>
+<h2><b>0) The Question, the Problem</b></h2>
 
 <hr>
 
@@ -374,4 +374,4 @@ K-Nearest-Neighbors:
 
 <hr>
 
-+ It's nearly always more palatable to general audiences to visualize the data with pictures and graphs. Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. I'll be using another boiler plate function from <a href=http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html>scikit-learn.org</a> that I've added to my data_util file. 
++ It's nearly <i>always</i> more palatable to general audiences to visualize the data with pictures and graphs. Here, we'll use ```matplot.pyplot``` to pretty up our confusion matrices. I'll be using another boiler plate function from <a href=http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html>scikit-learn.org</a> that I've added to my data_util file. 
