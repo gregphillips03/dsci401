@@ -21,19 +21,18 @@ Date:   11.12.2017
 
 <hr>
 <div class="standard">
-<ul>
-<li>The Occupational Safety and Health Administration (OSHA) requires organizations to track occupational injuries. This implies organizations maintain accurate recordkeeping of their employees and the types of incidents they are involved in. This allows OSHA to accurately gauge the overall safety of the workplace enviornment and protect workers from occupational injury.</li>
 
-<li>Organizations are required to report incidents related to their employees; however, the work environment of today is not always comprised of one company acting alone. Instead, it's common to employ contractors to perform work along side an organization.</li> 
++ The Occupational Safety and Health Administration (OSHA) requires organizations to track occupational injuries. This implies organizations maintain accurate recordkeeping of their employees and the types of incidents they are involved in. This allows OSHA to accurately gauge the overall safety of the workplace enviornment and protect workers from occupational injury.
 
-<li>Most organizations, such as AECOM, track workplace injuries of thier contractors as well. Naturally, providing a safe work environment for our working parters is beneficial to all invested in a business venture. Both AECOM Employee and Contractor incidents are logged in the same database, IndustrySafe, to be centrally managed and stored.</li>
++ Organizations are required to report incidents related to their employees; however, the work environment of today is not always comprised of one company acting alone. Instead, it's common to employ contractors to perform work along side an organization.
 
-<li>This, however, presents a problem. IndustrySafe, AECOM's online safety reporting software suite, is used to formulate incident rates for legal, business, and performance purposes. Properly distinguishing between an actual AECOM Employee and Contractor is paramount; <b>Contractors</b> aren't included in these rates. If they are included, they have the propensity to negatively influence the overall metrics.</li> 
++ Most organizations, such as AECOM, track workplace injuries of thier contractors as well. Naturally, providing a safe work environment for our working parters is beneficial to all invested in a business venture. Both AECOM Employee and Contractor incidents are logged in the same database, IndustrySafe, to be centrally managed and stored.
 
-<li><b><i>The problem, therein, lies at data entry</i></b>. It's not often clear to an end user whether or not someone is an AECOM Employee 'proper', or one of our contractors. I've often wondered if most end users simply default to classifying someon as an AECOM Employee when they don't know. While this isn't as bad as classifying an actual employee as a contractor, it's still detrimental to metrics, such as OSHA's Recordable Incident Rate.</li>
++ This, however, presents a problem. IndustrySafe, AECOM's online safety reporting software suite, is used to formulate incident rates for legal, business, and performance purposes. Properly distinguishing between an actual AECOM Employee and Contractor is paramount; <b>Contractors</b> aren't included in these rates. If they are included, they have the propensity to negatively influence the overall metrics.
 
-<li>The question then is, "Can we develop a model that accurately predicts if a record is an AECOM Employee or Contractor, based off of other information we know about the record." Since there are thousands of records created every year, a model could quickly and efficiently quality check data as it came in, where such a task would require a staff to accomplish.</li>
-</ul>
++ <b><i>The problem, therein, lies at data entry</i></b>. It's not often clear to an end user whether or not someone is an AECOM Employee 'proper', or one of our contractors. I've often wondered if most end users simply default to classifying someon as an AECOM Employee when they don't know. While this isn't as bad as classifying an actual employee as a contractor, it's still detrimental to metrics, such as OSHA's Recordable Incident Rate.
+
++ The question then is, "Can we develop a model that accurately predicts if a record is an AECOM Employee or Contractor, based off of other information we know about the record." Since there are thousands of records created every year, a model could quickly and efficiently quality check data as it came in, where such a task would require a staff to accomplish.
 
 </div>>
 <hr>
