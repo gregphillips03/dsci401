@@ -26,7 +26,7 @@ Date:   11.12.2017
 
 + Organizations are required to report incidents related to their employees; however, the work environment of today is not always comprised of one company acting alone. Instead, it's common to employ contractors to perform work along side an organization.
 
-+ Most organizations, such as AECOM, track workplace injuries of thier contractors as well. Naturally, providing a safe work environment for our working parters is beneficial to all invested in a business venture. Both AECOM Employee and Contractor incidents are logged in the same database, IndustrySafe, to be centrally managed and stored.
++ Most organizations, such as AECOM, track workplace injuries of thier contractors as well. Naturally, providing a safe work environment for our working partners is beneficial to all invested in a business venture. Both AECOM Employee and Contractor incidents are logged in the same database, IndustrySafe, to be centrally managed and stored.
 
 + This, however, presents a problem. IndustrySafe, AECOM's online safety reporting software suite, is used to formulate incident rates for legal, business, and performance purposes. Properly distinguishing between an actual AECOM Employee and Contractor is paramount; <b>Contractors</b> aren't included in these rates. If they are included, they have the propensity to negatively influence the overall metrics.
 
@@ -47,7 +47,7 @@ Date:   11.12.2017
 <hr>
 <div class="standard">
 
-+ The data is comprised of Safety, Health, and Environmental records generated from AECOM's IndustrySafe online incident reporting system. Each time an employee experiences an incident (such as those associated with physical harm, property damage, or hazardous material spills), they - or someone on their behalf - enter the incident into the IndustrySafe database.</li> 
++ The data is comprised of Safety, Health, and Environmental records generated from AECOM's IndustrySafe online incident reporting system. Each time an employee experiences an incident (such as those associated with physical harm, property damage, or hazardous material spills), they - or someone on their behalf - enter the incident into the IndustrySafe database.
 
 + In keeping with the Health Insurance Portability and Accountability Act of 1996 (HIPAA); best practices associated with the protection and dissemination of employee personally identifiable information (PII); and AECOM's own internal guidelines that govern the dissemination of said information, all fields which could possibily indicate a specific employee have been removed from the data set prior to importing it into the working environment.
 
@@ -121,11 +121,11 @@ Date:   11.12.2017
 
 + It seems the business world runs on MS Excel. As such, vendors and third party software suppliers normally add in the ability to get data out of an application in a .xlsx format. It's convenient for normal end users, but it isn't very conducive to analysis.
 
-+ You can use Excel's built-in save function to save the file as a .csv extension; however, this doesn't always work. Depending on the exported format (JSON, XML, HTML), the data might come out a bit messy. 
++ You can use Excel's built-in save function to save the file as a .csv extension; however, this doesn't always work. Depending on the exported format from the database it's housed in (JSON, XML, HTML), the data might come out a bit messy. 
 
 + Fortunately, pandas and Python have a built in module for importing directly from a spreadsheet.
 
-+ From a terminal (substitute pip for the package manager you use): 
++ From a terminal, use the command (substitute pip for the package manager you use): 
 
 ```unix
 	sudo pip install xlrd
@@ -141,7 +141,7 @@ data = pd.read_excel('./data/incs.xlsx', sheet_name='fy17');
 
 + The ```read_excel``` method takes a string argument for the worksheet you want to import. There are other paramaters you can specify as well. Since my spreadsheet contained multiple tabs within it, I used the ```sheet_name='fy17'``` argument as well.
 
-	+ Due to the size of the data, I was forced to download each month separately. The 'fy17' tab is where I aggregated each month by hand. Ergo, that's where I want pandas to look for the entirey of my incident records. 
+	+ Due to the size of the data, I was forced to download each month separately. The 'fy17' tab is where I aggregated each month by hand. Ergo, that's where I want pandas to look for the entirety of my incident records. 
 
 + Here, you can see column names within the data set. I cleverly placed 'Worker Type' at index 0, as it will function as the dependent /response variable for this analysis. 
 
@@ -254,7 +254,7 @@ X = scaler.fit_transform(X);
 
 ```
 
-+ At this point, we have a features space (which I've denoted as X), and a target value (which I have denoted as y). This is our model, and it's ready to be applied to a multitude of algorithms for predictions. 
++ At this point, we have a feature space (which I've denoted as X), and a target value (which I have denoted as y). This is our model, and it's ready to be applied to a multitude of algorithms for predictions. 
 
 + However, it's good measure at this point to check and make sure we've not done anything crazy with the data. We done a lot of moving and transforming, so it's good to check and make sure that we didn't forget anything. 
 
@@ -384,7 +384,7 @@ K-Nearest-Neighbors:
 
 	+ For instance, in our case it's bad enough if the classifier predicts that a record is an AECOM Employee and they're actually not. Our rates will take a hit (as we're including records we don't need to), but we're not missing anything that we should be including. 
 
-	+ But it's worse if my classifier predicts that a record is a Contractor when they are, in fact, an AECOM Employee. Here, we'd be missing out on data, and undereporting. 
+	+ But it's worse if my classifier predicts that a record is a Contractor when they are, in fact, an AECOM Employee. Here, we'd be missing out on data, and undereporting. That has the potential to get us in trouble with the government.
 
 + Plus we can't forget the old adage <i>garbage in, garbage out</i>. Our model is only ever going to perform as well as the data it's fed. 
 
@@ -454,7 +454,7 @@ K-Nearest-Neighbors | Third | Third | Third
 
 + Classification is great, but it's actually lacking a lot of information - <i>which most people really want</i>. Think of it like this:
 
-	> You probably won't be a car crash on your way home today. 
+	> You probably won't be in a car crash on your way home today. 
 
 	or
 
@@ -497,7 +497,7 @@ Predicted Probabilty % | Number of Records  | AECOM Employee?
 10 | 116 | No
 0 | 2218 | No
 
-+ Essentially the table says, there is an ```X Predicted Probability %``` that these ```Number of Records``` were an AECOM Employee. Then it shows the if they were actually an ```AECOM Employee?```. Underneath the hood, were asking the model to predict the probability that 'this' record is an AECOM Employee. 
++ Essentially the table says, there is an ```X Predicted Probability %``` that these ```Number of Records``` were an AECOM Employee. Then it shows if they were actually an ```AECOM Employee?```. Underneath the hood, were asking the model to predict the probability that 'this' record is an AECOM Employee. 
 
 	>On the first line, the model is saying, "For these 4009 records, there is a 100% probability that they are an AECOM Employee." And, based on the last column, those records actually were associated with AECOM Employees. 
 
