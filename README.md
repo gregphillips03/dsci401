@@ -433,7 +433,7 @@ Support Vector Machine | 4152 | 4150 |0.999
 Algorithm | Retrieved Instances | Relevant Instances | Precision Score
 --- | ---: | ---: | ---:
 K-Nearest-Neighbors | 4170 | 3898 | 0.934
-Random Forest | 4142 | 4152 | 1.000
+Random Forest | 4152 | 4152 | 1.000
 Support Vector Machine | 4170 | 4150 |0.995
 
 + Again, Random Forest for the win. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
