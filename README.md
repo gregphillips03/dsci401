@@ -460,12 +460,12 @@ Decision Tree (Gini Impurity) | 4152 | 3423 | 0.8194
 
 Algorithm | Retrieved Instances | Relevant Instances | Precision Score
 --- | ---: | ---: | ---:
-K-Nearest-Neighbors | 4170 | 3898 | 0.934
-Random Forest | 4152 | 4152 | 1.000
-Support Vector Machine | 4170 | 4150 |0.995
-Naive Bayes Bernoulli | | |
-Naive Bayes Gaussian | | |
-Decision Tree (Gini Impurity) | | |
+K-Nearest-Neighbors | 4170 | 3898 | 0.8159
+Random Forest | 4152 | 4152 | 0.8641
+Support Vector Machine | 4170 | 4150 |0.8803
+Naive Bayes Bernoulli | | | 0.8562
+Naive Bayes Gaussian | | | 0.9467
+Decision Tree (Gini Impurity) | | | 0.8643
 
 + Insert winner here. 
 
