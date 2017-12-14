@@ -19,6 +19,7 @@ from sklearn.tree import DecisionTreeClassifier as DTC;
 from sklearn.metrics import confusion_matrix;
 from sklearn.metrics import recall_score;
 from sklearn.metrics import precision_score;  
+from sklearn.metrics import f1_score; 
 
 data_util_file = './util/data_util.py';
 import os;
@@ -133,6 +134,8 @@ print("Recall");
 print("%.4f" % recall_score(y, util.run_cv(X,y,SVC)));
 print("Precision"); 
 print("%.4f" % precision_score(y, util.run_cv(X,y,SVC)));
+print("F1"); 
+print("%.4f" % f1_score(y, util.run_cv(X,y,SVC)));
 
 print("Random Forest:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
@@ -140,6 +143,8 @@ print("Recall");
 print("%.4f" % recall_score(y, util.run_cv(X,y,RF)));
 print("Precision"); 
 print("%.4f" % precision_score(y, util.run_cv(X,y,RF)));
+print("F1"); 
+print("%.4f" % f1_score(y, util.run_cv(X,y,RF)));
 
 print("K-Nearest-Neighbors:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN)));
@@ -147,6 +152,8 @@ print("Recall");
 print("%.4f" % recall_score(y, util.run_cv(X,y,KNN))); 
 print("Precision"); 
 print("%.4f" % precision_score(y, util.run_cv(X,y,KNN)));
+print("F1"); 
+print("%.4f" % f1_score(y, util.run_cv(X,y,KNN)));
 
 print("Naive Bayes Bernoulli:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,BNB)));
@@ -154,6 +161,8 @@ print("Recall");
 print("%.4f" % recall_score(y, util.run_cv(X,y,BNB)));
 print("Precision"); 
 print("%.4f" % precision_score(y, util.run_cv(X,y,BNB)));
+print("F1"); 
+print("%.4f" % f1_score(y, util.run_cv(X,y,BNB)));
 
 print("Naive Bayes Gaussian:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,GNB)));
@@ -161,6 +170,8 @@ print("Recall");
 print("%.4f" % recall_score(y, util.run_cv(X,y,GNB)));
 print("Precision"); 
 print("%.4f" % precision_score(y, util.run_cv(X,y,GNB)));
+print("F1"); 
+print("%.4f" % f1_score(y, util.run_cv(X,y,GNB)));
 
 print("Decision Tree (Gini Impurity):"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,DTC)));
@@ -168,6 +179,8 @@ print("Recall");
 print("%.4f" % recall_score(y, util.run_cv(X,y,DTC)));
 print("Precision"); 
 print("%.4f" % precision_score(y, util.run_cv(X,y,DTC)));
+print("F1"); 
+print("%.4f" % f1_score(y, util.run_cv(X,y,DTC)));
 
 
 # ------------------------------------- #

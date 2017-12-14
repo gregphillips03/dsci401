@@ -467,18 +467,35 @@ Naive Bayes Bernoulli | 3639 | 3116 | 0.8562
 Naive Bayes Gaussian | 454 | 431 | 0.9467
 Decision Tree (Gini Impurity) | 3990 | 3423 | 0.8643
 
-+ Insert winner here. 
++ Here, Naive Bayes Gaussian performs well - but that is a deceptive error metric if that's the only way you look at it. Who cares if it has a high precision score, <i>if it only gets a few things right</i>.
+
+	> What we really need is a way to combine those two score. Fortunately, that's something that's simple to do in <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html">sklearn</a>.
+
++ The F1 score provides a harmonic mean of the precision score and recall score. It considers both scores by computing the number of correct positive results and dividing them by the number of all positive results AND taking the number of correct positive results and dividing them by the number of positive results <i>that should have been returned</i>. Looks like this:
+
+<img src="./fig/f1equation.png" title="f1 equation" alt="f1 equation" style="display: block; margin: auto;" />
+
+Algorithm | F1 Score
+--- | ---: 
+K-Nearest-Neighbors | 0.8437
+Random Forest | 0.8571
+Support Vector Machine | 0.8780
+Naive Bayes Bernoulli | 0.8018
+Naive Bayes Gaussian | 0.1875
+Decision Tree (Gini Impurity) | 0.8416
+
++ We get a much better understanding of both <b>precision</b> and <b>recall</b>, when we role it up into an F1 score. 
 
 + To sum up our analysis to this point:
 
-Algorithm | Accuracy (Rank) | Recall (Rank) | Precision (Rank)
---- | :---: | :---: | :---:
-Random Forest | second | third  | fourth
-Support Vector Machine | first  | second  | second
-K-Nearest-Neighbors | fourth  | first  | sixth 
-Naive Bayes Bernoulli | fifth | fifth | fifth
-Naive Bayes Gaussian | sixth | sixth | first
-Decision Tree (Gini Impurity) | third | fourth | third
+Algorithm | Accuracy (Rank) | Recall (Rank) | Precision (Rank) | F1 Score
+--- | :---: | :---: | :---: | :---:
+Random Forest | second | third  | fourth | second
+Support Vector Machine | first  | second  | second | first
+K-Nearest-Neighbors | fourth  | first  | sixth | third
+Naive Bayes Bernoulli | fifth | fifth | fifth | fifth
+Naive Bayes Gaussian | sixth | sixth | first | sixth
+Decision Tree (Gini Impurity) | third | fourth | third | fourth
 
 <hr>
 
