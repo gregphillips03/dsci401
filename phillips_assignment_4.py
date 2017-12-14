@@ -234,7 +234,7 @@ clf3 = KNN();
 
 scoring = {'F1': 'f1'}; 
 
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4)
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4);
 
 voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3)], voting='hard');
 
