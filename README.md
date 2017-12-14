@@ -444,13 +444,13 @@ Decision Tree (Gini Impurity):
 Algorithm | Total Relevant Instances | Relevant Instances | Recall Score
 --- | ---: | ---: | ---:
 K-Nearest-Neighbors | 4152 | 3619| 0.8716
-Random Forest | 4142 | | 0.8528
-Support Vector Machine | 4152 | | 0.8714
-Naive Bayes Bernoulli | 4152 | | 0.7529
-Naive Bayes Gaussian | 4152 | | 0.1053
-Decision Tree (Gini Impurity) | 4152 | | 0.8194
+Random Forest | 4142 | 3538 | 0.8528
+Support Vector Machine | 4152 | 3631 | 0.8714
+Naive Bayes Bernoulli | 4152 | 3116 | 0.7529
+Naive Bayes Gaussian | 4152 | 431 | 0.1053
+Decision Tree (Gini Impurity) | 4152 | 3423 | 0.8194
 
-+ Insert winner here. 
++ Here, K-Nearest-Neighbors edges out Support Vector Machines. It's able to perform slightly better <i>when it's asked to predict if the record is an AECOM Employee when they actually are</i>.
 
 + An equally important question to ask is:
 
@@ -473,12 +473,12 @@ Decision Tree (Gini Impurity) | | |
 
 Algorithm | Accuracy (Rank) | Recall (Rank) | Precision (Rank)
 --- | :---: | :---: | :---:
-Random Forest |  |  | 
-Support Vector Machine |  |  |
-K-Nearest-Neighbors |  |  | 
-Naive Bayes Bernoulli | | |
-Naive Bayes Gaussian | | |
-Decision Tree (Gini Impurity) | | |
+Random Forest | second | third  | 
+Support Vector Machine | first  | second  |
+K-Nearest-Neighbors | fourth  | first  | 
+Naive Bayes Bernoulli | fifth | fifth|
+Naive Bayes Gaussian | sixth | sixth |
+Decision Tree (Gini Impurity) | third | fourth |
 
 <hr>
 
