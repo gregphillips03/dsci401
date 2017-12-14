@@ -8,6 +8,7 @@ import pandas as pd;
 import numpy as np;
 import matplotlib.pyplot as plt;
 import itertools;
+import pprint; 
 from sklearn.preprocessing import StandardScaler;
 from sklearn.cross_validation import KFold;
 from sklearn.svm import SVC;
@@ -132,59 +133,59 @@ else:
 # --- Section 4: Evaluate Models --- #
 # ---------------------------------- #
 
-print("Support Vector Machine:"); 
-print("%.4f" % util.accuracy(y, util.run_cv(X,y,SVC))); 
-print("Recall"); 
-print("%.4f" % recall_score(y, util.run_cv(X,y,SVC)));
-print("Precision"); 
-print("%.4f" % precision_score(y, util.run_cv(X,y,SVC)));
-print("F1"); 
-print("%.4f" % f1_score(y, util.run_cv(X,y,SVC)));
+# print("Support Vector Machine:"); 
+# print("%.4f" % util.accuracy(y, util.run_cv(X,y,SVC))); 
+# print("Recall"); 
+# print("%.4f" % recall_score(y, util.run_cv(X,y,SVC)));
+# print("Precision"); 
+# print("%.4f" % precision_score(y, util.run_cv(X,y,SVC)));
+# print("F1"); 
+# print("%.4f" % f1_score(y, util.run_cv(X,y,SVC)));
 
-print("Random Forest:"); 
-print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
-print("Recall"); 
-print("%.4f" % recall_score(y, util.run_cv(X,y,RF)));
-print("Precision"); 
-print("%.4f" % precision_score(y, util.run_cv(X,y,RF)));
-print("F1"); 
-print("%.4f" % f1_score(y, util.run_cv(X,y,RF)));
+# print("Random Forest:"); 
+# print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
+# print("Recall"); 
+# print("%.4f" % recall_score(y, util.run_cv(X,y,RF)));
+# print("Precision"); 
+# print("%.4f" % precision_score(y, util.run_cv(X,y,RF)));
+# print("F1"); 
+# print("%.4f" % f1_score(y, util.run_cv(X,y,RF)));
 
-print("K-Nearest-Neighbors:"); 
-print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN)));
-print("Recall"); 
-print("%.4f" % recall_score(y, util.run_cv(X,y,KNN))); 
-print("Precision"); 
-print("%.4f" % precision_score(y, util.run_cv(X,y,KNN)));
-print("F1"); 
-print("%.4f" % f1_score(y, util.run_cv(X,y,KNN)));
+# print("K-Nearest-Neighbors:"); 
+# print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN)));
+# print("Recall"); 
+# print("%.4f" % recall_score(y, util.run_cv(X,y,KNN))); 
+# print("Precision"); 
+# print("%.4f" % precision_score(y, util.run_cv(X,y,KNN)));
+# print("F1"); 
+# print("%.4f" % f1_score(y, util.run_cv(X,y,KNN)));
 
-print("Naive Bayes Bernoulli:"); 
-print("%.4f" % util.accuracy(y, util.run_cv(X,y,BNB)));
-print("Recall"); 
-print("%.4f" % recall_score(y, util.run_cv(X,y,BNB)));
-print("Precision"); 
-print("%.4f" % precision_score(y, util.run_cv(X,y,BNB)));
-print("F1"); 
-print("%.4f" % f1_score(y, util.run_cv(X,y,BNB)));
+# print("Naive Bayes Bernoulli:"); 
+# print("%.4f" % util.accuracy(y, util.run_cv(X,y,BNB)));
+# print("Recall"); 
+# print("%.4f" % recall_score(y, util.run_cv(X,y,BNB)));
+# print("Precision"); 
+# print("%.4f" % precision_score(y, util.run_cv(X,y,BNB)));
+# print("F1"); 
+# print("%.4f" % f1_score(y, util.run_cv(X,y,BNB)));
 
-print("Naive Bayes Gaussian:"); 
-print("%.4f" % util.accuracy(y, util.run_cv(X,y,GNB)));
-print("Recall"); 
-print("%.4f" % recall_score(y, util.run_cv(X,y,GNB)));
-print("Precision"); 
-print("%.4f" % precision_score(y, util.run_cv(X,y,GNB)));
-print("F1"); 
-print("%.4f" % f1_score(y, util.run_cv(X,y,GNB)));
+# print("Naive Bayes Gaussian:"); 
+# print("%.4f" % util.accuracy(y, util.run_cv(X,y,GNB)));
+# print("Recall"); 
+# print("%.4f" % recall_score(y, util.run_cv(X,y,GNB)));
+# print("Precision"); 
+# print("%.4f" % precision_score(y, util.run_cv(X,y,GNB)));
+# print("F1"); 
+# print("%.4f" % f1_score(y, util.run_cv(X,y,GNB)));
 
-print("Decision Tree (Gini Impurity):"); 
-print("%.4f" % util.accuracy(y, util.run_cv(X,y,DTC)));
-print("Recall"); 
-print("%.4f" % recall_score(y, util.run_cv(X,y,DTC)));
-print("Precision"); 
-print("%.4f" % precision_score(y, util.run_cv(X,y,DTC)));
-print("F1"); 
-print("%.4f" % f1_score(y, util.run_cv(X,y,DTC)));
+# print("Decision Tree (Gini Impurity):"); 
+# print("%.4f" % util.accuracy(y, util.run_cv(X,y,DTC)));
+# print("Recall"); 
+# print("%.4f" % recall_score(y, util.run_cv(X,y,DTC)));
+# print("Precision"); 
+# print("%.4f" % precision_score(y, util.run_cv(X,y,DTC)));
+# print("F1"); 
+# print("%.4f" % f1_score(y, util.run_cv(X,y,DTC)));
 
 
 # ------------------------------------- #
@@ -230,45 +231,43 @@ util.plot_confusion_matrix(confusion_matrix_DTC, classes=class_names,
 clf1 = SVC(); 
 clf2 = RF(); 
 clf3 = KNN(); 
-clf4 = BNB(); 
-clf5 = GNB(); 
-clf6 = DTC(); 
 
 scoring = {'F1': 'f1'}; 
 
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4)
 
-voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3), ('bnb', clf4), 
-	('gnb', clf5), ('dtc', clf6)], voting='hard');
+voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3)], voting='hard');
 
-#voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3)], voting='hard');
-
-#voting_mod = VotingClassifier(estimators=[('svm', clf1), ('knn', clf3)], voting='hard');
-
-#voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2)], voting='hard');
-
-# Set up params for combined Grid Search on the voting model. Notice the convention for specifying 
-# parameters foreach of the different models.
+# Set up params for combined Grid Search on the voting model. 
+#Notice the convention for specifying parameters foreach of the different models.
 param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0], 'rf__n_estimators':[5, 10, 50, 100], 'rf__max_depth': [3, 6, None]}; 
-#param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0]};
-#best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5)
+
 best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5, scoring=scoring, refit='F1'); 
-best_voting_mod.fit(x_train, y_train)
-print('Voting Ensemble Model Test Score: ' + str(best_voting_mod.score(x_test, y_test)))
+best_voting_mod.fit(x_train, y_train);
+preds = best_voting_mod.predict(x_test); 
+print('Voting Ensemble Model Test Score: ' + str(best_voting_mod.score(x_test, y_test)));
+#spit it out to the commandline  
+pprint.pprint(pd.DataFrame({'Actual': y_test, 'Predicted': preds})); 
+
+#spit out the file to something human readable
+outdf = pd.DataFrame(pd.DataFrame({'Actual': y_test, 'Predicted': preds}));
+writer = pd.ExcelWriter('./gen/output.xlsx'); 
+outdf.to_excel(writer, 'Sheet1'); 
+writer.save(); 
 
 # -------------------------------- #
 # --- Section 7: Probabilities --- #
 # -------------------------------- #
 
-predicted_prob = util.run_prob_cv(X, y, RF, n_estimators=10); 
-predicted_emp = predicted_prob[:,1]; 
-is_AECOM_emp = y == 1; 
-counts = pd.value_counts(predicted_emp); 
-actual_prob ={}; 
-for prob in counts.index:
-	actual_prob[prob] = np.mean(is_AECOM_emp[predicted_emp == prob]); 
-	actual_prob = pd.Series(actual_prob); 
+# predicted_prob = util.run_prob_cv(X, y, best_voting_mod, n_estimators=10); 
+# predicted_emp = predicted_prob[:,1]; 
+# is_AECOM_emp = y == 1; 
+# counts = pd.value_counts(predicted_emp); 
+# actual_prob ={}; 
+# for prob in counts.index:
+# 	actual_prob[prob] = np.mean(is_AECOM_emp[predicted_emp == prob]); 
+# 	actual_prob = pd.Series(actual_prob); 
 
-counts = pd.concat([counts, actual_prob], axis=1).reset_index(); 
-counts.columns = ['Predicted Probability', 'Count', 'Actual Probability']; 
-print(counts); 
+# counts = pd.concat([counts, actual_prob], axis=1).reset_index(); 
+# counts.columns = ['Predicted Probability', 'Count', 'Actual Probability']; 
+# print(counts); 
