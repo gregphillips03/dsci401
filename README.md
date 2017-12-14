@@ -460,12 +460,12 @@ Decision Tree (Gini Impurity) | 4152 | 3423 | 0.8194
 
 Algorithm | Retrieved Instances | Relevant Instances | Precision Score
 --- | ---: | ---: | ---:
-K-Nearest-Neighbors | 4170 | 3898 | 0.8159
-Random Forest | 4152 | 4152 | 0.8641
-Support Vector Machine | 4170 | 4150 |0.8803
-Naive Bayes Bernoulli | | | 0.8562
-Naive Bayes Gaussian | | | 0.9467
-Decision Tree (Gini Impurity) | | | 0.8643
+K-Nearest-Neighbors | 4430 | 3619 | 0.8159
+Random Forest | 4096 | 3538 | 0.8641
+Support Vector Machine | 4124 | 3631 |0.8803
+Naive Bayes Bernoulli | 3639 | 3116 | 0.8562
+Naive Bayes Gaussian | 454 | 431 | 0.9467
+Decision Tree (Gini Impurity) | 3990 | 3423 | 0.8643
 
 + Insert winner here. 
 
@@ -473,12 +473,12 @@ Decision Tree (Gini Impurity) | | | 0.8643
 
 Algorithm | Accuracy (Rank) | Recall (Rank) | Precision (Rank)
 --- | :---: | :---: | :---:
-Random Forest | second | third  | 
-Support Vector Machine | first  | second  |
-K-Nearest-Neighbors | fourth  | first  | 
-Naive Bayes Bernoulli | fifth | fifth|
-Naive Bayes Gaussian | sixth | sixth |
-Decision Tree (Gini Impurity) | third | fourth |
+Random Forest | second | third  | fourth
+Support Vector Machine | first  | second  | second
+K-Nearest-Neighbors | fourth  | first  | sixth 
+Naive Bayes Bernoulli | fifth | fifth | fifth
+Naive Bayes Gaussian | sixth | sixth | first
+Decision Tree (Gini Impurity) | third | fourth | third
 
 <hr>
 
