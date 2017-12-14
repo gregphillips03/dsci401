@@ -474,7 +474,7 @@ Decision Tree (Gini Impurity) | 3990 | 3423 | 0.8643
 + The F1 score provides a harmonic mean of the precision score and recall score. It considers both scores by computing the number of correct positive results and dividing them by the number of all positive results AND taking the number of correct positive results and dividing them by the number of positive results <i>that should have been returned</i>. Looks like this:
 
 
-<img src="./fig/f1equation.png" title="f1 equation" alt="f1 equation" align="middle" style="display: block; margin: auto;" />
+<img src="./fig/f1equation.png" title="f1 equation" alt="f1 equation" align="middle" />
 
 + And when we churn the data through the machine, we get this:
 
