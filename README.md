@@ -629,6 +629,17 @@ Voting Ensemble Model Test Score: 0.862126245847
 Voting Ensemble Model Test Score: 0.877388535032
 ```
 
++ Arranged neatly in a table:
+
+Model Ensemble | Accuracy | F1 Score
+--- | ---: | ---:
+RF, SVM, KNN, BNB, GNB, DTC | 0.8361 | 0.8701 
+RF, SVM, KNN | 0.8499 | 0.8780
+SVM, KNN | 0.8233 | 0.8621
+SVM, RF | 0.8458 | 0.8773
+
++ Here, it looks like an ensemble of Random Forest, Support Vector Machine, and K-Nearest-Neighbor works the best. 
+
 <hr>
 
 <h2><b>8) Beyond Classification</b></h2>
