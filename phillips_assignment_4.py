@@ -17,6 +17,7 @@ from sklearn.naive_bayes import BernoulliNB as BNB;
 from sklearn.naive_bayes import GaussianNB as GNB; 
 from sklearn.tree import DecisionTreeClassifier as DTC; 
 from sklearn.metrics import confusion_matrix;
+from sklearn.metrics import recall_score; 
 
 data_util_file = './util/data_util.py';
 import os;
@@ -127,16 +128,28 @@ print("Number of Response Types:", np.unique(y));
 
 print("Support Vector Machine:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,SVC))); 
+print("Recall"); 
+print("%.4f" % recall_score(y, util.run_cv(X,y,SVC)));
 print("Random Forest:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
+print("Recall"); 
+print("%.4f" % recall_score(y, util.run_cv(X,y,RF)));
 print("K-Nearest-Neighbors:"); 
-print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN)));
+print("Recall"); 
+print("%.4f" % recall_score(y, util.run_cv(X,y,KNN))); 
 print("Naive Bayes Bernoulli:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,BNB)));
+print("Recall"); 
+print("%.4f" % recall_score(y, util.run_cv(X,y,BNB)));
 print("Naive Bayes Gaussian:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,GNB)));
+print("Recall"); 
+print("%.4f" % recall_score(y, util.run_cv(X,y,GNB)));
 print("Decision Tree (Gini Impurity):"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,DTC)));
+print("Recall"); 
+print("%.4f" % recall_score(y, util.run_cv(X,y,DTC)));
 
 
 # ------------------------------------- #
