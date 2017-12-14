@@ -563,7 +563,7 @@ Decision Tree (Gini Impurity) | third | fourth | third | fourth
 
 	> A Word of Caution: Even with relatively small amounts of data (5000-10000 observations), this process can be computationally intensive. If you have access to a beefed up virtual machine, or a Hadoop cluster, you can save a lot of computing time. If you're on you local machine, grab a cup of coffee - especially when you have lots of data.
 
-+ After the Grid Search runs, we refit the model on our training data, then call the ```score``` method on the ```VotingClassifier``` object we created. The scoring metrics are different for each estimator you use, but you can find the characteristics for the voting estimator <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier.score">here</a>, but this one basically delivers us back the mean accuracy.  
++ After the Grid Search runs, we refit the model on our training data, then call the ```score``` method on the ```VotingClassifier``` object we created. The scoring metrics are different for each estimator you use, but you can find the characteristics for the voting estimator <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier.score">here</a>, but this one basically delivers us back the mean accuracy by default.  
 
 ```python
 best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5)
@@ -595,6 +595,19 @@ Voting Ensemble Model Test Score: 0.823348694316
 Voting Ensemble Model Test Score: 0.845878136201
 ```
 
++ F1 Scoring
+
++ Grid Search, combined with just Support Vector Machine and K-Nearest-Neighbor:
+
+```python
+TODO
+```
+
++ Grid Search, combined with just Support Vector Machine and Random Forest:
+
+```python
+Voting Ensemble Model Test Score: 0.877388535032
+```
 
 <hr>
 
