@@ -511,7 +511,7 @@ Decision Tree (Gini Impurity) | 3990 | 3423 | 0.8643
 
 + Here, Naive Bayes Gaussian performs well - but that is a deceptive error metric if that's the only way you look at it. Who cares if it has a high precision score, <i>if it only gets a few things right</i>.
 
-	> What we really need is a way to combine those two score. Fortunately, that's something that's simple to do in <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html">sklearn</a>.
+	> What we really need is a way to combine those two scores. Fortunately, that's something that's simple to do in <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html">sklearn</a>.
 
 + The F1 score provides a harmonic mean of the precision score and recall score. It considers both scores by computing the number of correct positive results and dividing them by the number of all positive results AND taking the number of correct positive results and dividing them by the number of positive results <i>that should have been returned</i>. Looks like this:
 
@@ -595,12 +595,32 @@ Voting Ensemble Model Test Score: 0.823348694316
 Voting Ensemble Model Test Score: 0.845878136201
 ```
 
-+ F1 Scoring
+<h3>F1 Scoring</h3>
+
+	> You can change the scoring of the estimator from the default. It's just a change to the keyword arguments. 
+
+```python
+scoring = {'F1': 'f1'}; 
+best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5, scoring=scoring, refit='F1');
+```
+
+
++ Grid Search, combined with each of the six algorithms we've explored so far:
+
+```python
+Voting Ensemble Model Test Score: 0.870140612076
+```
+
++ Grid Search, combined with Support Vector Machine, K-Nearest-Neighbor, and Random Forest:
+
+```python
+Voting Ensemble Model Test Score: 0.878068091845
+```
 
 + Grid Search, combined with just Support Vector Machine and K-Nearest-Neighbor:
 
 ```python
-TODO
+Voting Ensemble Model Test Score: 0.862126245847
 ```
 
 + Grid Search, combined with just Support Vector Machine and Random Forest:

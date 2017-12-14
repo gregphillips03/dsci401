@@ -238,19 +238,19 @@ scoring = {'F1': 'f1'};
 
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4)
 
-#voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3), ('bnb', clf4), 
-	#('gnb', clf5), ('dtc', clf6)], voting='hard');
+voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3), ('bnb', clf4), 
+	('gnb', clf5), ('dtc', clf6)], voting='hard');
 
 #voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3)], voting='hard');
 
-voting_mod = VotingClassifier(estimators=[('svm', clf1), ('knn', clf3)], voting='hard');
+#voting_mod = VotingClassifier(estimators=[('svm', clf1), ('knn', clf3)], voting='hard');
 
 #voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2)], voting='hard');
 
 # Set up params for combined Grid Search on the voting model. Notice the convention for specifying 
 # parameters foreach of the different models.
-#param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0], 'rf__n_estimators':[5, 10, 50, 100], 'rf__max_depth': [3, 6, None]}; 
-param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0]};
+param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0], 'rf__n_estimators':[5, 10, 50, 100], 'rf__max_depth': [3, 6, None]}; 
+#param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0]};
 #best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5)
 best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5, scoring=scoring, refit='F1'); 
 best_voting_mod.fit(x_train, y_train)
