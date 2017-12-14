@@ -561,7 +561,15 @@ Decision Tree (Gini Impurity) | third | fourth | third | fourth
 
 + I'm going to combine the voting method with ```GridSearchCV``` which is a way of optimizing the model. Instead of manually picking out a bunch of parameters by hand, I'm going to let it fine tune the model for me - thus optimizing it all at once. 
 
-	> A Word of Caution: Even with relatively small amounts of data (5000-10000 observations), this process can be computationally intensive. If you have access to a beefed up virtual machine, or a Hadoop cluster, you can save a lot of computing time. If you're on you local machine, grab a cup of coffee - especially when you have lots of data. 
+	> A Word of Caution: Even with relatively small amounts of data (5000-10000 observations), this process can be computationally intensive. If you have access to a beefed up virtual machine, or a Hadoop cluster, you can save a lot of computing time. If you're on you local machine, grab a cup of coffee - especially when you have lots of data.
+
++ After the Grid Search runs, we refit the model on our training data, then call the ```score``` method on the ```VotingClassifier``` object we created. The scoring metrics are different for each estimator you use, but you can find the characteristics for the voting estimator <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier.score">here</a>, but this one basically delivers us back the mean accuracy.  
+
+```python
+best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5)
+best_voting_mod.fit(x_train, y_train)
+print('Voting Ensemble Model Test Score: ' + str(best_voting_mod.score(x_test, y_test)))
+``` 
 
 + Grid Search, combined with each of the six algorithms we've explored so far:
 
@@ -572,8 +580,21 @@ Voting Ensemble Model Test Score: 0.836149513569
 + Grid Search, combined with Support Vector Machine, K-Nearest-Neighbor, and Random Forest:
 
 ```python
-
+Voting Ensemble Model Test Score: 0.849974398361
 ```
+
++ Grid Search, combined with just Support Vector Machine and K-Nearest-Neighbor:
+
+```python
+Voting Ensemble Model Test Score: 0.823348694316
+```
+
++ Grid Search, combined with just Support Vector Machine and Random Forest:
+
+```python
+Voting Ensemble Model Test Score: 
+```
+
 
 <hr>
 
@@ -596,44 +617,34 @@ Voting Ensemble Model Test Score: 0.836149513569
 + Here, we'll move on to the part I think is really cool because you can communicate it much easier. I'll be using the same ```run_cv()``` method I defined earlier, but I'll rewrite the code to spit out probabilities instead of classes. <a href="http://scikit-learn.org/stable/modules/generated/
 sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy.
 
-+ The ```run_cv_prob()``` function produces the following, when applied against the Random Forest algorithm:
++ The ```run_cv_prob()``` function produces the following, when applied against the best model from our ensembled algorithms:
 
 ```python
 '''
-   Predicted Probability  Count  Actual Probability
-0                    1.0   4009                 1.0
-1                    0.0   2218                 0.0
-2                    0.9    132                 1.0
-3                    0.1    116                 0.0
-4                    0.2     16                 0.0
-5                    0.8     11                 1.0
-6                    0.3      7                 0.0
-7                    0.4      1                 0.0
+TODO
 '''
-
 ``` 
 
 + The following table is a cleaner, more communicatable version of the above output snippet: 
 
 Predicted Probabilty % | Number of Records  | AECOM Employee?
 ---: | :---: | :---:
-100 | 4009 | Yes
-90 | 132 | Yes
-80 | 11 | Yes
-40 | 1 | No
-30 | 7 | No
-20 | 16 | No
-10 | 116 | No
-0 | 2218 | No
+100 | X | Yes
+90 | X | Yes
+80 | X | Yes
+40 | X | No
+30 | X | No
+20 | X | No
+10 | X | No
+0 | X | No
 
 + Essentially the table says, there is an ```X Predicted Probability %``` that these ```Number of Records``` were an AECOM Employee. Then it shows if they were actually an ```AECOM Employee?```. Underneath the hood, were asking the model to predict the probability that 'this' record is an AECOM Employee. 
 
-	>On the first line, the model is saying, "For these 4009 records, there is a 100% probability that they are an AECOM Employee." And, based on the last column, those records actually were associated with AECOM Employees. 
+	>On the first line, the model is saying, "For these X records, there is a 100% probability that they are an AECOM Employee." And, based on the last column, those records actually were associated with AECOM Employees. 
 
-	> On the fourth line, the model is saying, "For this lonely 1 record, there is a 40% probability that it is an AECOM Employee". That record actually isn't, but the good thing is that the model didn't assign it a high percentage, nor does the model predict anything crazy - such as high percentages when they're actually the opposite. 
+	> On the xth line, the model is saying, "For this X record, there is a X% probability that it is an AECOM Employee". That record actually isn't, but the good thing is that the model didn't assign it a high percentage, nor does the model predict anything crazy - such as high percentages when they're actually the opposite. 
 
-+ The key thing to take away from this is that the model really understands what an "AECOM Employee" record looks like, and it also knows what one doesn't look like. There are really only 8 records where it got a bit 'iffy', but even there it didn't lend them alot of weight. 
-
++ The key thing to take away from this is that the model really understands what an "AECOM Employee" record looks like, and it also knows what one doesn't look like.
 
 
 
