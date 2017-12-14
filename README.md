@@ -128,7 +128,7 @@ Date:   11.12.2017
 + From a terminal, use the command (substitute pip for the package manager you use): 
 
 ```unix
-	sudo pip install xlrd
+sudo pip install xlrd
 ```
 
 + Then within your Python code:
@@ -215,7 +215,13 @@ y = np.where(target_result == 'AECOM Employee', 1, 0)
 
 + This yields a response variable ('Worker Type'), that is either 'true' [1] for an AECOM Employee, or is 'false' [0] for a Contractor. 
 
-+ Next, we need to get rid of the text values. This part might not be apparent at first, but its crucial to performing the analysis. Ergo, we need a label encoder, or something that can take a column, find all the different text values / categories in it, then encoded it properly. 
++ Remove the column ```Worker Type``` from the feature space. 
+
+```python
+data = data.drop(['Worker Type'], axis=1); 
+```
+
++ Next, we need to get rid of the text values. This part might not be apparent at first, but its crucial to performing the analysis. Ergo, we need a label encoder, or something that can take a column, find all the different text values / categories in it, then encode it properly. 
 
 + To accomplish this, we'll use pandas ```get_dummies()``` method, coupled with a utility label encoder borrowed from <a href=https://github.com/chrisgarcia001>Chris Garcia, PhD</a>. The ```get_dummies()``` method converts categorical values into "dummy", or indicator variables, while the ```cat_features()``` function returns a list of the categorical features for a given dataframe. They work hand in hand to get rid of the text and leave us with a nice, clean, numerical data frame. 
 
@@ -224,7 +230,7 @@ data = pd.get_dummies(data, columns=util.cat_features(data));
 
 ```
 
-+ For good measure, I pull out the feature space for future use. 
++ For good measure, I pull out the feature space for future use. I might not use them, but it's good to save it just in case I need to reference what they are later on. 
 
 ```python
 features = feature_space.columns;  
@@ -294,7 +300,7 @@ print("Number of Response Types:", np.unique(y));
 
 ```python
 '''
-Feature space contains 6510 records and 66 columns
+Feature space contains 6510 records and 64 columns
 ('Number of Response Types:', array([0, 1]))
 '''
 
@@ -304,17 +310,18 @@ Feature space contains 6510 records and 66 columns
 
 	+ Our feature space contains the correct amount of records, and after we label encoded all the text, it has the correct amount of columns as well. 
 
-		+ Worker Type x 1
 		+ Incident Type x 9
 		+ Month x 12
 		+ Potential Severity x 5
 		+ Potential Probability x 5
 		+ Business Group x 8
-		+ Business Line x 26
+		+ Business Line x 25
 
 	+ And our response variable, has the correct types we encoded earlier (either a 1 or a 0)
 
 + Now that we've cleaned up the data, transformed it, and given a few sanity checks, we can rest easy knowing that our data is ready to be processed. Now we can move onto making the predictions. 
+
+	> It's extremely good practice to perform these sanity checks along the way. Every time you move data; slice it up; or transform it; it's good to make sure that the machine is producing the results you expect. 
 
 <hr>
 
@@ -331,6 +338,12 @@ print("Random Forest:");
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
 print("K-Nearest-Neighbors:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
+print("Naive Bayes Bernoulli:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,BNB)));
+print("Naive Bayes Gaussian:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,GNB)));
+print("Decision Tree (Gini Impurity):"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,DTC)));  
 
 ```
 
@@ -370,15 +383,21 @@ for train_index, test_index in kf:
 ```python
 '''
 Support Vector Machine:
-0.9962
+0.8452
 Random Forest:
-1.0000
+0.8226
 K-Nearest-Neighbors:
-0.9214
+0.7965
+Naive Bayes Bernoulli:
+0.7591
+Naive Bayes Gaussian:
+0.4249
+Decision Tree (Gini Impurity):
+0.8020
 '''
 ```
 
-+ Each algorithm performs outstanding, at least using <b>accuracy</b> as the error metric, but we can't always rely on a measurement to explain whether or not a model is good or bad. Models don't always spit out high performance measures when they're good, and they won't always spit out low numbers when they are bad. It's simply not that black and white. If it were, models would simply be akin to algebraic formulas; you'd plug your data in, let the model cogitate, then wait for it to spit you out a number (fingers crossed that it's a high number). 
++ Each algorithm performs rather well, with the exception of the Gaussian Naive Bayes algorithm - which shouldn't come as too much of a shock. This, however, is just using <b>accuracy</b> as the error metric - but we can't always rely on a measurement to explain whether or not a model is good or bad. Models don't always spit out high performance measures when they're good, and they won't always spit out low numbers when they are bad. It's simply not that black and white. If it were, models would simply be akin to algebraic formulas; you'd plug your data in, let the model cogitate, then wait for it to spit you out a number (fingers crossed that it's a high number). 
 
 + Instead, error metrics give you a good indication that you've built a model that's solid, and can be put to use. It's still the job of the scientist to verify that the model is actually valid. 
 
@@ -388,7 +407,7 @@ K-Nearest-Neighbors:
 
 + Plus we can't forget the old adage <i>garbage in, garbage out</i>. Our model is only ever going to perform as well as the data it's fed. 
 
-> Random forest looks to hands-down be the winner, but let's make sure. In the Safety realm, there's no room for error. 
+	> Support Vector Machine looks to be our winner , but let's make sure. In the Safety realm, there's no room for error. 
 
 <hr>
 
@@ -408,6 +427,12 @@ K-Nearest-Neighbors:
 
 <img src="./fig/SVMconfmatrix.png" title="SVM Conf Matrix" alt="SVM Conf Matrix" style="display: block; margin: auto;" />
 
+<img src="./fig/BNBconfmatrix.png" title="BNB Conf Matrix" alt="BNB Conf Matrix" style="display: block; margin: auto;" />
+
+<img src="./fig/GNBconfmatrix.png" title="GNB Conf Matrix" alt="GNB Conf Matrix" style="display: block; margin: auto;" />
+
+<img src="./fig/DTCconfmatrix.png" title="DTC Conf Matrix" alt="DTC Conf Matrix" style="display: block; margin: auto;" />
+
 > Again, it's good to go back and really think about the question we're asking. This helps us to determine what error metrics we should really be focused on. 
 
 + Here, a good question to ask is: 
@@ -421,8 +446,11 @@ Algorithm | Total Relevant Instances | Relevant Instances | Recall Score
 K-Nearest-Neighbors | 4152 | 3898 | 0.938
 Random Forest | 4142 | 4152 | 1.000
 Support Vector Machine | 4152 | 4150 |0.999
+Naive Bayes Bernoulli | | |
+Naive Bayes Gaussian | | |
+Decision Tree (Gini Impurity) | | |
 
-+ Again, Random Forest is in the lead. Each time a record is attributed to an AECOM Employee, it correctly predicts that. 
++ Insert winner here. 
 
 + An equally important question to ask is:
 
@@ -435,16 +463,22 @@ Algorithm | Retrieved Instances | Relevant Instances | Precision Score
 K-Nearest-Neighbors | 4170 | 3898 | 0.934
 Random Forest | 4152 | 4152 | 1.000
 Support Vector Machine | 4170 | 4150 |0.995
+Naive Bayes Bernoulli | | |
+Naive Bayes Gaussian | | |
+Decision Tree (Gini Impurity) | | |
 
-+ Again, Random Forest for the win. Each time it predicts a record is associated with an AECOM Employee, that's actually the case. 
++ Insert winner here. 
 
 + To sum up our analysis to this point:
 
 Algorithm | Accuracy (Rank) | Recall (Rank) | Precision (Rank)
 --- | :---: | :---: | :---:
-Random Forest | First | First | First
-Support Vector Machine | Second | Second |Second
-K-Nearest-Neighbors | Third | Third | Third
+Random Forest |  |  | 
+Support Vector Machine |  |  |
+K-Nearest-Neighbors |  |  | 
+Naive Bayes Bernoulli | | |
+Naive Bayes Gaussian | | |
+Decision Tree (Gini Impurity) | | |
 
 <hr>
 

@@ -13,7 +13,11 @@ from sklearn.cross_validation import KFold;
 from sklearn.svm import SVC;
 from sklearn.ensemble import RandomForestClassifier as RF;
 from sklearn.neighbors import KNeighborsClassifier as KNN;
+from sklearn.naive_bayes import BernoulliNB as BNB; 
+from sklearn.naive_bayes import GaussianNB as GNB; 
+from sklearn.tree import DecisionTreeClassifier as DTC; 
 from sklearn.metrics import confusion_matrix;
+
 data_util_file = './util/data_util.py';
 import os;
 import sys;
@@ -83,13 +87,15 @@ target_result = data['Worker Type'];
 #Everything else (contractor) set it to 0
 y = np.where(target_result == 'AECOM Employee', 1, 0)
 
+#if I had anything additional to drop, i'd specify it here
+#but I get rid of most of this outside the working environment
+to_drop =[];
+data = data.drop(['Worker Type'], axis=1); 
+
 #transform using a label encoder
 data = pd.get_dummies(data, columns=util.cat_features(data));
-
-#if I had anything to drop, i'd specify it here
-#but I get rid of this outside the working environment
-to_drop =[]; 
-feature_space = data.drop(to_drop, axis=1);
+ 
+feature_space = data; 
 
 #remove feature space in case we need it later
 features = feature_space.columns;  
@@ -125,6 +131,13 @@ print("Random Forest:");
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,RF))); 
 print("K-Nearest-Neighbors:"); 
 print("%.4f" % util.accuracy(y, util.run_cv(X,y,KNN))); 
+print("Naive Bayes Bernoulli:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,BNB)));
+print("Naive Bayes Gaussian:"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,GNB)));
+print("Decision Tree (Gini Impurity):"); 
+print("%.4f" % util.accuracy(y, util.run_cv(X,y,DTC)));
+
 
 # ------------------------------------- #
 # --- Section 5: Confusion Matrices --- #
@@ -137,6 +150,9 @@ np.set_printoptions(precision=2)
 confusion_matrix_SVC = confusion_matrix(y, util.run_cv(X,y,SVC)); 
 confusion_matrix_RF = confusion_matrix(y, util.run_cv(X,y,RF)); 
 confusion_matrix_KNN = confusion_matrix(y, util.run_cv(X,y,KNN)); 
+confusion_matrix_BNB = confusion_matrix(y, util.run_cv(X,y,BNB)); 
+confusion_matrix_GNB = confusion_matrix(y, util.run_cv(X,y,GNB)); 
+confusion_matrix_DTC = confusion_matrix(y, util.run_cv(X,y,DTC)); 
 
 plt.figure()
 util.plot_confusion_matrix(confusion_matrix_SVC, classes=class_names,
@@ -147,18 +163,17 @@ util.plot_confusion_matrix(confusion_matrix_RF, classes=class_names,
 plt.figure()
 util.plot_confusion_matrix(confusion_matrix_KNN, classes=class_names,
                       title='K-Nearest-Neighbors, without normalization')
+plt.figure()
+util.plot_confusion_matrix(confusion_matrix_BNB, classes=class_names,
+                      title='Naive Bayes Bernoulli, without normalization')
+plt.figure()
+util.plot_confusion_matrix(confusion_matrix_GNB, classes=class_names,
+                      title='Naive Bayes Gaussian, without normalization')
+plt.figure()
+util.plot_confusion_matrix(confusion_matrix_DTC, classes=class_names,
+                      title='Decision Tree (Gini Impurity), without normalization')
 
-plt.figure()
-util.plot_confusion_matrix(confusion_matrix_SVC, classes=class_names, normalize=True,
-                      title='Support Vector Machine, with normalization')
-plt.figure()
-util.plot_confusion_matrix(confusion_matrix_RF, classes=class_names, normalize=True,
-                      title='Random Forest, with normalization')
-plt.figure()
-util.plot_confusion_matrix(confusion_matrix_KNN, classes=class_names, normalize=True,
-                      title='K-Nearest-Neighbors, with normalization')
-
-#plt.show()
+plt.show()
 
 # -------------------------------- #
 # --- Section 6: Probabilities --- #
