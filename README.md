@@ -473,7 +473,6 @@ Decision Tree (Gini Impurity) | 3990 | 3423 | 0.8643
 
 + The F1 score provides a harmonic mean of the precision score and recall score. It considers both scores by computing the number of correct positive results and dividing them by the number of all positive results AND taking the number of correct positive results and dividing them by the number of positive results <i>that should have been returned</i>. Looks like this:
 
-
 <img src="./fig/f1equation.png" title="f1 equation" alt="f1 equation" align="middle" />
 
 + And when we churn the data through the machine, we get this:
@@ -500,9 +499,19 @@ Naive Bayes Bernoulli | fifth | fifth | fifth | fifth
 Naive Bayes Gaussian | sixth | sixth | first | sixth
 Decision Tree (Gini Impurity) | third | fourth | third | fourth
 
++ You can probably run your eyes across the above table and figure out which approaches are going to work best, and which ones we should toss out and ultimately exclude. But why? And to expand on that, why stick with just one? 
+
+<h2><b>7) Model Ensemble (Optimize)</b></h2>
+
 <hr>
 
-<h2><b>7) Beyond Classification</b></h2>
++ Choosing a single model to work with is fine. However, it's often not totally clear cut which 'one' model is better. To compound the matter, some models might perform close to each other, or different models might lag in some areas while excelling in others. 
+
++ To combat this, and more than likely achieve better results, we can combine multiple models together in a technique known as model ensembling. 
+
+<hr>
+
+<h2><b>8) Beyond Classification</b></h2>
 
 <hr>
 

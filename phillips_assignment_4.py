@@ -12,6 +12,8 @@ from sklearn.preprocessing import StandardScaler;
 from sklearn.cross_validation import KFold;
 from sklearn.svm import SVC;
 from sklearn.ensemble import RandomForestClassifier as RF;
+from sklearn.ensemble import VotingClassifier
+from sklearn import ensemble
 from sklearn.neighbors import KNeighborsClassifier as KNN;
 from sklearn.naive_bayes import BernoulliNB as BNB; 
 from sklearn.naive_bayes import GaussianNB as GNB; 
@@ -20,6 +22,8 @@ from sklearn.metrics import confusion_matrix;
 from sklearn.metrics import recall_score;
 from sklearn.metrics import precision_score;  
 from sklearn.metrics import f1_score; 
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import train_test_split
 
 data_util_file = './util/data_util.py';
 import os;
@@ -115,13 +119,13 @@ if(b):
 	show_name(data); 
 	print('\n');
 else:
-	print('No Missing Data!');
-	show_name(data); 
+	#print('No Missing Data!');
+	#show_name(data); 
 	print('\n');
 
 #check to make sure that we've not done anything crazy at this point
-print("Feature space contains %d records and %d columns" % X.shape); 
-print("Number of Response Types:", np.unique(y));  
+#print("Feature space contains %d records and %d columns" % X.shape); 
+#print("Number of Response Types:", np.unique(y));  
 
 
 # ---------------------------------- #
@@ -217,10 +221,33 @@ plt.figure()
 util.plot_confusion_matrix(confusion_matrix_DTC, classes=class_names,
                       title='Decision Tree (Gini Impurity), without normalization')
 
-plt.show()
+#plt.show()
 
 # -------------------------------- #
-# --- Section 6: Probabilities --- #
+# --- Section 6: Voting ---------- #
+# -------------------------------- #
+
+clf1 = SVC(); 
+clf2 = RF(); 
+clf3 = KNN(); 
+clf4 = BNB(); 
+clf5 = GNB(); 
+clf6 = DTC(); 
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4)
+
+voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3), ('bnb', clf4), 
+	('gnb', clf5), ('dtc', clf6)], voting='hard')
+
+# Set up params for combined Grid Search on the voting model. Notice the convention for specifying 
+# parameters foreach of the different models.
+param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0], 'rf__n_estimators':[5, 10, 50, 100], 'rf__max_depth': [3, 6, None]}
+best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5)
+best_voting_mod.fit(x_train, y_train)
+print('Voting Ensemble Model Test Score: ' + str(best_voting_mod.score(x_test, y_test)))
+
+# -------------------------------- #
+# --- Section 7: Probabilities --- #
 # -------------------------------- #
 
 predicted_prob = util.run_prob_cv(X, y, RF, n_estimators=10); 
