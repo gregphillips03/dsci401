@@ -68,12 +68,20 @@ partners, as well as members of the public.
 
 data = pd.read_excel('./data/incs.xlsx', sheet_name='fy17');
 col_names = data.columns.tolist(); 
-#print("Column names: "); 
+valdata = pd.read_excel('./data/incs_val.xlsx', sheet_name='fy16'); 
+vcol_names = valdata.columns.tolist(); 
+#print("Training Column names: "); 
 #print(col_names); 
+#print("Validation Column names: "); 
+#print(vcol_names); 
 
 #print("\nSample data: "); 
 #print(data.head(5)); 
 #print(data.tail(5));
+
+#print("\nSample data: "); 
+#print(valdata.head(5)); 
+#print(valdata.tail(5));
 
 # --------------------------------------------- #
 # --- Section 2: Helper function -------------- #
@@ -90,28 +98,36 @@ def show_name(df):
 
 #isolate our target data
 target_result = data['Worker Type']; 
+val_target_result = valdata['Worker Type']; 
 #let's alter the values, so that everytime that we see:
 #AECOM Employee, we set it to 1
 #Everything else (contractor) set it to 0
-y = np.where(target_result == 'AECOM Employee', 1, 0)
+y = np.where(target_result == 'AECOM Employee', 1, 0);
+valy = np.where(val_target_result == 'AECOM Employee', 1, 0);
 
 #if I had anything additional to drop, i'd specify it here
 #but I get rid of most of this outside the working environment
 to_drop =[];
 data = data.drop(['Worker Type'], axis=1); 
+valdata = valdata.drop(['Worker Type'], axis=1); 
 
 #transform using a label encoder
 data = pd.get_dummies(data, columns=util.cat_features(data));
+valdata = pd.get_dummies(valdata, columns=util.cat_features(valdata)); 
  
 feature_space = data; 
+val_feature_space = valdata; 
 
 #remove feature space in case we need it later
 features = feature_space.columns;  
+valfeatures = val_feature_space.columns; 
 X = feature_space.as_matrix().astype(np.float); 
+valX = val_feature_space.as_matrix().astype(np.float); 
 
 #apply a scaler to the predictors
 scaler = StandardScaler(); 
 X = scaler.fit_transform(X);
+valX = scaler.fit_transform(valX); 
 
 #let's check to see if there's missing data
 b = util.check_missing_data(data); 
@@ -120,13 +136,26 @@ if(b):
 	show_name(data); 
 	print('\n');
 else:
-	#print('No Missing Data!');
-	#show_name(data); 
+	print('No Missing Data!');
+	show_name(data); 
+	print('\n');
+
+b = util.check_missing_data(valdata); 
+if(b):
+	print('Found Missing Data'); 
+	show_name(valdata); 
+	print('\n');
+else:
+	print('No Missing Data!');
+	show_name(valdata); 
 	print('\n');
 
 #check to make sure that we've not done anything crazy at this point
-#print("Feature space contains %d records and %d columns" % X.shape); 
-#print("Number of Response Types:", np.unique(y));  
+print("Training Feature space contains %d records and %d columns" % X.shape); 
+print("Number of Response Types:", np.unique(y)); 
+
+print("Validation Feature space contains %d records and %d columns" % valX.shape); 
+print("Number of Response Types:", np.unique(valy)); 
 
 
 # ---------------------------------- #
@@ -256,7 +285,19 @@ outdf.to_excel(writer, 'Sheet1');
 writer.save(); 
 
 # -------------------------------- #
-# --- Section 7: Probabilities --- #
+# --- Section 7: Validation ------ #
+# -------------------------------- #
+
+#let's see how the model performs on a data set it hasn't seen. 
+valpreds = best_voting_mod.predict(valX); 
+print('Voting Ensemble Model Real Score: ' + str(best_voting_mod.score(valX, valy))); 
+outdf = pd.DataFrame(pd.DataFrame({'Actual': valy, 'Predicted': valpreds})); 
+valwriter = pd.ExcelWriter('./gen/output.xlsx'); 
+outdf.to_excel(writer, 'Validation'); 
+valwriter.save; 
+
+# -------------------------------- #
+# --- Section 8: Probabilities --- #
 # -------------------------------- #
 
 # predicted_prob = util.run_prob_cv(X, y, best_voting_mod, n_estimators=10); 

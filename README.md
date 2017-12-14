@@ -642,7 +642,75 @@ SVM, RF | 0.8458 | 0.8773
 
 <hr>
 
-<h2><b>8) Beyond Classification</b></h2>
+<h2><b>8) Validation</b></h2>
+
+<hr>
+
++ Now, let's test our ```best_voting_mod``` against a data set that it hasn't seen, and see how it performs. 
+
++ I'm simply going to feed the ```best_voting_mod``` the features (predictors, X, independent variables, etc.), and have it churn. Using th ```.predict()``` method, the machine will try to figure out what the record actually is (dependent variable, y, etc.). 
+
+```python
+#let's see how the model performs on a data set it hasn't seen. 
+valpreds = best_voting_mod.predict(valX); 
+print('Voting Ensemble Model Real Score: ' + str(best_voting_mod.score(valX, valy))); 
+outdf = pd.DataFrame(pd.DataFrame({'Actual': valy, 'Predicted': valpreds})); 
+valwriter = pd.ExcelWriter('./gen/output.xlsx'); 
+outdf.to_excel(writer, 'Validation'); 
+valwriter.save;
+```
+
++ Validation Data. 
+
+	> Now is a probably a good time to mention this - all transformation, movements, encoding, 'slicing and dicing', etc. that was applied to the training data, is applied to the validation data. Basically, if you've done something special to the data you use to train the model, make sure you've done that to the validation data as well. Naturally, with the exception of refitting it. 
+
++ As best practice, I do this in parallel each time I mess with the training data. It makes me less error prone. 
+
+```python
+#read in data
+data = pd.read_excel('./data/incs.xlsx', sheet_name='fy17');
+col_names = data.columns.tolist(); 
+valdata = pd.read_excel('./data/incs_val.xlsx', sheet_name='fy16'); 
+vcol_names = valdata.columns.tolist(); 
+
+#isolate our target data
+target_result = data['Worker Type']; 
+val_target_result = valdata['Worker Type']; 
+
+#let's alter the values, so that everytime that we see:
+#AECOM Employee, we set it to 1
+#Everything else (contractor) set it to 0
+y = np.where(target_result == 'AECOM Employee', 1, 0);
+valy = np.where(val_target_result == 'AECOM Employee', 1, 0);
+
+#get rid of the 'Worker Type'
+to_drop =[];
+data = data.drop(['Worker Type'], axis=1); 
+valdata = valdata.drop(['Worker Type'], axis=1); 
+
+#transform using a label encoder
+data = pd.get_dummies(data, columns=util.cat_features(data));
+valdata = pd.get_dummies(valdata, columns=util.cat_features(valdata)); 
+ 
+feature_space = data; 
+val_feature_space = valdata; 
+
+#remove feature space in case we need it later
+features = feature_space.columns;  
+valfeatures = val_feature_space.columns; 
+X = feature_space.as_matrix().astype(np.float); 
+valX = val_feature_space.as_matrix().astype(np.float); 
+
+#apply a scaler to the predictors
+scaler = StandardScaler(); 
+X = scaler.fit_transform(X);
+valX = scaler.fit_transform(valX);
+
+```
+
+<hr>
+
+<h2><b>9) Beyond Classification</b></h2>
 
 <hr>
 
