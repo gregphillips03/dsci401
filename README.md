@@ -638,7 +638,7 @@ RF, SVM, KNN | 0.8499 | 0.8780
 SVM, KNN | 0.8233 | 0.8621
 SVM, RF | 0.8458 | 0.8773
 
-+ Here, it looks like an ensemble of Random Forest, Support Vector Machine, and K-Nearest-Neighbor works the best. 
++ Here, it looks like an ensemble of Random Forest, Support Vector Machine, and K-Nearest-Neighbor works the best. I'll stick with this model. 
 
 <hr>
 
