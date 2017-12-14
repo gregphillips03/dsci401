@@ -592,7 +592,7 @@ Voting Ensemble Model Test Score: 0.823348694316
 + Grid Search, combined with just Support Vector Machine and Random Forest:
 
 ```python
-Voting Ensemble Model Test Score: 
+Voting Ensemble Model Test Score: 0.845878136201
 ```
 
 
