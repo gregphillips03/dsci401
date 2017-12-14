@@ -595,9 +595,9 @@ Voting Ensemble Model Test Score: 0.823348694316
 Voting Ensemble Model Test Score: 0.845878136201
 ```
 
-<h3>F1 Scoring</h3>
++ F1 Scoring
 
-	> You can change the scoring of the estimator from the default. It's just a change to the keyword arguments. 
+	>You can change the scoring of the estimator from the default. It's just a change to the keyword arguments. 
 
 ```python
 scoring = {'F1': 'f1'}; 
