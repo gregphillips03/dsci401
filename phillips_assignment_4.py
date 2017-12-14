@@ -236,8 +236,10 @@ clf6 = DTC();
 
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4)
 
-voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3), ('bnb', clf4), 
-	('gnb', clf5), ('dtc', clf6)], voting='hard')
+#voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3), ('bnb', clf4), 
+	#('gnb', clf5), ('dtc', clf6)], voting='hard');
+
+voting_mod = VotingClassifier(estimators=[('svm', clf1), ('rf', clf2), ('knn', clf3)], voting='hard');
 
 # Set up params for combined Grid Search on the voting model. Notice the convention for specifying 
 # parameters foreach of the different models.

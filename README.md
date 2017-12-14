@@ -439,7 +439,28 @@ Decision Tree (Gini Impurity):
 
 	> When a record is attributed to an AECOM Employee, how often does my classifier correctly predict that?. 
 
-+ This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is?  
++ This is the <b>recall</b> error metric, or <i>the fraction of relevant instances that have been retrieved over the total amount of relevant instances</i>. In other words, are we saying the record is associated with an AECOM Employee when it actually is? 
+
++ Performance of each algorithm: 
+
+```python
+'''
+Support Vector Machine:
+0.8714
+Random Forest:
+0.8528
+K-Nearest-Neighbors:
+0.8716
+Naive Bayes Bernoulli:
+0.7529
+Naive Bayes Gaussian:
+0.1053
+Decision Tree (Gini Impurity):
+0.8194
+'''
+```
+
++ Arranged neatly in a table:
 
 Algorithm | Total Relevant Instances | Relevant Instances | Recall Score
 --- | ---: | ---: | ---:
@@ -457,6 +478,27 @@ Decision Tree (Gini Impurity) | 4152 | 3423 | 0.8194
 	> When my classifier predicts a record is associated with an AECOM Employee, how often is this true?
 
 + This is the <b>precision</b> metric, or <i> the fraction of relevant retrieved instances, among the retrieved instances</i>. 
+
++ Performance of each algorithm: 
+
+```python
+'''
+Support Vector Machine:
+0.8803
+Random Forest:
+0.8641
+K-Nearest-Neighbors:
+0.8159
+Naive Bayes Bernoulli:
+0.8562
+Naive Bayes Gaussian:
+0.9467
+Decision Tree (Gini Impurity):
+0.8643
+'''
+```
+
++ Arranged neatly in a table:
 
 Algorithm | Retrieved Instances | Relevant Instances | Precision Score
 --- | ---: | ---: | ---:
@@ -486,7 +528,7 @@ Naive Bayes Bernoulli | 0.8018
 Naive Bayes Gaussian | 0.1875
 Decision Tree (Gini Impurity) | 0.8416
 
-+ We get a much better understanding of both <b>precision</b> and <b>recall</b>, when we role it up into an F1 score. 
++ We get a much better understanding of both <b>precision</b> and <b>recall</b>, when we role it up into an <b>F1 score</b>. 
 
 + To sum up our analysis to this point:
 
@@ -508,6 +550,30 @@ Decision Tree (Gini Impurity) | third | fourth | third | fourth
 + Choosing a single model to work with is fine. However, it's often not totally clear cut which 'one' model is better. To compound the matter, some models might perform close to each other, or different models might lag in some areas while excelling in others. 
 
 + To combat this, and more than likely achieve better results, we can combine multiple models together in a technique known as model ensembling. 
+
+	> Again, here it's the job of the scientist to select the right models to combine. You need to have a fundamental - or rudimentary - knowledge of what model works best for the type of data you have. Performance will vary, based on the approach you choose. 
+
++ The point of the previous analysis on each of the six algorithms was to weed out what worked and what didn't work. You can combine models together haphazardly, but that's not very scientific nor is it conducive to crunching large amounts of data. 
+
+	> Even at this point, I know I don't need all six, but I'm going to mash them all together just for demonstration purposes. 
+
++ There are a few ensemble approaches that are normally used; however, for this analysis I'm going to use the Voting ensemble. The basic idea is to create multiple classifiers using training data, then take a vote when predicting new instances. You can find out more about it <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html">here</a>. 
+
++ I'm going to combine the voting method with ```GridSearchCV``` which is a way of optimizing the model. Instead of manually picking out a bunch of parameters by hand, I'm going to let it fine tune the model for me - thus optimizing it all at once. 
+
+	> A Word of Caution: Even with relatively small amounts of data (5000-10000 observations), this process can be computationally intensive. If you have access to a beefed up virtual machine, or a Hadoop cluster, you can save a lot of computing time. If you're on you local machine, grab a cup of coffee - especially when you have lots of data. 
+
++ Grid Search, combined with each of the six algorithms we've explored so far:
+
+```python
+Voting Ensemble Model Test Score: 0.836149513569
+```
+
++ Grid Search, combined with Support Vector Machine, K-Nearest-Neighbor, and Random Forest:
+
+```python
+
+```
 
 <hr>
 
