@@ -802,7 +802,14 @@ clf4 = SVC(probability=True);
 valprobs = best_voting_mod.predict_proba(valX); 
 ``` 
 
-+ The following table is a cleaner, more communicatable version of the above output snippet: 
+```python
+pred_df = pd.DataFrame({'Actual': valy, 'Predicted Class': valpreds, 'P(1)': prob_pos, 'P(0)': prob_neg});
+probwriter = pd.ExcelWriter('./gen/proboutput.xlsx'); 
+pred_df.to_excel(probwriter, 'Sheet1');  
+probwriter.save(); 
+```
+
++ The following table is a cleaned up version of the dataframe we spit out to the ```pred_df```. 
 
 Actual Class | Prob % (Contractor)  | Prob % (AECOM Employee) | Predicted by Machine
 :---: | :---: | :---: | :---:
