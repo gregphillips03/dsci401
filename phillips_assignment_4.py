@@ -9,6 +9,7 @@ import numpy as np;
 import matplotlib.pyplot as plt;
 import itertools;
 import pprint; 
+import random; 
 from sklearn.preprocessing import StandardScaler;
 from sklearn.cross_validation import KFold;
 from sklearn.svm import SVC;
@@ -22,7 +23,9 @@ from sklearn.tree import DecisionTreeClassifier as DTC;
 from sklearn.metrics import confusion_matrix;
 from sklearn.metrics import recall_score;
 from sklearn.metrics import precision_score;  
-from sklearn.metrics import f1_score; 
+from sklearn.metrics import f1_score;
+from sklearn.metrics import roc_curve; 
+from sklearn.metrics import auc;  
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 
@@ -260,6 +263,7 @@ util.plot_confusion_matrix(confusion_matrix_DTC, classes=class_names,
 clf1 = SVC(); 
 clf2 = RF(); 
 clf3 = KNN(); 
+clf4 = SVC(probability=True); 
 
 scoring = {'F1': 'f1'}; 
 
@@ -279,9 +283,9 @@ print('Voting Ensemble Model Test Score: ' + str(best_voting_mod.score(x_test, y
 pprint.pprint(pd.DataFrame({'Actual': y_test, 'Predicted': preds})); 
 
 #spit out the file to something human readable
-outdf = pd.DataFrame(pd.DataFrame({'Actual': y_test, 'Predicted': preds}));
-writer = pd.ExcelWriter('./gen/output.xlsx'); 
-outdf.to_excel(writer, 'Sheet1'); 
+traindf = pd.DataFrame(pd.DataFrame({'Actual': y_test, 'Predicted': preds}));
+writer = pd.ExcelWriter('./gen/trainoutput.xlsx'); 
+traindf.to_excel(writer, 'Sheet1'); 
 writer.save(); 
 
 # -------------------------------- #
@@ -291,24 +295,46 @@ writer.save();
 #let's see how the model performs on a data set it hasn't seen. 
 valpreds = best_voting_mod.predict(valX); 
 print('Voting Ensemble Model Real Score: ' + str(best_voting_mod.score(valX, valy))); 
-outdf = pd.DataFrame(pd.DataFrame({'Actual': valy, 'Predicted': valpreds})); 
-valwriter = pd.ExcelWriter('./gen/output.xlsx'); 
-outdf.to_excel(valwriter, 'Validation'); 
-valwriter.save; 
+valdf = pd.DataFrame(pd.DataFrame({'Actual': valy, 'Predicted': valpreds}));
+valwriter = pd.ExcelWriter('./gen/validoutput.xlsx');  
+valdf.to_excel(valwriter, 'Sheet1'); 
+valwriter.save(); 
 
 # -------------------------------- #
 # --- Section 8: Probabilities --- #
 # -------------------------------- #
 
-# predicted_prob = util.run_prob_cv(X, y, best_voting_mod, n_estimators=10); 
-# predicted_emp = predicted_prob[:,1]; 
-# is_AECOM_emp = y == 1; 
-# counts = pd.value_counts(predicted_emp); 
-# actual_prob ={}; 
-# for prob in counts.index:
-# 	actual_prob[prob] = np.mean(is_AECOM_emp[predicted_emp == prob]); 
-# 	actual_prob = pd.Series(actual_prob); 
+voting_mod = VotingClassifier(estimators=[('svm', clf4), ('rf', clf2), ('knn', clf3)], voting='soft');
+param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0], 'rf__n_estimators':[5, 10, 50, 100], 'rf__max_depth': [3, 6, None]};
+best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5, scoring=scoring, refit='F1'); 
+best_voting_mod.fit(x_train, y_train);
+valprobs = best_voting_mod.predict_proba(valX); 
+prob_pos = valprobs.transpose()[1]; 
+prob_neg = valprobs.transpose()[0]; 
+print('Voting Ensemble Model Prediction Score: ' + str(best_voting_mod.score));
+probdf = pd.DataFrame(pd.DataFrame({'ActualProb': valy, 'PredictedProbability': valprobs}));
 
-# counts = pd.concat([counts, actual_prob], axis=1).reset_index(); 
-# counts.columns = ['Predicted Probability', 'Count', 'Actual Probability']; 
-# print(counts); 
+pred_df = pd.DataFrame({'Actual': valy, 'Predicted Class': valpreds, 'P(1)': prob_pos, 'P(0)': prob_neg});
+probwriter = pd.ExcelWriter('./gen/proboutput.xlsx'); 
+probdf.to_excel(probwriter, 'Sheet1');
+preddf.to_excel(probwriter, 'Sheet2');  
+probwriter.save(); 
+
+class_names=np.unique(valy); 
+confusion_matrix_ensemble = confusion_matrix(valy, valpreds);
+plt.figure()
+util.plot_confusion_matrix(confusion_matrix_ensemble, classes=class_names,
+                      title='SVM, KNN, RF Ensemble, without normalization')
+plt.show(); 
+
+false_positive_rate, true_positive_rate, thresholds = roc_curve(valy, valpreds); 
+roc_auc = auc(false_positive_rate, true_positive_rate); 
+plt.title('Receiver Operating Characteristic'); 
+plt.plot(false_positive_rate, true_positive_rate, 'b', label='AUC = %0.2f' % roc_auc); 
+plt.legend(loc='lower right'); 
+plt.plot([0,1], [0,1], 'r--'); 
+plt.xlim([-0.1, 1.2]); 
+plt.ylim([-0.1, 1.2]); 
+plt.ylabel('True Positive Rate'); 
+plt.xlabel('False Positive Rate'); 
+plt.show(); 
