@@ -754,7 +754,7 @@ Voting Ensemble Model Real Score: 0.919463087248
 + Probabilities makes more sense, especially when you need to communicate information <i>as it pertains to a decision making problem</i>. 
 
 + Here, we'll move on to the part I think is really cool because you can communicate it much easier. I'll be using the same ```run_cv()``` method I defined earlier, but I'll rewrite the code to spit out probabilities instead of classes. <a href="http://scikit-learn.org/stable/modules/generated/
-sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy.
+sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB.predict_proba">Naive Bayes Gaussian</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB.predict_proba">Naive Bayes Bernoulli</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier.predict_proba">Decision Tree Classifier</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy.
 
 + The ```run_cv_prob()``` function produces the following, when applied against the ```best_voting_mod``` from our ensembled algorithms:
 
@@ -795,7 +795,7 @@ Predicted Probabilty % | Number of Records  | AECOM Employee?
 
 + You'll notice that I tend to <i>not</i> rely too heavily on the terminal when analyzing the data. Instead, I like to push it back out to Excel. There's two reasons for this:
 
-	+ I'm slightly odd, and really like to manipulate data outside the working environment. 
+	+ I'm slightly odd, and really like to manipulate data outside the working environment. It's one of many idiosyncrasies, but it works for me.  
 
 	+ The majority of people who would actually use the information (such as this model's), <i>really only understand data stored in a spreadsheet</i>. 
 
