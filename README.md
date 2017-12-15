@@ -811,7 +811,7 @@ Predicted Probabilty % | Number of Records  | AECOM Employee?
 
 	+ The majority of people who would actually use the information (such as this model's), <i>really only understand data stored in a spreadsheet</i>. 
 
-+ There are two modules you need to install in order to do this:
++ There are two modules you can install to do this:
 
 ```unix
 sudo pip install xlwt
