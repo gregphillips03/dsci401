@@ -767,10 +767,10 @@ Voting Ensemble Model Real Score: 0.919463087248
 
 + Probabilities makes more sense, especially when you need to communicate information <i>as it pertains to a decision making problem</i>. 
 
-+ Here, we'll move on to the part I think is really cool because you can communicate it much easier. I'll be using the same ```run_cv()``` method I defined earlier, but I'll rewrite the code to spit out probabilities instead of classes. <a href="http://scikit-learn.org/stable/modules/generated/
++ Here, we'll move on to the part I think is really cool because you can communicate it much easier. I've written a ```run_cv_prob()``` method, based on the same ```run_cv``` method I used earlier. This function spits out probabilities instead of classes. <a href="http://scikit-learn.org/stable/modules/generated/
 sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB.predict_proba">Naive Bayes Gaussian</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB.predict_proba">Naive Bayes Bernoulli</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier.predict_proba">Decision Tree Classifier</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy.
 
-+ The ```run_cv_prob()``` function produces the following, when applied against the ```best_voting_mod``` from our ensembled algorithms:
++ Here, I'm just going to apply the ```predict_proba()``` method (as a ```GridSearchCV``` object contains one as well, and I've already built my model) to the ```best_voting_mod``` from our ensembled algorithms:
 
 ```python
 '''
@@ -840,6 +840,14 @@ valwriter.save;
 https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_excel.html
 ">pass along as parameters</a>. For instance, you can specify the ```startrow``` if you want to 'append' data on the same tab.  
 
+<h3>Write out to CSV</h3>
 
++ Excel is good for humans, but it's normally not something you'd send off to a server. You can also spit your output directly out to a ```.csv``` file. 
+
+```python
+somedf.to_csv('name_of_your_csv_file.csv', sep=','); 
+```
+
++ This is especially useful for server-side clients that expect data neatly separated by commas.
 
 
