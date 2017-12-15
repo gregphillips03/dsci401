@@ -882,7 +882,7 @@ import data_util as util;
 
 + I create a variable and store a string which contains the path to my utility file - because I know where that exists. 
 
-+ The import the os and sys modules, so you can steal the rest of the path from your machine. Feed the ```sys.path.append()``` method the string containing the path to your file and you're done. You can import your utility file wherever you're working from. 
++ Then import the os and sys modules, so you can steal the rest of the path from your machine. Feed the ```sys.path.append()``` method the string containing the path to your file and you're done. You can import your utility file wherever you're working from. 
 
 <h3>Disclaimer</h3>
 
