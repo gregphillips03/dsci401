@@ -314,7 +314,7 @@ print("Number of Response Types:", np.unique(y));
 
 ```python
 '''
-Feature space contains 6510 records and 64 columns
+Feature space contains 6510 records and 59 columns
 ('Number of Response Types:', array([0, 1]))
 '''
 
@@ -328,8 +328,8 @@ Feature space contains 6510 records and 64 columns
 		+ Month x 12
 		+ Potential Severity x 5
 		+ Potential Probability x 5
-		+ Business Group x 8
-		+ Business Line x 25
+		+ Business Group x 7
+		+ Business Line x 21
 
 	+ And our response variable, has the correct types we encoded earlier (either a 1 or a 0)
 
