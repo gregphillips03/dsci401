@@ -34,6 +34,20 @@ Date:   11.12.2017
 
 + The question then is, "Can we develop a model that accurately predicts if a record is an AECOM Employee or Contractor, based off of other information we know about the record." Since there are thousands of records created every year, a model could quickly and efficiently quality check data as it came in, where such a task would require a staff to accomplish.
 
+<h3>But Why Care?</h3>
+
++ Without much of an argument, Total Recordable Incident Rate (TRIR) - commonly referred to as 'RIR', is <i><b>THE</b></i> indicator metric that spells out <i><b>how safe your company is</b></i>. It's what makes insurance rates go up or down. It was draws in or pushes potential clients away. It's also what the government looks at. 
+
++ <b>The OSHA Recordable Incident Rate (RIR)</b> is calculated by multiplying the number of recordable cases by 200,000, and then dividing that number by the number of labor hours at the company:
+
+	> RIR = (No of Recordable Cases * 200,000) / (No of Labor Hours)
+
++ The key take away - <b>RIR tells you for every 100 employees, 'X' have been involved in a recordable injury or illness</b>. Naturally, that number needs to stay really small. 
+
++ More cases = worsening rate. 
+
++ This metric excludes contractors. However, if a contractor gets improperly classified at data entry, the rate worsens. Hence the need to quality check data, and the purpose of this analysis. 
+
 </div>
 <hr>
 
