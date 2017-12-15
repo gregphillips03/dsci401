@@ -411,7 +411,7 @@ Decision Tree (Gini Impurity):
 '''
 ```
 
-+ Each algorithm performs rather well, with the exception of the Gaussian Naive Bayes algorithm - which shouldn't come as too much of a shock. This, however, is just using <b>accuracy</b> as the error metric - but we can't always rely on a measurement to explain whether or not a model is good or bad. Models don't always spit out high performance measures when they're good, and they won't always spit out low numbers when they are bad. It's simply not that black and white. If it were, models would simply be akin to algebraic formulas; you'd plug your data in, let the model cogitate, then wait for it to spit you out a number (fingers crossed that it's a high number). 
++ Each algorithm performs rather well, with the exception of the Gaussian Naive Bayes algorithm - which shouldn't come as too much of a shock, as it's expecting a normal distribution. This, however, is just using <b>accuracy</b> as the error metric - but we can't always rely on a measurement to explain whether or not a model is good or bad. Models don't always spit out high performance measures when they're good, and they won't always spit out low numbers when they are bad. It's simply not that black and white. If it were, models would simply be akin to algebraic formulas; you'd plug your data in, let the model cogitate, then wait for it to spit you out a number (fingers crossed that it's a high number). 
 
 + Instead, error metrics give you a good indication that you've built a model that's solid, and can be put to use. It's still the job of the scientist to verify that the model is actually valid. 
 
@@ -575,7 +575,7 @@ Decision Tree (Gini Impurity) | third | fourth | third | fourth
 
 + I'm going to combine the voting method with ```GridSearchCV``` which is a way of optimizing the model. Instead of manually picking out a bunch of parameters by hand, I'm going to let it fine tune the model for me - thus optimizing it all at once. 
 
-	> A Word of Caution: Even with relatively small amounts of data (5000-10000 observations), this process can be computationally intensive. If you have access to a beefed up virtual machine, or a Hadoop cluster, you can save a lot of computing time. If you're on you local machine, grab a cup of coffee - especially when you have lots of data.
+	> A Word of Caution: Even with relatively small amounts of data (5000-10000 observations), this process can be computationally intensive. If you have access to a beefed up virtual machine, or a Hadoop cluster, you can save a lot of computing time. If you're on your local machine, grab a cup of coffee - especially when you have lots of data.
 
 + After the Grid Search runs, we refit the model on our training data, then call the ```score``` method on the ```VotingClassifier``` object we created. The scoring metrics are different for each estimator you use, but you can find the characteristics for the voting estimator <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier.score">here</a>, but this one basically delivers us back the mean accuracy by default.  
 
@@ -766,6 +766,8 @@ Voting Ensemble Model Real Score: 0.919463087248
 + And the updated confusion matrix, based on our ensembled model:
 
 <img src="./fig/SVMKNNRFconfmatrix.png" title="ensembled conf matrix" alt="emsembled conf matrix" align="middle" />
+
++ We've got a rather decent model built, based on the available data. 
 
 <hr>
 
