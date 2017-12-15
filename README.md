@@ -773,9 +773,7 @@ sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>,
 + Here, I'm just going to apply the ```predict_proba()``` method (as a ```GridSearchCV``` object contains one as well, and I've already built my model) to the ```best_voting_mod``` from our ensembled algorithms:
 
 ```python
-'''
-TODO
-'''
+valprobs = best_voting_mod.predict_proba(valX); 
 ``` 
 
 + The following table is a cleaner, more communicatable version of the above output snippet: 
