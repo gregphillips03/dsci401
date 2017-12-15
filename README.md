@@ -725,6 +725,16 @@ Validation Feature space contains 6109 records and 59 columns
 
 	> The author speaks from experience. 
 
+<h3>The Best Model Against Unseen Data</h3>
+
++ When the model is applied to the real data, it performs quite well using the F1 metric:
+
+```python
+'''
+Voting Ensemble Model Real Score: 0.919463087248
+'''
+```
+
 <hr>
 
 <h2><b>9) Beyond Classification</b></h2>
