@@ -293,7 +293,7 @@ valpreds = best_voting_mod.predict(valX);
 print('Voting Ensemble Model Real Score: ' + str(best_voting_mod.score(valX, valy))); 
 outdf = pd.DataFrame(pd.DataFrame({'Actual': valy, 'Predicted': valpreds})); 
 valwriter = pd.ExcelWriter('./gen/output.xlsx'); 
-outdf.to_excel(writer, 'Validation'); 
+outdf.to_excel(valwriter, 'Validation'); 
 valwriter.save; 
 
 # -------------------------------- #
