@@ -749,6 +749,16 @@ Voting Ensemble Model Real Score: 0.919463087248
 '''
 ```
 
++ We can also visually inspect the Area Under the Curve (AUC) to get a good understanding of how well our model has performed on the data it hasn't seen. 
+
+	+ In terms of AUC, here's a simple rule of thumb to evaluate a classifier:
+
+		+ .90 to 1.0 = (A) Very Good
+		+ .80 to .89 = (B) Good
+		+ .70 to .79 = (C) Meh
+		+ .60 to .69 = (D) Poor
+		+ .50 to .59 = (F) Trash this model, and punch your monitor
+
 <hr>
 
 <h2><b>9) Beyond Classification</b></h2>
@@ -781,8 +791,6 @@ clf4 = SVC(probability=True);
 ```python
 valprobs = best_voting_mod.predict_proba(valX); 
 ``` 
-
-
 
 + The following table is a cleaner, more communicatable version of the above output snippet: 
 
@@ -855,5 +863,11 @@ somedf.to_csv('name_of_your_csv_file.csv', sep=',');
 ```
 
 + This is especially useful for server-side clients that expect data neatly separated by commas.
+
+<h3>Disclaimer</h3>
+
++ The purpose of this markdown is to be educational, informative, and relevant to a 2 class problem while knowingly subjecting you to a small amount of dry humor. It is correct to the best of my knowledge and ability, though if you're using this for reference (or flat out ripping it off), please be aware that I am human, and therefore subject to error. Use at your own risk. YMMV.
+
++ If you do find this helpful, feel free to reference me in your work. 
 
 
