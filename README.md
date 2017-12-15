@@ -864,6 +864,26 @@ somedf.to_csv('name_of_your_csv_file.csv', sep=',');
 
 + This is especially useful for server-side clients that expect data neatly separated by commas.
 
+<h3>Utility File / Directory</h3>
+
++ I've never been a fan of messy or unorganized code. Plus, my mind is really geared to an object oriented frame of thinking. Ergo, stuff I use often is stored in a separate file in a utility directory. It's imported just like any other module when I need it. 
+
++ However, it's not very clear cut on how to do this. I've seen where most people just drop a utility file in their working directory. That's easy to reference, but seems messy an unwieldy to me. 
+
++ This bit of code works good, lasts long time:
+
+```python
+data_util_file = './util/data_util.py';
+import os;
+import sys;
+sys.path.append(os.path.dirname(os.path.expanduser(data_util_file))); 
+import data_util as util;
+```
+
++ I create a variable and store a string which contains the path to my utility file - because I know where that exists. 
+
++ The import the os and sys modules, so you can steal the rest of the path from your machine. Feed the ```sys.path.append()``` method the string containing the path to your file and you're done. You can import your utility file wherever you're working from. 
+
 <h3>Disclaimer</h3>
 
 + The purpose of this markdown is to be educational, informative, and relevant to a 2 class problem while knowingly subjecting you to a small amount of dry humor. It is correct to the best of my knowledge and ability, though if you're using this for reference (or flat out ripping it off), please be aware that I am human, and therefore subject to error. Use at your own risk. YMMV.
