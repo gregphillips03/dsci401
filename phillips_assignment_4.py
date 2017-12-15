@@ -300,32 +300,12 @@ valwriter = pd.ExcelWriter('./gen/validoutput.xlsx');
 valdf.to_excel(valwriter, 'Sheet1'); 
 valwriter.save(); 
 
-# -------------------------------- #
-# --- Section 8: Probabilities --- #
-# -------------------------------- #
-
-voting_mod = VotingClassifier(estimators=[('svm', clf4), ('rf', clf2), ('knn', clf3)], voting='soft');
-param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0], 'rf__n_estimators':[5, 10, 50, 100], 'rf__max_depth': [3, 6, None]};
-best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5, scoring=scoring, refit='F1'); 
-best_voting_mod.fit(x_train, y_train);
-valprobs = best_voting_mod.predict_proba(valX); 
-prob_pos = valprobs.transpose()[1]; 
-prob_neg = valprobs.transpose()[0]; 
-print('Voting Ensemble Model Prediction Score: ' + str(best_voting_mod.score));
-probdf = pd.DataFrame(pd.DataFrame({'ActualProb': valy, 'PredictedProbability': valprobs}));
-
-pred_df = pd.DataFrame({'Actual': valy, 'Predicted Class': valpreds, 'P(1)': prob_pos, 'P(0)': prob_neg});
-probwriter = pd.ExcelWriter('./gen/proboutput.xlsx'); 
-probdf.to_excel(probwriter, 'Sheet1');
-preddf.to_excel(probwriter, 'Sheet2');  
-probwriter.save(); 
-
 class_names=np.unique(valy); 
 confusion_matrix_ensemble = confusion_matrix(valy, valpreds);
 plt.figure()
 util.plot_confusion_matrix(confusion_matrix_ensemble, classes=class_names,
                       title='SVM, KNN, RF Ensemble, without normalization')
-plt.show(); 
+#plt.show(); 
 
 false_positive_rate, true_positive_rate, thresholds = roc_curve(valy, valpreds); 
 roc_auc = auc(false_positive_rate, true_positive_rate); 
@@ -337,4 +317,25 @@ plt.xlim([-0.1, 1.2]);
 plt.ylim([-0.1, 1.2]); 
 plt.ylabel('True Positive Rate'); 
 plt.xlabel('False Positive Rate'); 
-plt.show(); 
+#plt.show(); 
+
+# -------------------------------- #
+# --- Section 8: Probabilities --- #
+# -------------------------------- #
+
+voting_mod = VotingClassifier(estimators=[('svm', clf4), ('rf', clf2), ('knn', clf3)], voting='soft');
+param_grid = {'svm__C':[0.2, 0.5, 1.0, 2.0, 5.0, 10.0], 'rf__n_estimators':[5, 10, 50, 100], 'rf__max_depth': [3, 6, None]};
+best_voting_mod = GridSearchCV(estimator=voting_mod, param_grid=param_grid, cv=5, scoring=scoring, refit='F1'); 
+best_voting_mod.fit(x_train, y_train);
+valprobs = best_voting_mod.predict_proba(valX); 
+prob_pos = valprobs.transpose()[1]; 
+prob_neg = valprobs.transpose()[0]; 
+#print('Voting Ensemble Model Prediction Score: ' + str(best_voting_mod.score));
+#probdf = pd.DataFrame(pd.DataFrame({'ActualProb': valy, 'PredictedProbability': valprobs}));
+
+pred_df = pd.DataFrame({'Actual': valy, 'Predicted Class': valpreds, 'P(1)': prob_pos, 'P(0)': prob_neg});
+probwriter = pd.ExcelWriter('./gen/proboutput.xlsx'); 
+#probdf.to_excel(probwriter, 'Sheet1');
+pred_df.to_excel(probwriter, 'Sheet1');  
+probwriter.save(); 
+
