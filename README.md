@@ -772,9 +772,17 @@ sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>,
 
 + Here, I'm just going to apply the ```predict_proba()``` method (as a ```GridSearchCV``` object contains one as well, and I've already built my model) to the ```best_voting_mod``` from our ensembled algorithms:
 
+	> Note: Probability estimates are disabled by default on SVC objects. You'll need to enable it if you want to run probabilities on an ensembled model that includes a Support Vector Machine. It needs to be set to true, prior to fitting. It has the added headache of slowing down that method as well. 
+
+```python
+clf4 = SVC(probability=True); 
+```
+
 ```python
 valprobs = best_voting_mod.predict_proba(valX); 
 ``` 
+
+
 
 + The following table is a cleaner, more communicatable version of the above output snippet: 
 
