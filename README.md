@@ -759,6 +759,14 @@ Voting Ensemble Model Real Score: 0.919463087248
 		+ .60 to .69 = (D) Poor
 		+ .50 to .59 = (F) Trash this model, and punch your monitor
 
++ ROC AUC using ```matplotlib.pyplot```:
+
+<img src="./fig/ROC_AUC.png" title="ROC_AUC" alt="ROC_AUC" align="middle" />
+
++ And the updated confusion matrix, based on our ensembled model:
+
+<img src="./fig/SVMKNNRFconfmatrix.png" title="ensembled conf matrix" alt="emsembled conf matrix" align="middle" />
+
 <hr>
 
 <h2><b>9) Beyond Classification</b></h2>
