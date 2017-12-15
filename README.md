@@ -809,7 +809,7 @@ pred_df.to_excel(probwriter, 'Sheet1');
 probwriter.save(); 
 ```
 
-+ The following table is a cleaned up version of the dataframe we spit out to the ```pred_df```. 
++ The following table is a cleaned up sample version of the dataframe we spit out to the ```pred_df```. 
 
 Actual Class | Prob % (Contractor)  | Prob % (AECOM Employee) | Predicted by Machine
 :---: | :---: | :---: | :---:
