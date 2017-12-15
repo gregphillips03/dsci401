@@ -382,7 +382,7 @@ for train_index, test_index in kf:
 
 ```
 
-+ I took this function directly from <a href=http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html>scikit-learn.org</a> in case you're interested in the specifics of it. It's a rather common implementation of KFold's use. You can find it plastered all of the internet without looking too hard.  
++ I took this function directly from <a href=http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html>scikit-learn.org</a> in case you're interested in the specifics of it. It's a rather common implementation of KFold's use. You can find it plastered all over the internet without looking too hard.  
 
 + The object of this is to ensure that:
 
