@@ -816,7 +816,7 @@ AECOM Employee | 0.0865 | 0.9134 | AECOM Employee
 AECOM Employee | 0.1929 | 0.8070 | AECOM Employee
 AECOM Employee | 0.1019 | 0.8980 | AECOM Employee
 
-+ And so forth, through the entired set of data. 
++ And so forth, through the entire set of data. 
 
 + The table shows what the record actually was (```Actual Class```); the probability percentage of if the record was a contractor or AECOM Employee (```Prob % (Contractor)``` and ```Prob % (AECOM Employee)```); and what the machine predicted the record was (```Predicted by Machine```). 
 
