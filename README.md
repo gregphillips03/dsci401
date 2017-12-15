@@ -804,24 +804,23 @@ valprobs = best_voting_mod.predict_proba(valX);
 
 + The following table is a cleaner, more communicatable version of the above output snippet: 
 
-Predicted Probabilty % | Number of Records  | AECOM Employee?
----: | :---: | :---:
-100 | X | Yes
-90 | X | Yes
-80 | X | Yes
-40 | X | No
-30 | X | No
-20 | X | No
-10 | X | No
-0 | X | No
+Actual Class | Prob % (Contractor)  | Prob % (AECOM Employee) | Predicted by Machine
+:---: | :---: | :---: | :---:
+Contractor | 0.5775 | 0.4224 | AECOM Employee
+AECOM Employee | 0.0580 | 0.9419 | AECOM Employee
+AECOM Employee | 0.3640 | 0.6359 | AECOM Employee
+AECOM Employee | 0.1652 | 0.8347 | AECOM Employee
+AECOM Employee | 0.0865 | 0.9134 | AECOM Employee
+AECOM Employee | 0.3874 | 0.6125 | AECOM Employee
+AECOM Employee | 0.0865 | 0.9134 | AECOM Employee
+AECOM Employee | 0.1929 | 0.8070 | AECOM Employee
+AECOM Employee | 0.1019 | 0.8980 | AECOM Employee
 
-+ Essentially the table says, there is an ```X Predicted Probability %``` that these ```Number of Records``` were an AECOM Employee. Then it shows if they were actually an ```AECOM Employee?```. Underneath the hood, were asking the model to predict the probability that 'this' record is an AECOM Employee. 
++ And so forth, through the entired set of data. 
 
-	>On the first line, the model is saying, "For these X records, there is a 100% probability that they are an AECOM Employee." And, based on the last column, those records actually were associated with AECOM Employees. 
++ The table shows what the record actually was (```Actual Class```); the probability percentage of if the record was a contractor or AECOM Employee (```Prob % (Contractor)``` and ```Prob % (AECOM Employee)```); and what the machine predicted the record was (```Predicted by Machine```). 
 
-	> On the xth line, the model is saying, "For this X record, there is a X% probability that it is an AECOM Employee". That record actually isn't, but the good thing is that the model didn't assign it a high percentage, nor does the model predict anything crazy - such as high percentages when they're actually the opposite. 
-
-+ The key thing to take away from this is that the model really understands what an "AECOM Employee" record looks like, and it also knows what one doesn't look like.
++ The key thing to take away from this is that this is where the model begins to really become useful. If you couple each of the predicted records, along with a unique identifier (such as a system ID or incident number) in the database that houses it, you now have a handy quality assessment tool to spot check data that 'doesn't look right'.
 
 <hr>
 
