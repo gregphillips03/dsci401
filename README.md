@@ -660,6 +660,8 @@ outdf.to_excel(writer, 'Validation');
 valwriter.save;
 ```
 
++ The ```pd.ExcelWriter()``` method is used to get the data out of the command line (memory), and spit it out to a 'human readable' document. I find it makes manipulating the output alot easier if you can do it outside the work environment. 
+
 + Validation Data. 
 
 	> Now is a probably a good time to mention this - all transformation, movements, encoding, 'slicing and dicing', etc. that was applied to the training data, is applied to the validation data. Basically, if you've done something special to the data you use to train the model, make sure you've done that to the validation data as well. Naturally, with the exception of refitting it. 
@@ -729,7 +731,7 @@ valX = scaler.fit_transform(valX);
 + Here, we'll move on to the part I think is really cool because you can communicate it much easier. I'll be using the same ```run_cv()``` method I defined earlier, but I'll rewrite the code to spit out probabilities instead of classes. <a href="http://scikit-learn.org/stable/modules/generated/
 sklearn.svm.SVC.html#sklearn.svm.SVC.predict_proba">Support Vector Machines</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier.predict_proba">Random Forests</a>, and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier.predict_proba">K-Nearest-Neighbor</a> objects all have a built in ```predict_proba()``` method, so rewriting the code was clean, quick, and easy.
 
-+ The ```run_cv_prob()``` function produces the following, when applied against the best model from our ensembled algorithms:
++ The ```run_cv_prob()``` function produces the following, when applied against the ```best_voting_mod``` from our ensembled algorithms:
 
 ```python
 '''
