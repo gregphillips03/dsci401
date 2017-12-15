@@ -260,7 +260,7 @@ X = scaler.fit_transform(X);
 
 ```
 
-+ At this point, we have a feature space (which I've denoted as X), and a target value (which I have denoted as y). This is our model, and it's ready to be applied to a multitude of algorithms for predictions. 
++ At this point, we have a feature space (which I've denoted as X), and a target value (which I have denoted as y). These are the parameters we're going to use to build our model, and it's ready to be applied to a multitude of algorithms for both evaluations and predictions. 
 
 + However, it's good measure at this point to check and make sure we've not done anything crazy with the data. We done a lot of moving and transforming, so it's good to check and make sure that we didn't forget anything. 
 
@@ -648,7 +648,7 @@ SVM, RF | 0.8458 | 0.8773
 
 + Now, let's test our ```best_voting_mod``` against a data set that it hasn't seen, and see how it performs. 
 
-+ I'm simply going to feed the ```best_voting_mod``` the features (predictors, X, independent variables, etc.), and have it churn. Using th ```.predict()``` method, the machine will try to figure out what the record actually is (dependent variable, y, etc.). 
++ I'm simply going to feed the ```best_voting_mod``` the features (predictors, X, independent variables, etc.), and have it churn. Using the ```.predict()``` method, the machine will try to figure out what the record actually is (dependent variable, y, etc.). 
 
 ```python
 #let's see how the model performs on a data set it hasn't seen. 
@@ -709,6 +709,21 @@ X = scaler.fit_transform(X);
 valX = scaler.fit_transform(valX);
 
 ```
+
++ This is why sanity checks are important, if you don't see this:
+
+```python
+'''
+Training Feature space contains 6505 records and 59 columns
+('Number of Response Types:', array([0, 1]))
+Validation Feature space contains 6109 records and 59 columns
+('Number of Response Types:', array([0, 1]))
+'''
+```
+
++ Then you'd waste alot of time crunching before your machine got mad and yelled at you. The feature space ```X``` or however you denote it, needs to have a certain ```shape```. If it doesn't, your code breaks.  
+
+	> The author speaks from experience. 
 
 <hr>
 
