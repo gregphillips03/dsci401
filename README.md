@@ -656,7 +656,7 @@ valpreds = best_voting_mod.predict(valX);
 print('Voting Ensemble Model Real Score: ' + str(best_voting_mod.score(valX, valy))); 
 outdf = pd.DataFrame(pd.DataFrame({'Actual': valy, 'Predicted': valpreds})); 
 valwriter = pd.ExcelWriter('./gen/output.xlsx'); 
-outdf.to_excel(writer, 'Validation'); 
+outdf.to_excel(valwriter, 'Validation'); 
 valwriter.save;
 ```
 
@@ -727,7 +727,7 @@ Validation Feature space contains 6109 records and 59 columns
 
 <h3>The Best Model Against Unseen Data</h3>
 
-+ When the model is applied to the real data, it performs quite well using the F1 metric:
++ When the model is applied to data it hasn't seen, it performs quite well using the F1 metric:
 
 ```python
 '''
@@ -785,9 +785,46 @@ Predicted Probabilty % | Number of Records  | AECOM Employee?
 
 + The key thing to take away from this is that the model really understands what an "AECOM Employee" record looks like, and it also knows what one doesn't look like.
 
+<hr>
 
+<h2><b>10) Meta</b></h2>
 
+<hr>
 
+<h3>Write out to Excel</h3>
+
++ You'll notice that I tend to <i>not</i> rely too heavily on the terminal when analyzing the data. Instead, I like to push it back out to Excel. There's two reasons for this:
+
+	+ I'm slightly odd, and really like to manipulate data outside the working environment. 
+
+	+ The majority of people who would actually use the information (such as this model's), <i>really only understand data stored in a spreadsheet</i>. 
+
++ There are two modules you need to install in order to do this:
+
+```unix
+sudo pip install xlwt
+sudo pip install openpyxl
+```
+
++ I'm not sure if you need both - YMMV. 
+
++ Here I create a pandas dataframe, then create an ```ExcelWriter``` object. The ```ExcelWriter``` object takes in the file path of where I want to generate the Excel file, along with the name. 
+
+```python
+outdf = pd.DataFrame(pd.DataFrame({'Actual': valy, 'Predicted': valpreds})); 
+valwriter = pd.ExcelWriter('./gen/output.xlsx'); 
+```
+
++ Then I pass the dataframe (here it's ```outdf```), along with the name of the tab I want to write to:
+
+```python
+outdf.to_excel(valwriter, 'Validation'); 
+valwriter.save;
+```
+
++ I'm just doing simple stuff; however, there's other things that you can <a href="
+https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_excel.html
+">pass along as parameters</a>. For instance, you can specify the ```startrow``` if you want to 'append' data on the same tab.  
 
 
 
