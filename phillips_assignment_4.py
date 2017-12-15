@@ -330,12 +330,9 @@ best_voting_mod.fit(x_train, y_train);
 valprobs = best_voting_mod.predict_proba(valX); 
 prob_pos = valprobs.transpose()[1]; 
 prob_neg = valprobs.transpose()[0]; 
-#print('Voting Ensemble Model Prediction Score: ' + str(best_voting_mod.score));
-#probdf = pd.DataFrame(pd.DataFrame({'ActualProb': valy, 'PredictedProbability': valprobs}));
 
 pred_df = pd.DataFrame({'Actual': valy, 'Predicted Class': valpreds, 'P(1)': prob_pos, 'P(0)': prob_neg});
 probwriter = pd.ExcelWriter('./gen/proboutput.xlsx'); 
-#probdf.to_excel(probwriter, 'Sheet1');
 pred_df.to_excel(probwriter, 'Sheet1');  
 probwriter.save(); 
 
